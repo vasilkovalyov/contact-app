@@ -18,3 +18,10 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+    // .login-form-wrapper {
+    //     padding: 40px;
+    //     color: #ffffff;
+    // }
+</style>
