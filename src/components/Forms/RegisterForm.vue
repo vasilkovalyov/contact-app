@@ -45,7 +45,7 @@ export default {
 
     methods: {
         clickHandler() {
-            console.log(this.formData);
+            
         },
 
         inputHandler(type, value) {

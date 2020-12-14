@@ -4,16 +4,21 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import Vuelidate from "vuelidate";
+import $firebase from './firebase/index';
 
 import './scss/main.scss'
 
-Vue.config.productionTip = false
+Vue.prototype.$firebase = $firebase; // add firebase to global environment
 
-Vue.use(Vuelidate);
+let app;
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+$firebase.auth.onAuthStateChanged(() => {
+	
+    if(!app) {
+      	app = new Vue({
+			router,
+			store,
+			render: h => h(App)
+		}).$mount('#app')
+    }
+})

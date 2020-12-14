@@ -17,6 +17,9 @@ export default {
 
 	}),
 
+	created() {
+	},
+
 	components: {
 		AuthLayout,
 		MainLayout
@@ -24,7 +27,6 @@ export default {
 
 	computed: {
 		layout() {
-			console.log(this.$route.meta.layout);
 			return this.$route.meta.layout;
 		}
 	}
