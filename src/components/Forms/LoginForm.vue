@@ -5,7 +5,6 @@
             label="Email"
             placeholder="Your email goes here"
             @inputHandler="(value) => inputHandler('email', value)"
-
         />
         <InputField
             name="password"
@@ -13,7 +12,6 @@
             label="Password"
             placeholder="Enter your password"
             @inputHandler="(value) => inputHandler('password', value)"
-
         />
         <div class="login-form__wrap">
             <FormButton text="Sign In" @clickHandler="clickHandler" />
@@ -24,6 +22,7 @@
 
 import InputField from '../FormsComponents/InputField';
 import FormButton from '../FormsComponents/FormButton';
+
 
 export default {
     data: () => ({
@@ -39,8 +38,18 @@ export default {
     },
 
     methods: {
-        clickHandler() {
-            
+        async clickHandler() {
+            const formData = {
+                email: this.formData.email,
+                password: this.formData.password,
+            }
+
+            try {
+                await this.$store.dispatch('signIn', formData);
+                this.$router.push('/');
+            } catch(error) {
+                console.log(error);
+            }
         },
 
         inputHandler(type, value) {

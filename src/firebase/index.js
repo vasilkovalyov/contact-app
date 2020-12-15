@@ -21,7 +21,39 @@ class Firebase {
 		firebase.initializeApp(firebaseConfig);
 		this.auth = firebase.auth();
 		this.firebase = firebase;
-	}
+    }
+    
+    async signInWithEmailAndPassword(email, password) {
+        const response = await this.auth.signInWithEmailAndPassword(email, password)
+        .then((response) => {
+            return response.user;
+        })
+        .catch((error) => {
+            throw error;
+        });
+
+        return response;
+    }
+
+    async signUp(name, email, password) {
+        await this.auth.createUserWithEmailAndPassword(email, password)
+        .then(function(response) {
+			return response.user.updateProfile({
+				displayName: name
+			})
+        })  
+    }
+
+    async signOut() {
+        const response = this.auth.signOut()
+        .then(function() {
+            return true;
+        }).catch(function(error) {
+            return error;
+        });
+
+        return response;
+    }
 }
 
 const fb = new Firebase();

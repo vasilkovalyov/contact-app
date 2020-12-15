@@ -44,8 +44,19 @@ export default {
     },
 
     methods: {
-        clickHandler() {
-            
+        async clickHandler() {
+            const formData = {
+                name: this.formData.name,
+                email: this.formData.email,
+                password: this.formData.password,
+            }
+
+            try {
+                await this.$store.dispatch('signUp', formData);
+                this.$router.push('/');
+            } catch(error) {
+                console.log(error);
+            }
         },
 
         inputHandler(type, value) {

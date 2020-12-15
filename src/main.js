@@ -12,8 +12,7 @@ Vue.prototype.$firebase = $firebase; // add firebase to global environment
 
 let app;
 
-$firebase.auth.onAuthStateChanged(() => {
-	
+$firebase.auth.onAuthStateChanged((user) => {
     if(!app) {
       	app = new Vue({
 			router,

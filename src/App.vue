@@ -17,7 +17,8 @@ export default {
 
 	}),
 
-	created() {
+	beforeCreate() {
+		this.$store.dispatch('onAuthUser');
 	},
 
 	components: {
