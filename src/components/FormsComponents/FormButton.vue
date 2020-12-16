@@ -1,5 +1,10 @@
 <template>
-    <button class="btn" @click="onClick">{{text}}</button>
+    <button 
+        class="btn"
+        :class="{ 'btn__loader': loader }"
+        :disabled="loader"
+        @click="onClick" 
+    >{{text}}</button>
 </template>
 
 <script>
@@ -11,6 +16,12 @@ export default {
             default: 'button',
             required: true
         },
+
+        loader: {
+            type: Boolean,
+            default: false,
+            required: false,
+        }
     },
 
     methods: {
@@ -25,6 +36,8 @@ export default {
 
 <style lang="scss" scoped>
     .btn {
+        display: inline-block;
+        position: relative;
         background-color: #57c7bb;
         border: none;
         color: #ffffff;
@@ -45,5 +58,30 @@ export default {
         &:hover {
             background-color: darken(#57c7bb, 10%);
         }
+
+        &__loader {
+            color: transparent;
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 30%;
+                left: 43%;
+                transform: translate(-50%, -50%);
+                display: inline-block;
+                border: 2px solid #394b63;
+                border-top: 2px solid #ffffff;
+                border-radius: 50%;
+                width: 14px;
+                height: 14px;
+                animation: spin 1s linear infinite;
+            }
+        }
     }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
 </style>

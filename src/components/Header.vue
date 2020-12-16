@@ -1,8 +1,16 @@
 <template>
     <header class="header">
         <div class="container">
-            <h1>Header</h1>
-            <button @click.prevent="signOut">Sign out</button>
+            <div class="header__logo">Vue Contact App</div>
+
+            <nav class="header-nav">
+                <ul class="header-nav-list">
+                    <li>
+                        <button @click.prevent="signOut">Sign out</button>
+                    </li>
+                </ul>
+            </nav>
+            
         </div>
     </header>
 </template>
@@ -24,3 +32,22 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    .header {
+        padding: 14px 0;
+        color: #ffffff;
+        background-color: #2196f3;
+
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    .header-nav-list {
+        list-style-type: none;
+    }
+</style>

@@ -14,7 +14,7 @@
             @inputHandler="(value) => inputHandler('password', value)"
         />
         <div class="login-form__wrap">
-            <FormButton text="Sign In" @clickHandler="clickHandler" />
+            <FormButton text="Sign In" @clickHandler="clickHandler" :loader="loader" />
         </div>
     </form>
 </template>
@@ -29,7 +29,8 @@ export default {
         formData: {
             email: '',
             password: ''
-        }
+        },
+        loader: false
     }),
 
     components: {
@@ -45,9 +46,12 @@ export default {
             }
 
             try {
+                this.loader = true;
                 await this.$store.dispatch('signIn', formData);
+                this.loader = false;
                 this.$router.push('/');
             } catch(error) {
+
                 console.log(error);
             }
         },
