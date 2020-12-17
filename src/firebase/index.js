@@ -19,7 +19,8 @@ class Firebase {
     constructor() {
         // Initialize Firebase
 		firebase.initializeApp(firebaseConfig);
-		this.auth = firebase.auth();
+        this.auth = firebase.auth();
+        this.database = firebase.database();
 		this.firebase = firebase;
     }
     
@@ -53,6 +54,10 @@ class Firebase {
         });
 
         return response;
+    }
+
+    async createUser(userData) {
+        const newUserKey = await this.database.ref().child('users').push(userData).key;
     }
 }
 

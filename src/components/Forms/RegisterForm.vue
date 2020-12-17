@@ -1,23 +1,23 @@
 <template>
     <form class="register-form">
         <InputField
+            v-model="formData.name"
             name="name"
             label="Full name"
             placeholder="Enter your full name"
-            @inputHandler="(value) => inputHandler('name', value)"
         />
         <InputField
+            v-model="formData.email"
             name="password"
             type="password"
             label="Password"
             placeholder="Enter your password"
-            @inputHandler="(value) => inputHandler('password', value)"
         />
         <InputField
+            v-model="formData.password"
             name="email"
             label="Email"
             placeholder="Your email goes here"
-            @inputHandler="(value) => inputHandler('email', value)"
         />
         <div class="login-form__wrap">
             <FormButton text="Sign Up" @clickHandler="clickHandler" :loader="loader" />
@@ -61,10 +61,6 @@ export default {
                 console.log(error);
             }
         },
-
-        inputHandler(type, value) {
-            this.formData[type] = value;
-        }
     }
 }
 </script>

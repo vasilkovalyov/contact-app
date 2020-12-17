@@ -1,12 +1,17 @@
 <template>
     <header class="header">
         <div class="container">
-            <div class="header__logo">Vue Contact App</div>
+            <router-link to="/" tag="a" class="header__logo">Vue Contact App</router-link>
 
             <nav class="header-nav">
                 <ul class="header-nav-list">
                     <li>
-                        <button @click.prevent="signOut">Sign out</button>
+                        <router-link to="create">Create</router-link>
+                    </li>
+                    <li>
+                        <button @click.prevent="signOut" class="btn-sign-out">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
                     </li>
                 </ul>
             </nav>
@@ -48,6 +53,32 @@ export default {
     }
 
     .header-nav-list {
+        display: flex;
+        align-items: center;
         list-style-type: none;
+
+        li {
+            &:not(:first-child) {
+                margin-left: 15px;
+            }
+        }
+
+        a,
+        button {
+            transition: opacity 0.3s linear;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+
+    .btn-sign-out {
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        font-size: 20px;
+        cursor: pointer;
+       
     }
 </style>

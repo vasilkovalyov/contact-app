@@ -15,7 +15,7 @@ export default  {
         async signIn(store, payload) {
             const { email, password } = payload;
 
-            const response = await  firebase.signInWithEmailAndPassword(email, password)
+            const response = await firebase.signInWithEmailAndPassword(email, password)
             .then(response => {
                 if(response) {
                     store.commit('setAuthUser', response);

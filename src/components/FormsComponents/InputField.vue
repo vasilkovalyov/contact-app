@@ -7,8 +7,8 @@
                 :name="name" 
                 :placeholder="placeholder" 
                 class="input-field__input"
-                v-model="inputValue"
-                @blur="inputHandler"
+                :value="value"
+                @blur="inputHandler($event.target.value)"
             >
         </label>
     </div>
@@ -29,26 +29,24 @@ export default {
         },
         label: {
             type: String,
-            default: 'Fill input',
+            default: null,
             required: false
         },
         placeholder: {
             type: String,
             default: 'Fill input',
             required: false
+        },
+        value: {
+            type: String,
+            default: '',
+            required: false
         }
     },
 
-    data: () => ({
-        inputValue: '',
-    }),
-
     methods: {
-        inputHandler() {
-            
-            if(this.inputValue.length > 0) {
-                this.$emit('inputHandler', this.inputValue);
-            }
+        inputHandler(value) {
+            this.$emit('input', value);
         }
     }
 }

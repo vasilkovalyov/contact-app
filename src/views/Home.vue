@@ -2,10 +2,13 @@
     <section class="section-users">
         <div class="container">
             <h1>List on Users</h1>
-            <Search 
-                label="Search:"
-                @handleClickSearch="handleClickSearch"
-            />
+            <div class="section-users__head-configuration">
+                <Search 
+                    label="Search:"
+                    @handleClickSearch="handleClickSearch"
+                />
+            </div>
+            <TableUser />
         </div>
     </section>
 </template>
@@ -15,6 +18,7 @@
 import MainLayout from '../layouts/MainLayout';
 
 import Search from '../components/Search';
+import TableUser from '../components/TableUsers';
 
 export default {
     data: () => ({
@@ -23,7 +27,8 @@ export default {
 
     components: {
         MainLayout,
-        Search
+        Search,
+        TableUser
     },
 
     methods: {
@@ -38,6 +43,10 @@ export default {
 <style lang="scss" scoped>
     .section-users {
         padding: 40px 0;
+
+        &__head-configuration {
+            margin-bottom: 20px;
+        }
 
         h1 {
             font-weight: 500;

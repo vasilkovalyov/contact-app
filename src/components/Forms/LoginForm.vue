@@ -1,17 +1,17 @@
 <template>
     <form class="login-form">
         <InputField
+        v-model="formData.email"
             name="email"
             label="Email"
             placeholder="Your email goes here"
-            @inputHandler="(value) => inputHandler('email', value)"
         />
         <InputField
+        v-model="formData.password"
             name="password"
             type="password"
             label="Password"
             placeholder="Enter your password"
-            @inputHandler="(value) => inputHandler('password', value)"
         />
         <div class="login-form__wrap">
             <FormButton text="Sign In" @clickHandler="clickHandler" :loader="loader" />
@@ -55,10 +55,6 @@ export default {
                 console.log(error);
             }
         },
-
-        inputHandler(type, value) {
-            this.formData[type] = value;
-        }
     }
 }
 </script>
