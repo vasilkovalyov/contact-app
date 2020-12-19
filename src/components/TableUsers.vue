@@ -1,67 +1,120 @@
 <template>
-    <table class="table-users">
-        <thead class="table-users__head">
-            <tr>
-                <td>Name</td>
-                <td>Email</td>
-                <td>Nickname</td>
-                <td>Birthday</td>
-                <td>Gender</td>
-                <td></td>
-            </tr>
-        </thead>
-        <template v-if="users.length > 0">
-            <tbody class="table-users__body"  v-for="user in users" :key="user.key">
-                <tr class="table-user">
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.nickname}}</td>
-                    <td>{{user.date}}</td>
-                    <td class="table-user__gender">
-                        <span class="gender" :class="user.gender === 'male' ? 'gender__male' : 'gender__female'"  >
-                            <template v-if="user.gender === 'male'">
-                                <i class="fas fa-star"></i>
-                            </template>
-                            <template v-else>
-                                <i class="fas fa-heart"></i>
-                            </template>
-                            {{user.gender}}
-                        </span>
-                    </td>
-                    <td class="table-user__btn-wrap">
-                        <div class="btn-wrap">
-                            <router-link  :to="'/edit/'+user.key" class="table-user__btn table-user__btn-edit">
-                                <i class="fas fa-pen"></i>
-                            </router-link>
-                            <button class="table-user__btn table-user__btn-remove">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </template>
-        <template v-else>
-            <tbody>
+    <div class="table-user-wrapper">
+        <table class="table-users">
+            <thead class="table-users__head">
                 <tr>
-                    <td colspan="6">
-                        <span>Users not a found</span>
-                    </td>
+                    <td>Name</td>
+                    <td>Email</td>
+                    <td>Nickname</td>
+                    <td>Birthday</td>
+                    <td>Gender</td>
+                    <td></td>
                 </tr>
-            </tbody>
-        </template>
-    </table>
+            </thead>
+            <template v-if="users.length > 0">
+                <tbody class="table-users__body"  v-for="user in users" :key="user.key">
+                    <tr class="table-user">
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.nickname}}</td>
+                        <td>{{user.date}}</td>
+                        <td class="table-user__gender">
+                            <span class="gender" :class="user.gender === 'male' ? 'gender__male' : 'gender__female'"  >
+                                <template v-if="user.gender === 'male'">
+                                    <i class="fas fa-star"></i>
+                                </template>
+                                <template v-else>
+                                    <i class="fas fa-heart"></i>
+                                </template>
+                                {{user.gender}}
+                            </span>
+                        </td>
+                        <td class="table-user__btn-wrap">
+                            <div class="btn-wrap">
+                                <router-link  :to="'/edit/'+user.key" class="table-user__btn table-user__btn-edit">
+                                    <i class="fas fa-pen"></i>
+                                </router-link>
+                                <button class="table-user__btn table-user__btn-remove" @click.prevent="removeHandleClick(user.key)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </template>
+            <template v-else>
+                <tbody>
+                    <tr>
+                        <td colspan="6">
+                            <span>Users not a found</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </template>
+        </table>
+        <Notification
+            :message="notification.message"
+            :type="notification.type"
+            :timeout="2000"
+            @closeNotification="closeNotification"
+        />
+    </div>
+    
 </template>
 
 <script>
 
+import Notification from './Notification';
+import { mapActions } from 'vuex';
 
 export default {
     props: ['users'],
 
-    computed: {
-
+    data() {
+        return {
+            notification: {
+                message: '',
+                type: ''
+            },
+            isShowNotification: false
+        }
     },
+
+    components: {
+        Notification
+    },
+
+    methods: {
+        ...mapActions(['removeUser']),
+
+        async removeHandleClick(idUser) {
+            try {
+                await this.removeUser(idUser);
+                this.initNotification(true);
+                console.log('try');
+            } catch(e) {
+                console.log('error');
+                this.initNotification(false);
+                console.log(e.message);
+            }
+        },
+
+        closeNotification() {
+            this.isShowNotification = false;
+        },
+
+        initNotification(flag) {
+            this.isShowNotification = true;
+
+            if(flag) {
+                this.notification.message = 'User remove - Successfull',
+                this.notification.type = 'successfull'
+            } else {
+                this.notification.message = 'User remove - Error',
+                this.notification.type = 'error'
+            }
+        }
+    }
     
 }
 </script>

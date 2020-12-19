@@ -57,7 +57,9 @@ export default  {
             if(response) {
                 store.commit('setAuthUser', response);
             }
-        }
+        },
+
+        
     },
 
     getters: {

@@ -22,6 +22,17 @@ export default  {
         async loadUsers(state, payload) {
             const users = await firebase.loadPosts(payload);
             state.commit('setAllUsers', users);
+        },
+
+        async removeUser(state, payload) {
+            await firebase.removePost('users', payload)
+            .then(() => {
+                const users = firebase.loadPosts('users');
+                state.commit('setAllUsers', users);
+            })
+            .catch((e) => {
+                throw e;
+            });
         }
     },
 

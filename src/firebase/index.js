@@ -86,6 +86,19 @@ class Firebase {
             }
         )
     }
+
+    removePost(typePost, idPost) {
+        return new Promise(
+            function(resolve, reject) {
+                try {
+                    firebase.database().ref(`${typePost}/${idPost}`).remove();
+                    return resolve();
+                } catch(e) {
+                    reject(e);
+                }
+            }
+        )
+    }
 }
 
 const fb = new Firebase();

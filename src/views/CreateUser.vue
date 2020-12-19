@@ -21,13 +21,15 @@
     import Notification from '../components/Notification';
 
     export default {
-        data: () => ({
-            notification: {
-                message: '',
-                type: ''
-            },
-            isShowNotification: false
-        }),
+        data() {
+            return {
+                notification: {
+                    message: '',
+                    type: ''
+                },
+                isShowNotification: false
+            }
+        },
 
         components: {
             FormCreateUser,
