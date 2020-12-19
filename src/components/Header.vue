@@ -2,11 +2,16 @@
     <header class="header">
         <div class="container">
             <router-link to="/" tag="a" class="header__logo">Vue Contact App</router-link>
-
             <nav class="header-nav">
                 <ul class="header-nav-list">
                     <li>
+                        <router-link to="/">Home</router-link>
+                    </li>
+                    <li>
                         <router-link to="/create">Create</router-link>
+                    </li>
+                    <li>
+                        <span class="user-name" v-if="getAuthUser">User: {{getAuthUser.displayName}}</span>
                     </li>
                     <li>
                         <button @click.prevent="signOut" class="btn-sign-out">
@@ -15,17 +20,22 @@
                     </li>
                 </ul>
             </nav>
-            
         </div>
     </header>
 </template>
 
 <script>
 
+import { mapGetters } from 'vuex';
+
 export default {
     data: () => ({
 
     }),
+
+    computed: {
+        ...mapGetters(['getAuthUser'])
+    },
 
     methods: {
         async signOut() {
@@ -44,6 +54,9 @@ export default {
         color: #ffffff;
         background-color: #2196f3;
 
+        &__logo {
+            margin-right: 10px;
+        }
 
         .container {
             display: flex;

@@ -61,6 +61,8 @@ export default  {
     },
 
     getters: {
-        
+        getAuthUser(store) {
+            return store.authUser;
+        }
     }
 }
