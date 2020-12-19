@@ -8,7 +8,7 @@
                     @handleClickSearch="handleClickSearch"
                 />
             </div>
-            <TableUser />
+            <TableUser :users="this.getUsers"  />
         </div>
     </section>
 </template>
@@ -20,9 +20,11 @@ import MainLayout from '../layouts/MainLayout';
 import Search from '../components/Search';
 import TableUser from '../components/TableUsers';
 
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
     data: () => ({
-        searchValue: ''
+        searchValue: '',
     }),
 
     components: {
@@ -31,7 +33,20 @@ export default {
         TableUser
     },
 
+    mounted() {
+
+    },
+
+    beforeMount() {
+        this.loadUsers('users');
+    },
+
+    computed: {
+        ...mapGetters(['getUsers']),
+    },
+
     methods: {
+        ...mapActions(['loadUsers']),
         handleClickSearch(value) {
             this.searchValue = value;
         } 

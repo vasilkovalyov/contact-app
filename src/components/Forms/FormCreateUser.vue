@@ -58,14 +58,14 @@
             
                 try {
                     this.loader = true;
-                    
                     await this.$store.dispatch('createUser', formData)
-
+                    this.$emit('initNotification', true);
                     this.loader = false;     
                     this.clearForm(this.formData);
 
                 } catch(error) {
                     console.log(error);
+                    this.$emit('initNotification', false);
                     this.loader = false;  
                 }
             },

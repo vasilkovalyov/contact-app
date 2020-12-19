@@ -59,6 +59,33 @@ class Firebase {
     async createUser(userData) {
         const newUserKey = await this.database.ref().child('users').push(userData).key;
     }
+
+    loadPosts(typePost) {
+        const firebaseDb = this.database;
+
+        return new Promise(
+            function(resolve, reject) {
+                firebaseDb.ref(typePost)
+				.once('value', function(snapshot) {
+                    let posts = snapshot.val();
+                    const arrayOfPosts = [];
+
+					if(posts != null) {
+						for(let key in posts) {
+							arrayOfPosts.push({
+								key,
+								...posts[key]
+							})
+                        }
+						return resolve(arrayOfPosts);
+						
+					} else {
+						reject([]);
+					}
+				})
+            }
+        )
+    }
 }
 
 const fb = new Firebase();

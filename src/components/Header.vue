@@ -6,7 +6,7 @@
             <nav class="header-nav">
                 <ul class="header-nav-list">
                     <li>
-                        <router-link to="create">Create</router-link>
+                        <router-link to="/create">Create</router-link>
                     </li>
                     <li>
                         <button @click.prevent="signOut" class="btn-sign-out">

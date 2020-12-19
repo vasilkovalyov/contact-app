@@ -26,7 +26,7 @@ const routes = [
 		component: () => import('../views/Register.vue')
 	},
 	{
-		path: '/edit',
+		path: '/edit/:id',
 		name: 'editUser',
 		meta: { layout: 'main-layout', auth: true },
 		component: () => import('../views/EditUser.vue')
