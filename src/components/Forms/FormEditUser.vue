@@ -2,36 +2,41 @@
     <form class="form-create-user" @submit="submitForm">
         <div class="form-field">
             <InputField 
-                v-model="formData.name"
+                v-model="userForm.name"
                 name="name" 
                 placeholder="Input name" 
             />
             <InputField 
-                v-model="formData.email"
+                v-model="userForm.email"
                 name="email" 
                 placeholder="Input email" 
             />
             <InputField 
-                v-model="formData.nickname"
+                v-model="userForm.nickname"
                 name="nickname" 
                 placeholder="Input nickname" 
             />
+            <!-- <InputField 
+                v-model="userForm.gender"
+                name="gender" 
+                type="text" 
+                placeholder="Input gender" 
+            /> -->
             <SelectField 
-                v-model="formData.gender"
+                v-model="userForm.gender"
+                :value="userForm.gender"
                 name="gender" 
                 baseOption="Select gender" 
                 :arrayOptions="genderArray"
             />
             <InputField 
-                v-model="formData.date"
+                v-model="userForm.date"
                 name="date" 
                 type="date" 
                 placeholder="Input birthbay" 
             />
-            <button class="form-btn form-btn__create" :class="{ 'btn__loader': loader }" >Create</button>
-            <button type="reset" class="form-btn form-btn__reset">Reset</button>
+            <button class="form-btn form-btn__create" :class="{ 'btn__loader': loader }" >Save</button>
         </div>
-        
     </form>
 </template>
 
@@ -40,33 +45,35 @@
     import SelectField from '../FormsComponents/SelectField';
 
     export default {
-        data: () => ({
-            formData: {
-                name: null,
-                email: null,
-                nickname: null,
-                gender: null,
-                date: null,
-            },
-            loader: false,
-            genderArray: [
-                {'value': 'male'},
-                {'value': 'female'},
-            ]
-        }),
+        name: 'FormEditUser',
+
+        props: ['user', 'keyUser'],
+
+        data() {
+            return {
+                userForm: {...this.user},
+                loader: false,
+                genderArray: [
+                    {'value': 'male'},
+                    {'value': 'female'},
+                ]
+            }
+        },
 
         methods: {
             async submitForm(e) {
                 e.preventDefault();
 
-                const formData = { ...this.formData };
-            
+                const formData = { ...this.userForm };
+
                 try {
                     this.loader = true;
-                    await this.$store.dispatch('createUser', formData)
+                    await this.$store.dispatch('saveUser', {
+                        user: formData,
+                        key: this.keyUser
+                    })
                     this.$emit('initNotification', true);
                     this.loader = false;     
-                    this.clearForm(this.formData);
 
                 } catch(error) {
                     console.log(error);
@@ -74,12 +81,6 @@
                     this.loader = false;  
                 }
             },
-
-            clearForm(formData) {
-                Object.keys(formData).forEach(function(key,index) {
-                    formData[key] = '';
-                });
-            }
         },
 
         components: {

@@ -70,34 +70,84 @@ class Firebase {
                     let posts = snapshot.val();
                     const arrayOfPosts = [];
 
-					if(posts != null) {
-						for(let key in posts) {
-							arrayOfPosts.push({
-								key,
-								...posts[key]
-							})
+					// if(posts != null) {
+					// 	for(let key in posts) {
+					// 		arrayOfPosts.push({
+					// 			key,
+					// 			...posts[key]
+					// 		})
+                    //     }
+
+					// 	return resolve(arrayOfPosts);
+					// } else {
+					// 	reject([]);
+                    // }
+                    
+                    try {
+                        if(posts != null) {
+                            for(let key in posts) {
+                                arrayOfPosts.push({
+                                    key,
+                                    ...posts[key]
+                                })
+                            }
+    
+                            return resolve(arrayOfPosts);
+                        } else {
+                            reject([]);
                         }
-						return resolve(arrayOfPosts);
-						
-					} else {
-						reject([]);
-					}
+                    } catch(e) {
+                        reject(e);
+                    }
 				})
             }
         )
     }
 
     removePost(typePost, idPost) {
+        const self = this;
+
         return new Promise(
             function(resolve, reject) {
                 try {
-                    firebase.database().ref(`${typePost}/${idPost}`).remove();
+                    self.database.ref(`${typePost}/${idPost}`).remove();
                     return resolve();
                 } catch(e) {
                     reject(e);
                 }
             }
         )
+    }
+
+    getPostById(typePost, idPost) {
+        const self = this;
+        return new Promise(
+            function(resolve, reject) {
+                try {
+                    self.database.ref(`${typePost}/`+idPost).once('value')
+                    .then(response => {
+                        const data = response.val();
+                        if(data) {
+                            return resolve(data);
+                        } else {
+                            return reject(new Error);
+                        }
+                    })
+                } catch(e) {
+                    reject(e);
+                }
+            }
+        )
+    }
+
+    savePost(typePost, payload) {
+        const self = this;
+        const {post, key} = payload;
+
+        self.database.ref(`${typePost}/` + key).set({
+            ...post
+        })
+        
     }
 }
 

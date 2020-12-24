@@ -52,12 +52,14 @@
                 </tbody>
             </template>
         </table>
-        <Notification
-            :message="notification.message"
-            :type="notification.type"
-            :timeout="2000"
-            @closeNotification="closeNotification"
-        />
+        <template v-if="isShowNotification">
+            <Notification
+                :message="notification.message"
+                :type="notification.type"
+                :timeout="2000"
+                @closeNotification="closeNotification"
+            />
+        </template>
     </div>
     
 </template>
@@ -91,11 +93,9 @@ export default {
             try {
                 await this.removeUser(idUser);
                 this.initNotification(true);
-                console.log('try');
             } catch(e) {
-                console.log('error');
                 this.initNotification(false);
-                console.log(e.message);
+                console.log(e);
             }
         },
 

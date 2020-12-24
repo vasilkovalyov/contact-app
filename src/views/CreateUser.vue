@@ -2,8 +2,9 @@
     <section class="section-create-user">
         <div class="container">
             <h1>Create User</h1>
-
-            <FormCreateUser @initNotification="initNotification"  />
+            <FormCreateUser 
+                @initNotification="initNotification"  
+            />
         </div>
         <template v-if="isShowNotification">
             <Notification
