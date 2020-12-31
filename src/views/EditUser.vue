@@ -2,14 +2,13 @@
     <section class="section-edit-user">
         <div class="container">
             <h1>Edit User</h1>
-            <template v-if="loader">
+            <div class="section-edit-user__content" v-if="loader">
                 <FormEditUser 
                     :user="user" 
                     :keyUser="$route.params.id"
-                    @saveUser="handleSubmit" 
                     @initNotification="initNotification"  
                 />
-            </template>
+            </div>
             <template v-if="isShowNotification">
                 <Notification
                     :message="notification.message"
@@ -24,6 +23,7 @@
 <script>
 
 import { mapActions, mapGetters } from 'vuex';
+
 import FormEditUser from '../components/Forms/FormEditUser';
 import Notification from '../components/Notification';
 
@@ -45,10 +45,6 @@ export default {
 
     methods: {
         ...mapActions(['userById']),
-
-        handleSubmit(payload) {
-            console.log(payload);
-        },
 
         closeNotification() {
             this.isShowNotification = false;
@@ -73,7 +69,7 @@ export default {
 
     components: {
         FormEditUser,
-        Notification
+        Notification,
     },
 
     async mounted() {
@@ -82,10 +78,7 @@ export default {
             this.user = this.getTargetEditUser;
             this.loader = true;
         }
-
     },
-
-    
 }
 
 </script>

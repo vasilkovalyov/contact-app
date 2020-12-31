@@ -1,46 +1,45 @@
 <template>
-    <form class="form-create-user" @submit="submitForm">
-        <div class="form-field">
-            <InputField 
-                v-model="userForm.name"
-                name="name" 
-                placeholder="Input name" 
-            />
-            <InputField 
-                v-model="userForm.email"
-                name="email" 
-                placeholder="Input email" 
-            />
-            <InputField 
-                v-model="userForm.nickname"
-                name="nickname" 
-                placeholder="Input nickname" 
-            />
-            <!-- <InputField 
-                v-model="userForm.gender"
-                name="gender" 
-                type="text" 
-                placeholder="Input gender" 
-            /> -->
-            <SelectField 
-                v-model="userForm.gender"
-                :value="userForm.gender"
-                name="gender" 
-                baseOption="Select gender" 
-                :arrayOptions="genderArray"
-            />
-            <InputField 
-                v-model="userForm.date"
-                name="date" 
-                type="date" 
-                placeholder="Input birthbay" 
-            />
-            <button class="form-btn form-btn__create" :class="{ 'btn__loader': loader }" >Save</button>
-        </div>
+    <form class="form-edit-user" >
+        <ImageUpload 
+            name="image-user"
+            :image="userForm.image"
+            @imageUploadHandler="imageUploadHandler"
+        />
+        <InputField 
+            v-model="userForm.name"
+            name="name" 
+            placeholder="Input name" 
+        />
+        <InputField 
+            v-model="userForm.email"
+            name="email" 
+            placeholder="Input email" 
+        />
+        <InputField 
+            v-model="userForm.nickname"
+            name="nickname" 
+            placeholder="Input nickname" 
+        />
+        <SelectField 
+            v-model="userForm.gender"
+            :value="userForm.gender"
+            name="gender" 
+            baseOption="Select gender" 
+            :arrayOptions="genderArray"
+        />
+        <InputField 
+            v-model="userForm.date"
+            name="date" 
+            type="date" 
+            placeholder="Input birthbay" 
+        />
+        <button class="form-btn form-btn__save" :class="{ 'btn__loader': loader }" @click.prevent="submitForm">Save</button>
     </form>
 </template>
 
 <script>
+
+    import ImageUpload from '../ImageUpload';
     import InputField from '../FormsComponents/InputField';
     import SelectField from '../FormsComponents/SelectField';
 
@@ -81,17 +80,27 @@
                     this.loader = false;  
                 }
             },
+
+            imageUploadHandler(image) {
+                this.userForm = {
+                    ...this.userForm,
+                    image
+                }
+            }
         },
 
         components: {
             InputField,
-            SelectField
+            SelectField,
+            ImageUpload
         }
     }
 </script>
 
 <style lang="scss" deep>
-    .form-create-user {
+    .form-edit-user {
+        width: 100%;
+        
         .input-field {
             &__input {
                 color: #000000;
@@ -109,7 +118,7 @@
         cursor: pointer;
         transition: background-color 0.3s linear, border-color 0.3s linear;
 
-        &__create {
+        &__save {
             color: #ffffff;
             background-color: #28a745;
             border-color: #28a745;

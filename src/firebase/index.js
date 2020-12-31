@@ -21,7 +21,8 @@ class Firebase {
 		firebase.initializeApp(firebaseConfig);
         this.auth = firebase.auth();
         this.database = firebase.database();
-		this.firebase = firebase;
+        this.firebase = firebase;
+        this.storage = firebase.storage();
     }
     
     async signInWithEmailAndPassword(email, password) {
@@ -69,19 +70,6 @@ class Firebase {
 				.once('value', function(snapshot) {
                     let posts = snapshot.val();
                     const arrayOfPosts = [];
-
-					// if(posts != null) {
-					// 	for(let key in posts) {
-					// 		arrayOfPosts.push({
-					// 			key,
-					// 			...posts[key]
-					// 		})
-                    //     }
-
-					// 	return resolve(arrayOfPosts);
-					// } else {
-					// 	reject([]);
-                    // }
                     
                     try {
                         if(posts != null) {
@@ -140,14 +128,27 @@ class Firebase {
         )
     }
 
-    savePost(typePost, payload) {
+    async uploadImageAndGetUrl(typePost, image) {
+        const storageRef = await this.storage.ref(`${typePost}/${image.name}`);
+        return await storageRef.put(image)
+        .then(function(snapshot) {
+            return snapshot.ref.getDownloadURL();
+        })
+    }
+
+    async savePost(typePost, payload) {
         const self = this;
-        const {post, key} = payload;
+        let imageUrl = null;
+        const { post, key } = payload;
+
+        if(post.image !== null) {
+            imageUrl = await this.uploadImageAndGetUrl('users', post.image);
+        }
 
         self.database.ref(`${typePost}/` + key).set({
-            ...post
+            ...post,
+            image: imageUrl
         })
-        
     }
 }
 

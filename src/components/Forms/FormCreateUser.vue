@@ -89,8 +89,10 @@
     }
 </script>
 
-<style lang="scss" deep>
+<style lang="scss" >
     .form-create-user {
+        width: 100%;
+        
         .input-field {
             &__input {
                 color: #000000;
