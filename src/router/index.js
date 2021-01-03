@@ -20,6 +20,12 @@ const routes = [
 		component: () => import('../views/Login.vue')
 	},
 	{
+		path: '/reset-password',
+		name: 'reset-password',
+		meta: { layout: 'auth-layout' },
+		component: () => import('../views/ResetPassword.vue')
+	},
+	{
 		path: '/register',
 		name: 'register',
 		meta: { layout: 'auth-layout' },

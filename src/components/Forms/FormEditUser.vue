@@ -33,7 +33,7 @@
             type="date" 
             placeholder="Input birthbay" 
         />
-        <button class="form-btn form-btn__save" :class="{ 'btn__loader': loader }" @click.prevent="submitForm">Save</button>
+        <form-button @clickHandler="submitForm" :loader="loader">Save</form-button>
     </form>
 </template>
 
@@ -41,6 +41,7 @@
 
     import ImageUpload from '../ImageUpload';
     import InputField from '../FormsComponents/InputField';
+    import FormButton from '../FormsComponents/FormButton';
     import SelectField from '../FormsComponents/SelectField';
 
     export default {
@@ -60,8 +61,7 @@
         },
 
         methods: {
-            async submitForm(e) {
-                e.preventDefault();
+            async submitForm() {
 
                 const formData = { ...this.userForm };
 
@@ -92,7 +92,8 @@
         components: {
             InputField,
             SelectField,
-            ImageUpload
+            ImageUpload,
+            FormButton
         }
     }
 </script>

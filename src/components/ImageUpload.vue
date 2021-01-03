@@ -12,18 +12,29 @@
         </div>
         <div class="image-upload__btn-wrap">
             <input type="file" :name="name" ref="file" hidden @change="handleFileUpload">
-            <button class="image-upload__btn image-upload__btn-upload" @click.prevent="submitFile()">Upload</button>
-            <button class="image-upload__btn image-upload__btn-reset" v-if="image" @click.prevent="handleClickReset()">Reset</button>
+
+            <form-button @clickHandler="submitFile">Upload</form-button>
+            
+            <template v-if="image">
+                <form-button @clickHandler="handleClickReset" >Reset</form-button>
+            </template>
         </div>
     </div>
 </template>
 
 <script>
 
+import FormButton from './FormsComponents/FormButton';
+
+
 export default {
     name: 'ImageUpload',
 
     props: ['image', 'name'],
+
+    components: {
+        FormButton,
+    },
 
     data() {
         return {
@@ -65,7 +76,7 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .image-upload {
         max-width: 280px;
         width: 100%;
@@ -96,38 +107,6 @@ export default {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        &__btn {
-            
-            position: relative;
-            padding: 10px 18px;
-            border: none;
-            outline: none;
-            border-radius: 4px;
-            margin-right: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s linear, border-color 0.3s linear;
-
-            &-upload {
-                color: #ffffff;
-                background-color: #28a745;
-                border-color: #28a745;
-
-                 &:hover {
-                    background-color: darken(#28a745, 20%);
-                }
-            }
-
-            &-reset {
-                color: #fff;
-                background-color: #c82333;
-                border-color: #bd2130;
-
-                &:hover {
-                    background-color: darken(#bd2130, 20%);
-                }
-            }
         }
     }
 </style>

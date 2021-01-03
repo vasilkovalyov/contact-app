@@ -59,7 +59,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .section-create-user {
         padding: 20px 0;
     }

@@ -54,7 +54,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .header {
         padding: 14px 0;
         color: #525F7F;

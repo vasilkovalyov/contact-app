@@ -1,31 +1,40 @@
 <template>
-	<div class="wrapper-auth">
-		<div class="container">
-			<div class="auth-panel">
-				<div class="auth-panel__image">
-					<img src="https://static6.depositphotos.com/1003229/609/v/450/depositphotos_6096843-Circuit-board-vector-background.jpg" alt="">
-				</div>
-				<div class="auth-panel__content">
-					<ul class="switcher-links">
-						<li class="switcher-links__item">
-							<router-link to="/login" class="switcher-links__item-link">Sign in</router-link>
-						</li>
-						<li class="switcher-links__item">
-							<router-link to="/register" class="switcher-links__item-link">Sign up</router-link>
-						</li>
-					</ul>
-					<p class="auth-panel__head">
-						<router-link to="/login" class="auth-panel__head-link">Sign in</router-link>
-						<span>or</span>
-						<router-link to="/register" class="auth-panel__head-link">Sign up</router-link>
+	<section class="section-auth">
+		<div class="section-auth__inner">
+			<div class="container">
+				<div class="section-auth__body">
+					<div class="section-auth__header">
+						<a href="#" class="logo">
+							<img src="images/users.jpg" alt="mycontribution">
+							<span class="logo__text">Users App</span>
+						</a>
+					</div>
+					<div class="section-auth__main">
+						<!-- <ul class="switcher-links">
+							<li class="switcher-links__item">
+								<router-link to="/login" class="switcher-links__item-link">Sign in</router-link>
+							</li>
+							<li class="switcher-links__item">
+								<router-link to="/register" class="switcher-links__item-link">Sign up</router-link>
+							</li>
+						</ul>
+						<p class="auth-panel__head">
+							<router-link to="/login" class="auth-panel__head-link">Sign in</router-link>
+							<span>or</span>
+							<router-link to="/register" class="auth-panel__head-link">Sign up</router-link>
 
-					</p>
-					<router-view  />
+						</p> -->
+						<router-view  />
+					</div>
+				</div>
+				<div class="section-auth__image" style="background-image: url(https://static6.depositphotos.com/1003229/609/v/450/depositphotos_6096843-Circuit-board-vector-background.jpg)">
+
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 </template>
+
 
 <script>
 	export default {
@@ -34,138 +43,99 @@
 	}
 </script>
 
-<style lang="scss">
-    .wrapper-auth {
-        min-height: 100vh;
-        background-color: #b9586b;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+<style lang="scss" deep>
+	@import '../scss/base/variables.scss';
 
-    .auth-panel {
-		background-color: #394b63;
-		overflow: hidden;
-		border-radius: 20px;
-		max-width: 450px;
-		width: 100%;
-		margin: 0 auto;
+	.section-auth {
+		position: relative;
 		display: flex;
-		min-height: 460px;
-		box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.75);
+		flex-direction: column;
 
-		@media (min-width: 1024px) {
-			max-width: 900px;
-			min-height: 560px;
+		&__inner {
+		    display: flex;
+    		min-height: 100vh;
+		}
+
+		&__header {
+			margin-bottom: 40px;
 		}
 
 		&__image {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
 			width: 50%;
-			display: none;
-
-			@media (min-width: 1024px) {
-				display: flex
-			}
-
-			img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
+			background-size: cover;
+			background-position: bottom left;
 		}
 
-		&__content {
+		&__body {
+			display: flex;
+			flex-direction: column;
+			max-width: 480px;
 			width: 100%;
-			color: #ffffff;
-			padding: 30px 15px;
+			padding: 64px 0;
+		}
+	}
 
-			@media (min-width: 1023px) {
-				width: 50%;
-				padding: 40px 40px 80px;
-			}
+	.logo {
+		color: $secondary-color;
+
+		font-weight: 500;
+		font-size: 24px;
+		text-align: center;
+		
+
+		img {
+			display: block;
+			width: 100px;
+			margin: 0 auto;
 		}
 
-		&__head {
+		&__text {
+			display: block;
+		}
+	}
 
-			@media (max-width: 1023px) {
-				text-align: center;
-				margin-bottom: 30px;
-			}
+	.auth-form-wrapper {
+		background-color: $white;
 
-			@media (min-width: 1024px) {
-				text-align: center;
-				margin-bottom: 50px;
-			}
+		max-width: 476px;
+		width: 100%;
+		border-radius: 5px;
+		box-shadow: 0px 0px 5px 0px rgba(233,236,239,0.75);
+		padding: 22px 30px 8px;
 
-			&-link {
-				position: relative;
-				color: #ffffff;
-				color: #677987;
-				font-size: 20px;
+		.auth-form__header {
+			color: $secondary-color;
 
-				@media (min-width: 1024px) {
-					font-size: 24px;
-				}
-
-				&.router-link-active {
-					color: #ffffff;
-
-					&:after {
-						content: '';
-						position: absolute;
-						bottom: -3px;
-						left: 0;
-						right: 0;
-						height: 1px;
-						background-color: #57c7bb;
-					}
-				}
-			}
-
-			> span {
-				display: inline-block;
-				margin: 0 10px 0 10px;
+			h2 {
+				font-size: 24px;
+				margin-bottom: 6px;
+				font-weight: 400;
 			}
 		}
 	}
-	
-	.switcher-links {
-		list-style-type: none;
-		display: flex;
-		justify-content: center;
-		padding: 0;
-		margin: 0 0 30px;
-		
 
-		@media (min-width: 1024px) {
-			justify-content: flex-end;
-			margin: 0 0 50px;
-		}
+	.auth-form {
+		&__btn-wrap {
+			text-align: center;
+			margin-bottom: 20px;
 
-		&__item {
-			&:nth-child(1) {
-				.switcher-links__item-link {
-					border-radius: 10px 0 0 10px;
-				}
-			}
+			p {
+				color: $blue-light-1;
+				font-size: 14px;
+				margin: 15px 0 0;
 
-			&:nth-child(2) {
-				.switcher-links__item-link {
-					border-radius: 0px 10px 10px 0;
-				}
-			}
+				> a {
+					display: inline-block;
+					color: $primary-color;
+					transition: color 0.3s linear;
 
-			&-link {
-				display: block;
-				color: #677987;
-				background-color: #46596a;
-				font-size: 13px;
-				padding: 5px 12px;
-				transition: 0.3s color linear, 0.3s background-color linear;
-
-				&.router-link-active {
-					color: #ffffff;
-					background-color: #57c7bb;
+					&:hover {
+						color: darken($primary-color, 20%);
+					}
 				}
 			}
 		}

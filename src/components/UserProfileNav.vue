@@ -44,7 +44,7 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .user-profile-nav {
         position: relative;
         cursor: pointer;

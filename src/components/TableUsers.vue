@@ -5,12 +5,8 @@
             <template v-if="selectedUsers.length === 1">
                 <div class="table-user-buttons-config">
                     <div class="table-user-buttons-config__btn-wrap">
-                        <router-link  :to="'/edit/'+selectedUsers[0]" class="table-user__btn table-user__btn-edit">
-                            <i class="fas fa-pen"></i>
-                        </router-link>
-                        <button class="table-user__btn table-user__btn-remove" @click.prevent="removeHandleClick(selectedUsers[0])">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        <router-link  :to="'/edit/'+selectedUsers[0]" class="table-user__btn table-user__btn-edit">Edit user</router-link>
+                        <button class="table-user__btn table-user__btn-remove" @click.prevent="removeHandleClick(selectedUsers[0])">Remove user</button>
                     </div>
                 </div>
             </template>
@@ -33,13 +29,15 @@
                             <input :value="user.key" v-model="selectedUsers" type="checkbox">
                         </td>
                         <td>
-                            <template v-if="user.image">
-                                <img :src="user.image" :alt="user.name" class="table-user__image">
-                            </template>
-                            <template v-else>
-                                <i class="fas fa-user"></i>
-                            </template>
-                            <span>{{user.name}}</span>
+                            <router-link :to="'/edit/'+user.key">
+                                <template v-if="user.image">
+                                    <img :src="user.image" :alt="user.name" class="table-user__image">
+                                </template>
+                                <template v-else>
+                                    <i class="fas fa-user"></i>
+                                </template>
+                                <span>{{user.name}}</span>
+                            </router-link>
                         </td>
                         <td>{{user.email}}</td>
                         <td>{{user.nickname}}</td>
@@ -140,7 +138,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .table-user-buttons-config {
         &__btn-wrap {
             display: flex;
@@ -218,32 +216,21 @@ export default {
 
         &__btn {
             color: #ffffff;
-            width: 30px;
-            height: 30px;
             border: none;
             outline: none;
             border-radius: 4px;
             margin: 0 4px;
-            cursor: pointer;
+            font-size: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: background-color 0.3s linear;
+            background-color:#4b9da5;
+            padding: 8px 12px;
+            cursor: pointer;
 
-            &-edit {
-                background-color: #eead53;
-
-                &:hover {
-                    background-color: darken(#eead53, 20%);
-                }
-            }
-
-            &-remove {
-                background-color: #d94f45;
-
-                &:hover {
-                    background-color: darken(#d94f45, 20%);
-                }
+            &:hover {
+                background-color: darken(#4b9da5, 20%);
             }
         }
 

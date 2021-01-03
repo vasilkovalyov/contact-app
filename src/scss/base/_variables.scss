@@ -1,12 +1,24 @@
-// Colors
-// Color calculator - https://razorltd.github.io/sasscolourfunctioncalculator/
-// Color names - http://name-of-color.com/
+$white: #FFFFFF;
+$black: #000000;
+$gray: #999999;
+$red: #E6412F;
+$orange: #E67E22;
+$blue-light: #4B9DA5;
+$blue-light-1: #9DACC0;
+$green: #97C21E;
+$light: #E9ECEF;
+$light-2: #F5F6FA;
+$light-3: #E5E9F2;
+$light-4: #F6F9FC;
+$blue-dark: #364A64;
+$blue-dark-1: #525F7F;
+$blue-dark-2: #526484;
+$grey: #999999;
+$yellow: #F1C40F;
+$blue: #3498DB;
 
-$gray:               #999;
-$black:              #1f1f1f;
-$white:              #fff;
-$blue:               #5b759e;
-$light:              #F5F6FA;
+$primary-color: $blue-light;
+$secondary-color: $blue-dark-1;
 
 $base-font-sans-serif:        'Roboto', 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
 $base-font-serif:             'Roboto', 'Times New Roman', 'Times', 'Baskerville', 'Georgia', serif;
@@ -29,20 +41,15 @@ $max-width-center-container:  1200px;
 $gutter:                      15px;
 $padding-container:           0 $gutter;
 
-$grid: (
-  ph: 'phone',
-  sm: 'tablet',
-  md: 'desktop'
-);
 
 // font weight
-$thin:                        100;
-$light:                       300;
-$normal:                      400;
-$medium:                      500;
-$semibold:                    600;
-$bold:                        700;
-$black-font:                  800;
+$font-thin:                        100;
+$font-light:                       300;
+$font-normal:                      400;
+$font-medium:                      500;
+$font-semibold:                    600;
+$font-bold:                        700;
+$font-black-font:                  800;
 
 // default margins
 $vertical-rhythm:             $font-size-base + 4;
@@ -73,34 +80,6 @@ $btn-border-color-primary:          $blue !default;
 // hover
 $btn-hover-background-primary:      $blue !default;
 $btn-hover-color-primary:           $white !default;
-
-// buttons default
-$btn-border-width:                  1px  !default;
-$btn-border:                        $btn-border-width solid transparent !default;
-$btn-padding:                       10px 20px !default;
-$btn-font-size:                     $font-size-base - 2 !default;
-$btn-line-height:                   $font-size-base + 2;
-
-// Forms
-$input-font-size:                   $font-size-base; // font size for forms elements
-$input-line-height:                 $input-font-size  + 2; // line height for forms elements
-$input-font-family:                 $base-font;
-$input-padding-vertical:            10px !default; // padding for forms elements
-$input-padding-horizontal:          20px !default; // padding for forms elements
-$input-padding:                     $input-padding-vertical $input-padding-horizontal !default;
-$input-border-width:                1px !default; // border input's width
-$input-border:                      $input-border-width solid $black !default; // border for forms elements
-$input-border-radius:               0 !default; // border radius for forms elements
-$inpH: $input-border-width + 2 * $input-padding-vertical + $input-line-height;
-$input-height:                      (2 * ($input-border-width + $input-padding-vertical) + $input-line-height) !default; // height for forms elements
-
-// submit hover
-$submit-hover-background:           $btn-hover-background; // submit background hover
-$submit-hover-color:                $btn-hover-color; // submit color hover
-//focus
-$input-focus-border-color:          $black !default; // border color for forms elements
-//placeholder
-$placeholder-color:                 $gray !default;
 
 
 // nav

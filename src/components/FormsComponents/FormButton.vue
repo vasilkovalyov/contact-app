@@ -1,22 +1,19 @@
 <template>
-    <button 
-        class="btn"
-        :class="{ 'btn__loader': loader }"
+    <button class="btn"
         :disabled="loader"
-        @click="onClick" 
-    >{{text}}</button>
+        @click.prevent="onClick" 
+    >
+        <slot></slot>
+        <span v-if="loader" class="btn__loader"></span>
+    </button>
 </template>
 
 <script>
 
+
+
 export default {
     props: {
-        text: {
-            type: String,
-            default: 'button',
-            required: true
-        },
-
         loader: {
             type: Boolean,
             default: false,
@@ -26,7 +23,6 @@ export default {
 
     methods: {
         onClick(e) {
-            e.preventDefault();
             this.$emit('clickHandler');
         }
     }
@@ -34,40 +30,36 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
-    .btn {
-        display: inline-block;
-        position: relative;
-        background-color: #57c7bb;
-        border: none;
-        color: #ffffff;
-        border-radius: 20px;
-        padding: 7px 20px;
-        outline: none;
-        font-size: 12px;
-        min-width: 100px;
-        cursor: pointer;
-        box-shadow: 0 3px 12px 0 rgba(#171f2c, 0.75);
-        transition: 0.3s box-shadow linear, 0.3s background-color linear;
+<style lang="scss">
+    @import '../../scss/base/variables.scss';
 
-        &:focus,
-        &:active {
-            box-shadow: 0 0 0 0 rgba(#171f2c, 0.75);
-        }
+    .btn {
+        background-color: $primary-color;
+        color: $white;
+
+        position: relative;
+        text-align: center;
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color .3s ease-in-out;
 
         &:hover {
-            background-color: darken(#57c7bb, 10%);
+            background-color: darken($primary-color, 10%);
         }
 
         &__loader {
             color: transparent;
+            position: relative;
+            left: 10px;
 
             &:after {
                 content: '';
-                position: absolute;
-                top: 30%;
-                left: 43%;
-                transform: translate(-50%, -50%);
+                position: relative;
                 display: inline-block;
                 border: 2px solid #394b63;
                 border-top: 2px solid #ffffff;

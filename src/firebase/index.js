@@ -137,15 +137,18 @@ class Firebase {
     }
 
     async savePost(typePost, payload) {
-        const self = this;
         let imageUrl = null;
         const { post, key } = payload;
 
-        if(post.image !== null) {
+        if(typeof post.image === 'string' && post.image !== null) {
+            imageUrl = post.image;
+        }
+
+        if(typeof post.image === 'object' && post.image !== null) {
             imageUrl = await this.uploadImageAndGetUrl('users', post.image);
         }
 
-        self.database.ref(`${typePost}/` + key).set({
+        this.database.ref(`${typePost}/` + key).set({
             ...post,
             image: imageUrl
         })

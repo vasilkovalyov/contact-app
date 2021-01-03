@@ -2,8 +2,8 @@
     <div class="auth-form-wrapper">
         <form class="auth-form">
             <div class="auth-form__header">
-                <h2>Login</h2>
-                <p>Please login to access the Dashboard</p>
+                <h2>Reset Password</h2>
+                <p>If your have forgotten your password, we can email instructions on how to reset it.</p>
             </div>
             <input-field
                 v-model="formData.email.value"
@@ -17,22 +17,9 @@
                 </template>
                 <template v-slot:label>Email</template>
             </input-field>
-            <input-field
-                v-model="formData.password.value"
-                :name="formData.password.name"
-                type="password"
-                :placeholder="formData.password.placeholder"
-                :link="formData.password.link"
-                :linkName="formData.password.linkName"
-            >
-                <template v-slot:input-icon>
-                    <i class="fas fa-lock"></i>
-                </template>
-                <template v-slot:label>Password</template>
-            </input-field>
             <div class="auth-form__btn-wrap">
-                <form-button @clickHandler="clickHandler" :loader="loader" >Login</form-button>
-                <p>New to our platform? <router-link to="/register">Create an account</router-link> </p>
+                <form-button @clickHandler="clickHandler" :loader="loader" >Send Instructions</form-button>
+                <p><router-link tag="a" to="/login">Return to login</router-link></p>
             </div>
         </form>
     </div>
@@ -53,13 +40,6 @@ export default {
                 link: '#',
                 linkName: 'Need help?'
             },
-            password: {
-                value: '',
-                name: 'password',
-                placeholder: 'Password',
-                link: '/reset-password',
-                linkName: 'Forgot Password?'
-            }
         },
         loader: false
     }),
@@ -73,16 +53,12 @@ export default {
         async clickHandler() {
             const formData = {
                 email: this.formData.email.value,
-                password: this.formData.password.value,
             }
 
             try {
                 this.loader = true;
-                await this.$store.dispatch('signIn', formData);
                 this.loader = false;
-                this.$router.push('/');
             } catch(error) {
-
                 console.log(error);
             }
         },

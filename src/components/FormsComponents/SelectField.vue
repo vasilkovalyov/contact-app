@@ -61,7 +61,7 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
     .select-field {
         margin-bottom: 30px;
 

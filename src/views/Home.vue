@@ -4,9 +4,7 @@
             <div class="section-users__header">
                 <div class="df-row">
                     <div class="col col-6">
-                        <div class="section-users-caption">
-                            <h1>Users</h1>
-                        </div>
+                        <h1>Users</h1>
                     </div>
                     <div class="col col-6">
                         <div class="search-wrap">
@@ -67,7 +65,7 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .section-users {
         padding: 40px 0;
 
@@ -77,6 +75,28 @@ export default {
 
         h1 {
             font-weight: 500;
+            margin: 0 20px 0 0;
+            color: #525F7F;
+        }
+
+        &__header {
+            margin-bottom: 40px;
+
+            .df-row {
+                display: flex;
+                align-items: center;
+
+                .col {
+                    &.col-6 {
+                        width: 50%;
+                    }
+                }
+            }
+        }
+
+        .search-wrap {
+            display: flex;
+            justify-content: flex-end;
         }
 
         &__panel {

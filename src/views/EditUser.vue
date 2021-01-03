@@ -82,7 +82,7 @@ export default {
 }
 
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
     .section-edit-user {
         padding: 50px 0;
     }
