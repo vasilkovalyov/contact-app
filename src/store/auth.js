@@ -53,7 +53,6 @@ export default  {
 
         async onAuthUser(store) {
             const response = await firebase.auth.currentUser;
-            console.log(response);
             if(response) {
                 store.commit('setAuthUser', response);
             }

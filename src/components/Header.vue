@@ -3,7 +3,7 @@
         <div class="container">
             <router-link to="/" tag="a" class="header__logo">Vue Contact App</router-link>
             <nav class="header-nav">
-                <ul class="header-nav-list">
+                <!-- <ul class="header-nav-list">
                     <li>
                         <router-link to="/">Home</router-link>
                     </li>
@@ -18,7 +18,12 @@
                             <i class="fas fa-sign-out-alt"></i>
                         </button>
                     </li>
-                </ul>
+                </ul> -->
+                <template v-if="getAuthUser">
+                    <UserProfileNav 
+                        :user="getAuthUser"
+                    />
+                </template>
             </nav>
         </div>
     </header>
@@ -28,7 +33,11 @@
 
 import { mapGetters } from 'vuex';
 
+import UserProfileNav from './UserProfileNav';
+
 export default {
+    name: 'Header',
+
     data: () => ({
 
     }),
@@ -37,22 +46,19 @@ export default {
         ...mapGetters(['getAuthUser'])
     },
 
-    methods: {
-        async signOut() {
-            try {
-                await this.$store.dispatch('signOut')
-                this.$router.push('/login');
-            } catch(e) {}
-        }
-    }
+    components: {
+        UserProfileNav
+    },
+
+   
 }
 </script>
 
 <style lang="scss" scoped>
     .header {
         padding: 14px 0;
-        color: #ffffff;
-        background-color: #2196f3;
+        color: #525F7F;
+        background-color: #ffffff;
 
         &__logo {
             margin-right: 10px;
@@ -66,6 +72,8 @@ export default {
     }
 
     .header-nav-list {
+        padding: 0;
+        margin: 0;
         display: flex;
         align-items: center;
         list-style-type: none;

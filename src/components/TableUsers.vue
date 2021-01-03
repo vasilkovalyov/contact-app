@@ -1,20 +1,46 @@
 <template>
     <div class="table-user-wrapper">
+        <div class="table-user-wrapper__header">
+            <span class="table-user-wrapper__caption">Users</span>
+            <template v-if="selectedUsers.length === 1">
+                <div class="table-user-buttons-config">
+                    <div class="table-user-buttons-config__btn-wrap">
+                        <router-link  :to="'/edit/'+selectedUsers[0]" class="table-user__btn table-user__btn-edit">
+                            <i class="fas fa-pen"></i>
+                        </router-link>
+                        <button class="table-user__btn table-user__btn-remove" @click.prevent="removeHandleClick(selectedUsers[0])">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </div>
         <table class="table-users">
-            <thead class="table-users__head">
+            <thead class="table-users__header">
                 <tr>
+                    <td>Select</td>
                     <td>Name</td>
                     <td>Email</td>
                     <td>Nickname</td>
                     <td>Birthday</td>
                     <td>Gender</td>
-                    <td></td>
                 </tr>
             </thead>
             <template v-if="users.length > 0">
                 <tbody class="table-users__body"  v-for="user in users" :key="user.key">
                     <tr class="table-user">
-                        <td>{{user.name}}</td>
+                        <td>
+                            <input :value="user.key" v-model="selectedUsers" type="checkbox">
+                        </td>
+                        <td>
+                            <template v-if="user.image">
+                                <img :src="user.image" :alt="user.name" class="table-user__image">
+                            </template>
+                            <template v-else>
+                                <i class="fas fa-user"></i>
+                            </template>
+                            <span>{{user.name}}</span>
+                        </td>
                         <td>{{user.email}}</td>
                         <td>{{user.nickname}}</td>
                         <td>{{user.date}}</td>
@@ -28,16 +54,6 @@
                                 </template>
                                 {{user.gender}}
                             </span>
-                        </td>
-                        <td class="table-user__btn-wrap">
-                            <div class="btn-wrap">
-                                <router-link  :to="'/edit/'+user.key" class="table-user__btn table-user__btn-edit">
-                                    <i class="fas fa-pen"></i>
-                                </router-link>
-                                <button class="table-user__btn table-user__btn-remove" @click.prevent="removeHandleClick(user.key)">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -78,7 +94,8 @@ export default {
                 message: '',
                 type: ''
             },
-            isShowNotification: false
+            isShowNotification: false,
+            selectedUsers: [],
         }
     },
 
@@ -97,6 +114,10 @@ export default {
                 this.initNotification(false);
                 console.log(e);
             }
+        },
+
+        selected() {
+
         },
 
         closeNotification() {
@@ -120,18 +141,54 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .table-user-buttons-config {
+        &__btn-wrap {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .table-user-wrapper {
+        &__header {
+            padding: 20px 40px 20px 30px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__caption {
+            color: #525F7F;
+            font-weight: 500;
+            display: block;
+        }
+    }
+
     .table-users {
         border-collapse: collapse;
         width: 100%;
         font-size: 14px;
 
-        &__head {
-            font-weight: 500;
+        &__header {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #9DACC0;
+            background-color: #F6F9FC;
+            font-weight: 600;
+            border-bottom: 1px solid #E9ECEF;
+
+            td {
+                text-align: left;
+                padding: 16px 31px 14px;
+            }
         }
 
-        td {
-            padding: 5px 10px;
-            border: 1px solid #9b9b9b;
+        &__body {
+            td {
+                font-size: 14px;
+                color: #525F7F;
+                padding: 16px 31px;
+            }
         }
     }
 
@@ -139,6 +196,24 @@ export default {
         &__btn-wrap {
             text-align: center;
             width: 120px;
+        }
+
+        .fa-user {
+            display: inline-block;
+            width: 35px;
+            text-align: center;
+        }
+
+        &__image {
+            display: inline-block;
+            align-items: center;
+            vertical-align: middle;
+            width: 35px;
+            min-width: 35px;
+            height: 35px;
+            overflow: hidden;
+            margin-right: 15px;
+            border-radius: 50%;
         }
 
         &__btn {
@@ -172,10 +247,6 @@ export default {
             }
         }
 
-        &__gender {
-            text-align: center;
-        }
-
         .btn-wrap {
             display: flex;
             align-items: center;
@@ -185,19 +256,7 @@ export default {
 
     .gender {
         display: inline-block;
-        padding: 8px 12px;
-        color: #ffffff;
-        border-radius: 4px;
-        margin: 0 auto;
         width: 100px;
         text-transform: capitalize;
-
-        &__male {
-            background-color: #59bcdb;
-        }
-
-        &__female {
-            background-color: #56bc59;
-        }
     }
 </style>

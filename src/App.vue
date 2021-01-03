@@ -17,8 +17,8 @@ export default {
 
 	}),
 
-	beforeCreate() {
-		this.$store.dispatch('onAuthUser');
+	async mounted() {
+		await this.$store.dispatch('onAuthUser');
 	},
 
 	components: {

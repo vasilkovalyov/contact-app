@@ -1,20 +1,18 @@
 <template>
     <div class="search">
         <label>
-            <span class="search__label-text">{{label}}</span>
-            <input type="text" class="search__input" v-model="inputValue">
+            <input type="text" class="search__input" v-model="inputValue" :placeholder="placeholder">
+            <button class="search__btn" @click.prevent="handleClickSearch">
+                <i class="fas fa-search"></i>
+            </button>
         </label>
-        <div class="search__btn-wrap">
-            <button class="search__btn search__btn-submit" @click.prevent="handleClickSearch">Go</button>
-            <button class="search__btn search__btn-reset" @click.prevent="handleClickReset">Reset</button>
-        </div>
     </div>
 </template>
 
 <script>
 export default {
     props: {
-        label: {
+        placeholder: {
             type: String,
             default: 'Input',
             required: false
@@ -29,65 +27,52 @@ export default {
         handleClickSearch() {
             this.$emit('handleClickSearch', this.inputValue);
         },
-
-        handleClickReset() {
-            this.inputValue = '';
-            this.$emit('handleClickSearch', '');
-        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
     .search {
+        max-width: 265px;
+        width: 100%;
         display: flex;
 
-        &__label-text {
-            font-size: 14px;
-            margin-right: 10px;
-            font-weight: 500;
+        label {
+            position: relative;
+            width: 100%;
         }
 
         &__input {
-            border-radius: 3px;
-            padding: 4px 10px;
-            border: 1px solid #9b9b9b;
             outline: none;
-            margin-right: 4px;
-            height: 32px;
-        }
-
-        &__btn-wrap {
-            display: flex;
+            transition: box-shadow .3s ease-in-out;
+            width: 100%;
+            border: 2px solid #E9ECEF;
+            font-size: 14px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 11px 1px rgba(233,236,240,0);
+            padding: 5px 40px 5px 10px;
+            height: 40px;
         }
 
         &__btn {
-            outline: none;
-            margin-right: 5px;
+            transition: color .3s ease-in-out,background-color .3s ease-in-out;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            bottom: 5px;
+            width: 30px;
+            border-radius: 5px;
+            color: #9DACC0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
             border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            padding: 4px 14px;
-            transition: color 0.3s linear, background-color 0.3s linear,;
 
-            &-submit {
+            &:hover {
+                cursor: pointer;
                 color: #fff;
-                background-color: #007bff;
-                border-color: #007bff;
-
-                &:hover {
-                    background-color: darken(#007bff, 20%);
-                }
-            }
-
-            &-reset {
-                background-color: #ffffff;
-                border: 1px solid #3a3434;
-
-                &:hover {
-                    color: #ffffff;
-                    background-color: darken(#3a3434, 20%);
-                }
+                background-color: #4b9da5;
             }
         }
     }
