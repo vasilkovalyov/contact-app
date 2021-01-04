@@ -1,5 +1,5 @@
 <template>
-    <div class="input-component">
+    <div class="input-component" :class="inputClass">
             <label class="input-field__label">
                 <slot name='label'></slot>
             </label>
@@ -22,6 +22,7 @@
 <script>
 
 export default {
+    name: 'InputField',
     props: {
         name: {
             type: String,
@@ -57,7 +58,8 @@ export default {
             type: String,
             default: '',
             required: false
-        }
+        },
+        inputClass: '',
     },
 
     methods: {
@@ -73,6 +75,7 @@ export default {
     @import '../../scss/base/variables.scss';
 
     .input-component {
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -86,8 +89,21 @@ export default {
             margin-bottom: 13px;
             transition: color 0.3s linear;
 
+            &:empty {
+                display: none;
+            }
+
             &:hover {
                 color: darken($primary-color, 20%);
+            }
+        }
+
+        &__md {
+            .input-field {
+                input {
+                    padding: 5px 40px;
+                    height: 36px;
+                }
             }
         }
     }
@@ -99,10 +115,14 @@ export default {
         &__label {
             color: $secondary-color;
             color: $blue-dark;
-
             display: block;
             font-size: 14px;
             margin-bottom: 13px;
+            font-weight: 600;
+
+            &:empty {
+                display: none;
+            }
         }
 
         &__input {
@@ -134,6 +154,8 @@ export default {
             top: 50%;
             left: 15px;
             transform: translateY(-50%);
+            color: rgb(157, 172, 192);
+            font-size: 14px;
         }
 
 

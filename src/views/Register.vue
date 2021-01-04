@@ -5,34 +5,34 @@
                 <h2>Register</h2>
                 <p>Create a new account for My Contribution</p>
             </div>
-            <input-field
+            <InputField
                 v-model="formData.firstName" name="first-name" placeholder="First Name">
                 <template v-slot:input-icon>
                     <i class="fas fa-user"></i>
                 </template>
-            </input-field>
-            <input-field v-model="formData.lastName" name="last-name" placeholder="Last Name">
+            </InputField>
+            <InputField v-model="formData.lastName" name="last-name" placeholder="Last Name">
                 <template v-slot:input-icon>
                     <i class="fas fa-user"></i>
                 </template>
-            </input-field>
-            <input-field v-model="formData.jobTitle" name="job" placeholder="Job Title">
+            </InputField>
+            <InputField v-model="formData.jobTitle" name="job" placeholder="Job Title">
                 <template v-slot:input-icon>
                     <i class="fas fa-user-md"></i>
                 </template>
-            </input-field>
-            <input-field v-model="formData.email" name="email" placeholder="Email">
+            </InputField>
+            <InputField v-model="formData.email" name="email" placeholder="Email">
                 <template v-slot:input-icon>
                     <i class="fas fa-envelope"></i>
                 </template>
-            </input-field>
-            <input-field v-model="formData.password" name="password" type="password" placeholder="Password">
+            </InputField>
+            <InputField v-model="formData.password" name="password" type="password" placeholder="Password">
                 <template v-slot:input-icon>
                         <i class="fas fa-lock"></i>
                 </template>
-            </input-field>
+            </InputField>
             <div class="auth-form__btn-wrap">
-                <form-button @clickHandler="clickHandler" :loader="loader">Register</form-button>
+                <FormButton :buttonClass="['btn__primary', 'btn__wide']" @clickHandler="clickHandler" :loader="loader">Register</FormButton>
                 <p>Do you have an account? <router-link tag="a" to="/login">Return to login</router-link></p>
             </div>
         </form>
@@ -45,16 +45,20 @@ import InputField from '@/components/FormsComponents/InputField';
 import FormButton from '@/components/FormsComponents/FormButton';
 
 export default {
-    data: () => ({
-        formData: {
-            firstName: '',
-            lastName: '',
-            jobTitle: '',
-            email: '',
-            password: ''
-        },
-        loader: false
-    }),
+    name: 'Register',
+    
+    data() {
+        return {
+            formData: {
+                firstName: '',
+                lastName: '',
+                jobTitle: '',
+                email: '',
+                password: ''
+            },
+            loader: false
+        }
+    },
 
     components: {
         InputField,

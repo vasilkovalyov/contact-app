@@ -1,5 +1,5 @@
 <template>
-    <button class="btn"
+    <button class="btn" :class="buttonClass ? buttonClass : []"
         :disabled="loader"
         @click.prevent="onClick" 
     >
@@ -13,13 +13,7 @@
 
 
 export default {
-    props: {
-        loader: {
-            type: Boolean,
-            default: false,
-            required: false,
-        }
-    },
+    props: ['loader', 'buttonClass'],
 
     methods: {
         onClick(e) {
@@ -34,23 +28,20 @@ export default {
     @import '../../scss/base/variables.scss';
 
     .btn {
-        background-color: $primary-color;
         color: $white;
 
         position: relative;
         text-align: center;
-        width: 100%;
         border: none;
         outline: none;
-        padding: 15px;
+        padding: 9px 15px;
         border-radius: 5px;
-        font-size: 16px;
+        font-size: 14px;
+        min-width: 120px;
         cursor: pointer;
         transition: background-color .3s ease-in-out;
 
-        &:hover {
-            background-color: darken($primary-color, 10%);
-        }
+        
 
         &__loader {
             color: transparent;
@@ -68,6 +59,27 @@ export default {
                 height: 14px;
                 animation: spin 1s linear infinite;
             }
+        }
+
+        &__primary {
+            background-color: $primary-color;
+
+            &:hover {
+                background-color: $blue-dark-1;
+            }
+        }
+
+        &__secondary {
+            background-color: $blue-light-1;
+            
+            &:hover {
+                background-color: $blue-dark-1;
+            }
+        }
+
+        &__wide {
+            width: 100%;
+            padding: 15px;
         }
     }
 

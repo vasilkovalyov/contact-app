@@ -5,7 +5,7 @@
                 <h2>Reset Password</h2>
                 <p>If your have forgotten your password, we can email instructions on how to reset it.</p>
             </div>
-            <input-field
+            <InputField
                 v-model="formData.email.value"
                 :name="formData.email.name"
                 :placeholder="formData.email.placeholder"
@@ -16,9 +16,9 @@
                     <i class="fas fa-envelope"></i>
                 </template>
                 <template v-slot:label>Email</template>
-            </input-field>
+            </InputField>
             <div class="auth-form__btn-wrap">
-                <form-button @clickHandler="clickHandler" :loader="loader" >Send Instructions</form-button>
+                <FormButton :buttonClass="['btn__primary', 'btn__wide']" @clickHandler="clickHandler" :loader="loader" >Send Instructions</FormButton>
                 <p><router-link tag="a" to="/login">Return to login</router-link></p>
             </div>
         </form>
@@ -31,18 +31,22 @@ import InputField from '@/components/FormsComponents/InputField';
 import FormButton from '@/components/FormsComponents/FormButton';
 
 export default {
-    data: () => ({
-        formData: {
-            email: {
-                value: '',
-                name: 'email',
-                placeholder: 'Email',
-                link: '#',
-                linkName: 'Need help?'
+    name: 'ResetPassword',
+    
+    data() {
+        return {
+            formData: {
+                email: {
+                    value: '',
+                    name: 'email',
+                    placeholder: 'Email',
+                    link: '#',
+                    linkName: 'Need help?'
+                },
             },
-        },
-        loader: false
-    }),
+            loader: false
+        }
+    },
 
     components: {
         InputField,

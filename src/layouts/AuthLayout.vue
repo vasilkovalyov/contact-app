@@ -10,26 +10,10 @@
 						</a>
 					</div>
 					<div class="section-auth__main">
-						<!-- <ul class="switcher-links">
-							<li class="switcher-links__item">
-								<router-link to="/login" class="switcher-links__item-link">Sign in</router-link>
-							</li>
-							<li class="switcher-links__item">
-								<router-link to="/register" class="switcher-links__item-link">Sign up</router-link>
-							</li>
-						</ul>
-						<p class="auth-panel__head">
-							<router-link to="/login" class="auth-panel__head-link">Sign in</router-link>
-							<span>or</span>
-							<router-link to="/register" class="auth-panel__head-link">Sign up</router-link>
-
-						</p> -->
 						<router-view  />
 					</div>
 				</div>
-				<div class="section-auth__image" style="background-image: url(https://static6.depositphotos.com/1003229/609/v/450/depositphotos_6096843-Circuit-board-vector-background.jpg)">
-
-				</div>
+				<div class="section-auth__image" style="background-image: url(./images/auth-image.jpg)"></div>
 			</div>
 		</div>
 	</section>
@@ -38,8 +22,11 @@
 
 <script>
 	export default {
-		data: () => ({
-		})
+		data() {
+			return {
+
+			}
+		},
 	}
 </script>
 

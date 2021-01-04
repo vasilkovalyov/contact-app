@@ -33,9 +33,13 @@ import TableUser from '../components/TableUsers';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    data: () => ({
-        searchValue: '',
-    }),
+    name: 'Home',
+    
+    data () {
+        return {
+            searchValue: '',
+        }
+    },
 
     components: {
         MainLayout,

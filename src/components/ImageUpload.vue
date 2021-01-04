@@ -12,12 +12,8 @@
         </div>
         <div class="image-upload__btn-wrap">
             <input type="file" :name="name" ref="file" hidden @change="handleFileUpload">
-
-            <form-button @clickHandler="submitFile">Upload</form-button>
-            
-            <template v-if="image">
-                <form-button @clickHandler="handleClickReset" >Reset</form-button>
-            </template>
+            <FormButton :buttonClass="['btn__primary']" @clickHandler="submitFile">Upload</FormButton>
+            <FormButton :buttonClass="['btn__secondary']" @clickHandler="handleClickReset">Reset</FormButton>
         </div>
     </div>
 </template>
@@ -78,16 +74,23 @@ export default {
 
 <style lang="scss">
     .image-upload {
-        max-width: 280px;
         width: 100%;
-        margin-bottom: 30px;
+
+        &__image-holder {
+            max-width: 218px;
+            width: 100%;
+            margin: 0 auto;
+        }
 
         &__thumbnail {
-            width: 280px;
+            max-width: 218px;
+            width: 100%;
+            height: 218px;
+            margin: 0 auto 30px;
 
             svg {
                 width: 100%;
-                height: 20vw;
+                height: 220px;
 
                 g {
                     width: inherit;
@@ -107,6 +110,15 @@ export default {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        &__btn-wrap {
+            display: flex;
+            justify-content: center;
+
+            .btn {
+                margin: 0 10px 20px;
+            }
         }
     }
 </style>

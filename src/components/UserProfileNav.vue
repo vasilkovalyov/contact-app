@@ -93,7 +93,7 @@ export default {
                 margin: 0;
 
                 li {
-                    padding: 11px 20px 11px 16px;
+                    padding: 15px 20px 15px 16px;
 
                     i {
                         margin-right: 10px;

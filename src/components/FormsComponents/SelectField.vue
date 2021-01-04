@@ -78,7 +78,6 @@ export default {
             border-bottom: 1px solid #677987;
             padding: 10px 0;
             outline: none;
-            font-family: 'Roboto';
             width: 100%;
             color: #677987;
 

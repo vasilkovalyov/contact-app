@@ -22,6 +22,8 @@
     import Notification from '../components/Notification';
 
     export default {
+        name: 'CreateUser',
+        
         data() {
             return {
                 notification: {
