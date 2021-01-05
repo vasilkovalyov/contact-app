@@ -85,6 +85,11 @@ export default  {
     getters: {
         getAuthUser(store) {
             return store.authUser;
-        }
+        },
+        
+        getAuthUserDate(store) {
+            return store.authUserData;
+        },
+
     }
 }

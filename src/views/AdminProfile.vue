@@ -2,7 +2,11 @@
     <div class="auth-profile-page">
         <section class="section-admin-banner" style="background-image: url(./images/admin-profile-image.jpg)">
             <div class="container">
-                <h1>Admin - {{name}}</h1>
+                <h1>Admin - 
+                    <template v-if="getAuthUserDate">
+                        {{getAuthUserDate.firstName}} {{getAuthUserDate.lastName}}
+                    </template>
+                </h1>
                 <ul class="dashboard-breadcrumbs">
                     <li>Account settings</li>
                 </ul>
@@ -15,15 +19,17 @@
                         <div class="col col-4">
                             <div class="profile-photo">
                                 <span class="profile-photo__caption">Profile Photo</span>
-                                <ImageUpload 
-                                    name="image-user"
-                                    :image="userForm.image"
-                                    @imageUploadHandler="imageUploadHandler"
-                                />
+                                <template v-if="getAuthUserDate">
+                                    <ImageUpload 
+                                        name="image-user"
+                                        :image="userForm.image"
+                                        @imageUploadHandler="imageUploadHandler"
+                                    />
+                                </template>
                             </div>
                         </div>
                         <div class="col col-8">
-                            <div class="profile-info">
+                            <div class="profile-info" >
                                 <div class="profile-info__header">
                                     <span class="profile-info__caption">Your Profile</span>
                                     <div class="btn-wrap">
@@ -33,11 +39,11 @@
                                 <div class="profile-info__category">
                                     <span class="profile-info__category-title">BASICS</span>
                                 </div>
-                                <div class="profile-info__form">
+                                <div class="profile-info__form" v-if="getAuthUserDate">
                                     <div class="df-row">
                                         <div class="col col-6">
                                             <InputField
-                                                v-model="userForm.firstName" name="first-name" placeholder="Name">
+                                                v-model="getAuthUserDate.firstName" name="first-name" placeholder="Name">
                                                 <template v-slot:input-icon>
                                                     <i class="fas fa-user"></i>
                                                 </template>
@@ -46,7 +52,7 @@
                                         </div>
                                         <div class="col col-6">
                                             <InputField
-                                                v-model="userForm.lastName" name="last-name" placeholder="Name">
+                                                v-model="getAuthUserDate.lastName" name="last-name" placeholder="Name">
                                                 <template v-slot:input-icon>
                                                     <i class="fas fa-user"></i>
                                                 </template>
@@ -54,7 +60,7 @@
                                             </InputField>
                                         </div>
                                         <div class="col col-6">
-                                            <InputField v-model="userForm.jobTitle" name="job" placeholder="Job Title">
+                                            <InputField v-model="getAuthUserDate.jobTitle" name="job" placeholder="Job Title">
                                                 <template v-slot:input-icon>
                                                     <i class="fas fa-user-md"></i>
                                                 </template>
@@ -62,7 +68,7 @@
                                             </InputField>
                                         </div>
                                         <div class="col">
-                                            <InputField v-model="userForm.email" name="email" placeholder="Email">
+                                            <InputField v-model="getAuthUserDate.email" name="email" placeholder="Email">
                                                 <template v-slot:input-icon>
                                                     <i class="fas fa-envelope"></i>
                                                 </template>
@@ -134,7 +140,7 @@ export default {
     data() {
         return {
             name: 'Vasiliy',
-            userForm: {...this.getAuthUser},
+            userForm: {},
             securityDate: {
                 password: '',
                 confirmPassword: ''
@@ -143,11 +149,11 @@ export default {
     },
 
     computed: {
-        ...mapGetters(['getAuthUser'])
+        ...mapGetters(['getAuthUserDate'])
     },
 
     mounted() {
-        // console.log(this.getAuthUser);
+        
     },
 
 

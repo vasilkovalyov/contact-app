@@ -34,7 +34,7 @@ export default {
 
     data() {
         return {
-            file: this.image
+            file: this.image || ''
         }
     },
 

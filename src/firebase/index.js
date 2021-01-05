@@ -166,7 +166,7 @@ class Firebase {
                     self.database.ref(typePost).orderByChild('uId').equalTo(uId).once('value', function(response) {
                         const data = response.val();
                         if(data) {
-                            return resolve(data);
+                            return resolve(Object.values(data)[0]);
                         }
                     })
                 } catch(e) {
