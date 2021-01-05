@@ -38,12 +38,23 @@ class Firebase {
     }
 
     async signUp(name, email, password) {
-        await this.auth.createUserWithEmailAndPassword(email, password)
-        .then(function(response) {
-			return response.user.updateProfile({
-				displayName: name
-			})
-        })  
+        const auth = this.auth;
+
+        return new Promise(
+            function(resolve, reject) {
+                auth.createUserWithEmailAndPassword(email, password)
+                .then(function(response) {
+                    response.user.updateProfile({
+                        displayName: name
+                    })
+
+                    resolve(response.user);
+                })
+                .catch(function(e) {
+                    reject(e)
+                })
+            }
+        )
     }
 
     async signOut() {
@@ -57,8 +68,27 @@ class Firebase {
         return response;
     }
 
-    async createUser(userData) {
-        const newUserKey = await this.database.ref().child('users').push(userData).key;
+    async addUidAuthUserToPost(typePost, post, key, uid) {
+        await this.database.ref(`${typePost}/` + key).set({
+            ...post,
+            uId: uid
+        })
+    }
+
+    createPostAndGetData(typePost, userData) {
+        const database = this.database;
+
+        return new Promise(
+            function(resolve, reject) {
+                const newPostKey = database.ref().child(typePost).push(userData).key;
+
+                if(newPostKey) {
+                    return resolve(newPostKey);
+                } else {
+                    return reject(e);
+                }
+            }
+        )
     }
 
     loadPosts(typePost) {
@@ -128,6 +158,24 @@ class Firebase {
         )
     }
 
+    getPostByPropUid(typePost, uId) {
+        const self = this;
+        return new Promise(
+            function(resolve, reject) {
+                try {
+                    self.database.ref(typePost).orderByChild('uId').equalTo(uId).once('value', function(response) {
+                        const data = response.val();
+                        if(data) {
+                            return resolve(data);
+                        }
+                    })
+                } catch(e) {
+                    reject(e);
+                }
+            }
+        )
+    }
+
     async uploadImageAndGetUrl(typePost, image) {
         const storageRef = await this.storage.ref(`${typePost}/${image.name}`);
         return await storageRef.put(image)
@@ -148,9 +196,21 @@ class Firebase {
             imageUrl = await this.uploadImageAndGetUrl('users', post.image);
         }
 
-        this.database.ref(`${typePost}/` + key).set({
-            ...post,
-            image: imageUrl
+        try {
+            this.database.ref(`${typePost}/` + key).set({
+                ...post,
+                image: imageUrl
+            })
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    async updateAuthUser(user) {
+        const {firstName, lastName } = user;
+        const userNow = this.auth.currentUser;
+        userNow.updateProfile({
+            displayName: firstName + ' ' + lastName,
         })
     }
 }

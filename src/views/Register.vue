@@ -54,7 +54,8 @@ export default {
                 lastName: '',
                 jobTitle: '',
                 email: '',
-                password: ''
+                password: '',
+                image: ''
             },
             loader: false
         }
@@ -68,9 +69,12 @@ export default {
     methods: {
         async clickHandler() {
             const formData = {
-                name: this.formData.name,
+                firstName: this.formData.firstName,
+                lastName: this.formData.lastName,
+                jobTitle: this.formData.jobTitle,
                 email: this.formData.email,
                 password: this.formData.password,
+                image: this.formData.image
             }
 
             try {

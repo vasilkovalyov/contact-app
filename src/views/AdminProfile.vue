@@ -104,7 +104,7 @@
                                                     </InputField>
                                                 </div>
                                                 <div class="btn-wrap">
-                                                    <button type="submit" class="btn accent-background btn__primary js-btn-save js-btn-save-password">Save</button>
+                                                    <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSavePassword" >Save</FormButton>
                                                 </div>
                                             </form>
                                         </div>
@@ -121,6 +121,8 @@
 
 <script>
 
+import { mapGetters, mapActions } from 'vuex';
+
 import InputField from '../components/FormsComponents/InputField';
 import FormButton from '../components/FormsComponents/FormButton';
 import ImageUpload from '../components/ImageUpload';
@@ -128,12 +130,11 @@ import ImageUpload from '../components/ImageUpload';
 
 export default {
     name: 'AdminProfile',
-    props: ['user'],
 
     data() {
         return {
             name: 'Vasiliy',
-            userForm: {...this.user},
+            userForm: {...this.getAuthUser},
             securityDate: {
                 password: '',
                 confirmPassword: ''
@@ -141,12 +142,30 @@ export default {
         }
     },
 
-    methods: {
-        handleClickSave() {
+    computed: {
+        ...mapGetters(['getAuthUser'])
+    },
 
+    mounted() {
+        // console.log(this.getAuthUser);
+    },
+
+
+    methods: {
+        ...mapActions(['updateAuthUser']),
+
+        handleClickSave() {
+            this.updateAuthUser(this.userForm);
         },
 
-        imageUploadHandler() {
+        imageUploadHandler(file) {
+            this.userForm = {
+                ...this.userForm,
+                image: file,
+            }
+        },
+
+        handleClickSavePassword() {
 
         }
     },

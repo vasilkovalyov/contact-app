@@ -19,8 +19,8 @@ export default  {
     },
 
     actions: {
-        async createUser(state, payload) {
-            await firebase.createUser(payload);
+        createUser(payload) {
+            firebase.createPostAndGetData('users', payload)
         },
 
         async loadUsers(state, payload) {
@@ -47,7 +47,7 @@ export default  {
                 post: payload.user,
                 key: payload.key
             })
-        }
+        },
     },
 
     getters: {

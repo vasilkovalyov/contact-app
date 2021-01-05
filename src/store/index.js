@@ -4,11 +4,11 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import auth from './auth';
-import admin from './admin';
+import users from './users';
 
 export default new Vuex.Store({
 	modules: {
 		auth,
-		admin
+		users,
 	},
 })

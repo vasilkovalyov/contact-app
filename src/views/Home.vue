@@ -47,10 +47,6 @@ export default {
         TableUser
     },
 
-    mounted() {
-
-    },
-
     beforeMount() {
         this.loadUsers('users');
     },

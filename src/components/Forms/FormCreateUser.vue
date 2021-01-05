@@ -56,20 +56,20 @@
         }),
 
         methods: {
-            async submitForm(e) {
+            submitForm(e) {
                 e.preventDefault();
 
                 const formData = { ...this.formData };
             
                 try {
                     this.loader = true;
-                    await this.$store.dispatch('createUser', formData)
+                    this.$store.dispatch('createUser', formData)
                     this.$emit('initNotification', true);
                     this.loader = false;     
                     this.clearForm(this.formData);
 
                 } catch(error) {
-                    console.log(error);
+                    console.error(error.message);
                     this.$emit('initNotification', false);
                     this.loader = false;  
                 }

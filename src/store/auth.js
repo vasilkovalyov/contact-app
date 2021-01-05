@@ -3,11 +3,16 @@ import firebase from '../firebase/index';
 export default  {
     state: {
         authUser: null,
+        authUserData: null
     },
 
     mutations: {
         setAuthUser(store, payload) {
             store.authUser = payload;
+        },
+
+        setAuthUserData(store, payload) {
+            store.authUserData = payload;
         }
     },
 
@@ -26,17 +31,23 @@ export default  {
         },
 
         async signUp(store, payload) {
-            const { name, email, password } = payload;
+            const { firstName, lastName, email, password } = payload;
 
-            const response = await firebase.signUp(name, email, password)
-            .then(response => {
-                if(response) {
-                    store.commit('setAuthUser', response);
-                }
-            })
+            const response = await firebase.signUp(`${firstName} ${lastName}`, email, password)
+           
+            if(!response) return;
+    
+                const uIdAuthUser = response.uid;
+                const key = await firebase.createPostAndGetData('auth-users', payload);
+                const authUserPost = await firebase.getPostById('auth-users', key);
+                firebase.addUidAuthUserToPost('auth-users', authUserPost, key, uIdAuthUser);
 
-            return response;
-        },
+                store.commit('setAuthUserData', {
+                    ...authUserPost,
+                    uId: uIdAuthUser,
+                });
+                store.commit('setAuthUser', response);
+            },
 
         async signOut(store) {
             const response = await firebase.signOut()
@@ -53,12 +64,22 @@ export default  {
 
         async onAuthUser(store) {
             const response = await firebase.auth.currentUser;
+
             if(response) {
+                const uid = response.uid;
+                const authPost = await firebase.getPostByPropUid('auth-users', uid);
+                store.commit('setAuthUserData', authPost);
                 store.commit('setAuthUser', response);
             }
         },
-
         
+        async updateAuthUser(store, payload) {
+            await firebase.updateAuthUser(payload);
+        },
+
+        onAuthUserKey(store, payload) {
+            store.commit('setAuthUserKey', payload);
+        }
     },
 
     getters: {
