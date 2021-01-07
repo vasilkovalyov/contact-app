@@ -71,6 +71,7 @@ class Firebase {
     async addUidAuthUserToPost(typePost, post, key, uid) {
         await this.database.ref(`${typePost}/` + key).set({
             ...post,
+            key,
             uId: uid
         })
     }
@@ -193,7 +194,7 @@ class Firebase {
         }
 
         if(typeof post.image === 'object' && post.image !== null) {
-            imageUrl = await this.uploadImageAndGetUrl('users', post.image);
+            imageUrl = await this.uploadImageAndGetUrl(typePost, post.image);
         }
 
         try {
@@ -207,11 +208,40 @@ class Firebase {
     }
 
     async updateAuthUser(user) {
-        const {firstName, lastName } = user;
+        const database = this.database;
+        const typePost = 'auth-users';
+        let imageUrl = null;
+        const {firstName, lastName, image, key } = user;
         const userNow = this.auth.currentUser;
+
         userNow.updateProfile({
             displayName: firstName + ' ' + lastName,
         })
+
+        if(typeof image === 'string' && image !== null) {
+            imageUrl = image;
+        }
+
+        if(typeof image === 'object' && image !== null) {
+            imageUrl = await this.uploadImageAndGetUrl(typePost, image);
+        }
+
+        return new Promise(
+            function(resolve, reject) {
+                try {
+                    database.ref(`${typePost}/` + key).set({
+                        ...user,
+                        image: imageUrl
+                    })
+                    resolve({
+                        ...user,
+                        image: imageUrl
+                    });
+                } catch(e) {
+                    reject(e);
+                }
+            }
+        );
     }
 }
 

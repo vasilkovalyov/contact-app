@@ -40,12 +40,14 @@ export default  {
                 const uIdAuthUser = response.uid;
                 const key = await firebase.createPostAndGetData('auth-users', payload);
                 const authUserPost = await firebase.getPostById('auth-users', key);
-                firebase.addUidAuthUserToPost('auth-users', authUserPost, key, uIdAuthUser);
+                await firebase.addUidAuthUserToPost('auth-users', authUserPost, key, uIdAuthUser);
 
                 store.commit('setAuthUserData', {
                     ...authUserPost,
+                    key,
                     uId: uIdAuthUser,
                 });
+
                 store.commit('setAuthUser', response);
             },
 
@@ -74,7 +76,10 @@ export default  {
         },
         
         async updateAuthUser(store, payload) {
-            await firebase.updateAuthUser(payload);
+            await firebase.updateAuthUser(payload)
+            .then(function(response) {
+                store.commit('setAuthUserData', {...response});
+            })
         },
 
         onAuthUserKey(store, payload) {

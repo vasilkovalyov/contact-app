@@ -32,9 +32,15 @@ export default {
         FormButton,
     },
 
+    watch: {
+        image(val, oldVal) {
+            this.file = val;
+        }
+    },
+
     data() {
         return {
-            file: this.image || ''
+            file: this.image
         }
     },
 
@@ -79,7 +85,14 @@ export default {
         &__image-holder {
             max-width: 218px;
             width: 100%;
-            margin: 0 auto;
+            height: 218px;
+            margin: 0 auto 30px;
+            overflow: hidden;
+
+            img {
+                border-radius: 50%;
+                overflow: hidden;
+            }
         }
 
         &__thumbnail {
@@ -96,14 +109,6 @@ export default {
                     width: inherit;
                 }
             }
-        }
-
-        &__image-holder {
-            width: 100%;
-            max-height: 320px;
-            height: 100%;
-            overflow: hidden;
-            margin-bottom: 30px;
         }
 
         img {

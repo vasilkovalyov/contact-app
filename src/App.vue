@@ -12,6 +12,7 @@
 import AuthLayout from '@/layouts/AuthLayout';
 import MainLayout from '@/layouts/MainLayout';
 
+
 export default {
 	data: () => ({
 
@@ -36,7 +37,6 @@ export default {
 
 <style lang="scss">
 	#app {
-		
 		overflow: hidden;
 	}
 </style>

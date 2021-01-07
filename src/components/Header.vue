@@ -19,9 +19,9 @@
                         </button>
                     </li>
                 </ul> -->
-                <template v-if="getAuthUser">
+                <template v-if="getAuthUserDate">
                     <UserProfileNav 
-                        :user="getAuthUser"
+                        :user="getAuthUserDate"
                     />
                 </template>
             </nav>
@@ -43,7 +43,7 @@ export default {
     }),
 
     computed: {
-        ...mapGetters(['getAuthUser'])
+        ...mapGetters(['getAuthUserDate'])
     },
 
     components: {

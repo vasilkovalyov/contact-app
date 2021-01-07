@@ -1,10 +1,11 @@
 <template>
     <div class="user-profile-nav">
         <div class="user-profile-nav__image">
-            <img src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" alt="">
+            <img :src="user.image" alt="" v-if="user.image">
+            <img src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" alt="" v-else>
         </div>
         <div class="user-profile-nav__info">
-            <span class="user-profile-nav__name">{{user.displayName}}</span>
+            <span class="user-profile-nav__name">{{user.firstName}} {{user.lastName}}</span>
         </div>
         <div class="user-profile-nav__dropdown">
             <ul>

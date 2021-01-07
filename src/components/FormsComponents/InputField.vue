@@ -14,6 +14,7 @@
                     :placeholder="placeholder" 
                     class="input-field__input"
                     :value="value"
+                    :disabled="disabled"
                     @blur="inputHandler($event.target.value)"
                 >
             </div>
@@ -57,6 +58,11 @@ export default {
         linkName: {
             type: String,
             default: '',
+            required: false
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
             required: false
         },
         inputClass: '',

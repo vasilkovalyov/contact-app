@@ -2,9 +2,9 @@
     <div class="auth-profile-page">
         <section class="section-admin-banner" style="background-image: url(./images/admin-profile-image.jpg)">
             <div class="container">
-                <h1>Admin - 
+                <h1>Admin
                     <template v-if="getAuthUserDate">
-                        {{getAuthUserDate.firstName}} {{getAuthUserDate.lastName}}
+                        - {{getAuthUserDate.firstName}} {{getAuthUserDate.lastName}}
                     </template>
                 </h1>
                 <ul class="dashboard-breadcrumbs">
@@ -19,13 +19,11 @@
                         <div class="col col-4">
                             <div class="profile-photo">
                                 <span class="profile-photo__caption">Profile Photo</span>
-                                <template v-if="getAuthUserDate">
-                                    <ImageUpload 
-                                        name="image-user"
-                                        :image="userForm.image"
-                                        @imageUploadHandler="imageUploadHandler"
-                                    />
-                                </template>
+                                <ImageUpload 
+                                    name="image-user"
+                                    :image="userForm.image"
+                                    @imageUploadHandler="imageUploadHandler"
+                                />
                             </div>
                         </div>
                         <div class="col col-8">
@@ -33,17 +31,17 @@
                                 <div class="profile-info__header">
                                     <span class="profile-info__caption">Your Profile</span>
                                     <div class="btn-wrap">
-                                        <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSave" >Save</FormButton>
+                                        <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSave" :loader="loaderMainForm">Save</FormButton>
                                     </div>
                                 </div>
                                 <div class="profile-info__category">
                                     <span class="profile-info__category-title">BASICS</span>
                                 </div>
-                                <div class="profile-info__form" v-if="getAuthUserDate">
+                                <div class="profile-info__form" v-if="userForm">
                                     <div class="df-row">
                                         <div class="col col-6">
                                             <InputField
-                                                v-model="getAuthUserDate.firstName" name="first-name" placeholder="Name">
+                                                v-model="userForm.firstName" name="first-name" placeholder="Name">
                                                 <template v-slot:input-icon>
                                                     <i class="fas fa-user"></i>
                                                 </template>
@@ -52,7 +50,7 @@
                                         </div>
                                         <div class="col col-6">
                                             <InputField
-                                                v-model="getAuthUserDate.lastName" name="last-name" placeholder="Name">
+                                                v-model="userForm.lastName" name="last-name" placeholder="Name">
                                                 <template v-slot:input-icon>
                                                     <i class="fas fa-user"></i>
                                                 </template>
@@ -60,7 +58,7 @@
                                             </InputField>
                                         </div>
                                         <div class="col col-6">
-                                            <InputField v-model="getAuthUserDate.jobTitle" name="job" placeholder="Job Title">
+                                            <InputField v-model="userForm.jobTitle" name="job" placeholder="Job Title">
                                                 <template v-slot:input-icon>
                                                     <i class="fas fa-user-md"></i>
                                                 </template>
@@ -68,7 +66,7 @@
                                             </InputField>
                                         </div>
                                         <div class="col">
-                                            <InputField v-model="getAuthUserDate.email" name="email" placeholder="Email">
+                                            <InputField v-model="userForm.email" name="email" placeholder="Email" :disabled="true">
                                                 <template v-slot:input-icon>
                                                     <i class="fas fa-envelope"></i>
                                                 </template>
@@ -110,7 +108,7 @@
                                                     </InputField>
                                                 </div>
                                                 <div class="btn-wrap">
-                                                    <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSavePassword" >Save</FormButton>
+                                                    <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSavePassword" :loader="loaderPassword">Save</FormButton>
                                                 </div>
                                             </form>
                                         </div>
@@ -122,6 +120,14 @@
                 </div>
             </div>
         </section>
+        <template v-if="isShowNotification">
+            <Notification
+                :message="notification.message"
+                :type="notification.type"
+                :timeout="2000"
+                @closeNotification="closeNotification"
+            />
+        </template>
     </div>
 </template>
 
@@ -132,6 +138,8 @@ import { mapGetters, mapActions } from 'vuex';
 import InputField from '../components/FormsComponents/InputField';
 import FormButton from '../components/FormsComponents/FormButton';
 import ImageUpload from '../components/ImageUpload';
+import Notification from '../components/Notification';
+
 
 
 export default {
@@ -144,35 +152,65 @@ export default {
             securityDate: {
                 password: '',
                 confirmPassword: ''
-            }
+            },
+            loaderMainForm: false,
+            loaderPassword: false,
+            notification: {
+                message: '',
+                type: ''
+            },
+            isShowNotification: false
         }
     },
 
     computed: {
-        ...mapGetters(['getAuthUserDate'])
+        ...mapGetters(['getAuthUserDate']),
     },
 
-    mounted() {
-        
-    },
-
+    async mounted() {
+        await this.$store.dispatch('onAuthUser');
+        this.userForm =  { ...this.getAuthUserDate };
+	},
 
     methods: {
-        ...mapActions(['updateAuthUser']),
+        ...mapActions(['updateAuthUser', 'onAuthUser']),
 
-        handleClickSave() {
-            this.updateAuthUser(this.userForm);
+        async handleClickSave() {
+            try {
+                this.loaderMainForm = true;
+                await this.updateAuthUser(this.userForm);
+                this.loaderMainForm = false;
+                this.initNotification(true);
+            } catch(error) {
+                console.log(error);
+                this.loaderMainForm = false;
+                this.initNotification(false);
+            }
         },
 
         imageUploadHandler(file) {
-            this.userForm = {
-                ...this.userForm,
-                image: file,
+            this.userForm.image = file;
+            
+        },
+
+        closeNotification() {
+            this.isShowNotification = false;
+        },
+
+        initNotification(flag) {
+            this.isShowNotification = true;
+
+            if(flag) {
+                this.notification.message = 'Admin data save - Successfull',
+                this.notification.type = 'successfull'
+            } else {
+                this.notification.message = 'Admin data save - Error',
+                this.notification.type = 'error'
             }
         },
 
         handleClickSavePassword() {
-
+            // function for change password
         }
     },
 
@@ -180,6 +218,7 @@ export default {
         InputField,
         FormButton,
         ImageUpload,
+        Notification
     }
 }
 

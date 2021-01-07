@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 
 Vue.use(VueRouter)
 
+
 import Home from '../views/Home.vue';
 
 const routes = [
