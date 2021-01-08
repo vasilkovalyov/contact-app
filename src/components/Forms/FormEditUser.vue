@@ -1,39 +1,79 @@
 <template>
-    <form class="form-edit-user" >
-        <ImageUpload 
-            name="image-user"
-            :image="userForm.image"
-            @imageUploadHandler="imageUploadHandler"
-        />
-        <InputField 
-            v-model="userForm.name"
-            name="name" 
-            placeholder="Input name" 
-        />
-        <InputField 
-            v-model="userForm.email"
-            name="email" 
-            placeholder="Input email" 
-        />
-        <InputField 
-            v-model="userForm.nickname"
-            name="nickname" 
-            placeholder="Input nickname" 
-        />
-        <SelectField 
-            v-model="userForm.gender"
-            :value="userForm.gender"
-            name="gender" 
-            baseOption="Select gender" 
-            :arrayOptions="genderArray"
-        />
-        <InputField 
-            v-model="userForm.date"
-            name="date" 
-            type="date" 
-            placeholder="Input birthbay" 
-        />
-        <form-button @clickHandler="submitForm" :loader="loader">Save</form-button>
+    <form class="form-profile">
+        <div class="df-row">
+            <div class="col col-4">
+                <div class="profile-photo">
+                    <span class="profile-photo__caption">Profile Photo</span>
+                    <ImageUpload 
+                        name="image-user"
+                        :image="userForm.image"
+                        @imageUploadHandler="imageUploadHandler"
+                    />
+                </div>
+            </div>
+            <div class="col col-8">
+                <div class="profile-info" >
+                    <div class="profile-info__header">
+                        <span class="profile-info__caption">Your Profile</span>
+                        <div class="btn-wrap">
+                            <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSave" :loader="loader">Save</FormButton>
+                        </div>
+                    </div>
+                    <div class="profile-info__category">
+                        <span class="profile-info__category-title">BASICS</span>
+                    </div>
+                    <div class="profile-info__form" v-if="userForm">
+                        <div class="df-row">
+                            <div class="col col-6">
+                                <InputField
+                                    v-model="userForm.name" name="name" placeholder="Input name">
+                                    <template v-slot:input-icon>
+                                        <i class="fas fa-user"></i>
+                                    </template>
+                                    <template v-slot:label>Name</template>
+                                </InputField>
+                            </div>
+                            <div class="col col-6">
+                                <InputField
+                                    v-model="userForm.nickname" name="nickname" placeholder="Input nickname">
+                                    <template v-slot:input-icon>
+                                        <i class="fas fa-user"></i>
+                                    </template>
+                                    <template v-slot:label>Nickname</template>
+                                </InputField>
+                            </div>
+                            <div class="col col-6">
+                                <InputField
+                                    v-model="userForm.email" name="email" placeholder="Input email">
+                                    <template v-slot:input-icon>
+                                        <i class="fas fa-envelope"></i>
+                                    </template>
+                                    <template v-slot:label>Email</template>
+                                </InputField>
+                            </div>
+                            <div class="col col-6">
+                                <InputField
+                                    v-model="userForm.date" name="date" placeholder="Input email" type="date">
+                                    <template v-slot:input-icon>
+                                        <i class="fas fa-envelope"></i>
+                                    </template>
+                                    <template v-slot:label>Date</template>
+                                </InputField>
+                            </div>
+                            <div class="col col-6">
+                                <SelectField 
+                                    v-model="userForm.gender"
+                                    :value="userForm.gender"
+                                    name="gender" 
+                                    baseOption="Select gender" 
+                                    :arrayOptions="genderArray"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </template>
 
@@ -61,7 +101,7 @@
         },
 
         methods: {
-            async submitForm() {
+            async handleClickSave() {
 
                 const formData = { ...this.userForm };
 

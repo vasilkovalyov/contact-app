@@ -1,20 +1,14 @@
 <template>
     <div class="auth-profile-page">
-        <section class="section-admin-banner" style="background-image: url(./images/admin-profile-image.jpg)">
-            <div class="container">
-                <h1>Admin
-                    <template v-if="getAuthUserDate">
-                        - {{getAuthUserDate.firstName}} {{getAuthUserDate.lastName}}
-                    </template>
-                </h1>
-                <ul class="dashboard-breadcrumbs">
-                    <li>Account settings</li>
-                </ul>
-            </div>
-        </section>
+        <ProfileBanner 
+            captionBanner="Admin"
+            :userName="getName"
+            typePage="Admin settings"
+            image="admin-profile-image.jpg"
+        />
         <section class="section-profile">
             <div class="container">
-                <div class="form-admin-profile">
+                <form class="form-profile">
                     <div class="df-row">
                         <div class="col col-4">
                             <div class="profile-photo">
@@ -117,7 +111,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </section>
         <template v-if="isShowNotification">
@@ -139,8 +133,7 @@ import InputField from '../components/FormsComponents/InputField';
 import FormButton from '../components/FormsComponents/FormButton';
 import ImageUpload from '../components/ImageUpload';
 import Notification from '../components/Notification';
-
-
+import ProfileBanner from '../components/ProfileBanner';
 
 export default {
     name: 'AdminProfile',
@@ -159,17 +152,26 @@ export default {
                 message: '',
                 type: ''
             },
-            isShowNotification: false
+            isShowNotification: false,
+            loadUserDate: false
         }
     },
 
     computed: {
         ...mapGetters(['getAuthUserDate']),
+
+        getName() {
+            if(this.loadUserDate) {
+                return this.getAuthUserDate.firstName + ' ' + this.getAuthUserDate.lastName;
+            }
+        }
     },
 
     async mounted() {
         await this.$store.dispatch('onAuthUser');
         this.userForm =  { ...this.getAuthUserDate };
+        this.loadUserDate = true;
+        
 	},
 
     methods: {
@@ -190,7 +192,6 @@ export default {
 
         imageUploadHandler(file) {
             this.userForm.image = file;
-            
         },
 
         closeNotification() {
@@ -218,177 +219,9 @@ export default {
         InputField,
         FormButton,
         ImageUpload,
-        Notification
+        Notification,
+        ProfileBanner
     }
 }
 
 </script>
-
-<style lang="scss">
-    @import '../scss/base/variables.scss';
-
-    .section-admin-banner {
-        color: $white;
-
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        padding: 92px 0 108px;
-        margin-bottom: -74px;
-
-        h1 {
-            font-size: 36px;
-        }
-    }
-
-    .dashboard-breadcrumbs {
-        font-size: 14px;
-        padding: 0;
-        margin: 0;
-        list-style-type: none;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        color: inherit;
-    }
-
-    .form-admin-profile {
-        > .df-row {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 0 -10px;
-
-            > .col {
-                padding: 0 15px;
-                display: flex;
-                width: 100%;
-
-                &.col-4 {
-                    width: 33.33%;
-                }
-
-                &.col-8 {
-                    width: 66.66%;
-                }
-            }
-        }
-    }
-    
-    .profile-photo {
-        border-radius: 5px;
-        overflow: hidden;
-        background-color: $white;
-        padding: 30px;
-        width: 100%;
-        margin-bottom: 34px;
-        box-shadow: 0px 0px 5px 0px rgba(233,236,239,0.85);
-
-        &__caption {
-            display: block;
-            color: $secondary-color;
-            font-weight: 600;
-            font-size: 16px;
-            margin-bottom: 27px;
-            letter-spacing: 1px;
-        }
-    }
-
-    .profile-info {
-        border-radius: 5px;
-        overflow: hidden;
-        background-color: $white;
-        width: 100%;
-        margin-bottom: 34px;
-        box-shadow: 0px 0px 5px 0px rgba(233,236,239,0.85);
-
-        &__header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 23px 28px;
-        }
-
-        &__caption {
-            display: block;
-            color: $secondary-color;
-            font-weight: 600;
-            font-size: 16px;
-            margin-bottom: 0;
-        }
-
-        &__category {
-            border-top: 1px solid $light;
-            border-bottom: 1px solid $light;
-            padding: 8px 31px;
-            background-color: $light-4;
-            
-            &-title {
-                font-size: 10px;
-                color: $blue-light-1;
-                font-weight: 600;
-                text-transform: uppercase;
-            }
-        }
-
-        &__form {
-            padding: 25px 28px 10px;
-
-            .df-row {
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                margin: 0 -15px;
-            }
-
-            .col {
-                padding: 0 15px;
-                width: 100%;
-
-                &.col-6 {
-                    width: 50%;
-                }
-            }
-        }
-    }
-
-    .profile-info-password-form {
-        padding: 25px 28px;
-        
-        .df-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            margin: 0 -10px;
-        }
-
-        .col {
-            padding: 0 17px;
-            width: 100%;
-
-            &.col-2 {
-                width: 20%;
-            }
-
-            &.col-10 {
-                width: 80%;
-            }
-        }
-    }
-
-    .confirm-password-form {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        &__input-wrapper {
-            margin-right: 20px;
-        }
-
-        .input-component {
-            margin-bottom: 0;
-        }
-    }
-    
-
-</style>

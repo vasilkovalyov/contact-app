@@ -178,6 +178,7 @@ class Firebase {
     }
 
     async uploadImageAndGetUrl(typePost, image) {
+        console.log(image);
         const storageRef = await this.storage.ref(`${typePost}/${image.name}`);
         return await storageRef.put(image)
         .then(function(snapshot) {
