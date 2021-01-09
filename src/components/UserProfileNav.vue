@@ -16,9 +16,21 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/create">
-                        <i class="fas fa-user"></i>
-                        <span>Create user</span>
+                    <router-link to="/users">
+                        <i class="fas fa-users"></i>
+                        <span>Users</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/create-quiz-game">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Create quiz game</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/quiz-games">
+                        <i class="fas fa-gamepad"></i>
+                        <span>All quiz games</span>
                     </router-link>
                 </li>
                 <li>

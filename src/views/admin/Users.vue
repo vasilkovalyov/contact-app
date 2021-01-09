@@ -25,10 +25,8 @@
 
 <script>
 
-import MainLayout from '../layouts/MainLayout';
-
-import Search from '../components/Search';
-import TableUser from '../components/TableUsers';
+import Search from '@/components/Search';
+import TableUser from '@/components/TableUsers';
 
 import { mapGetters, mapActions } from 'vuex';
 
@@ -42,7 +40,6 @@ export default {
     },
 
     components: {
-        MainLayout,
         Search,
         TableUser
     },

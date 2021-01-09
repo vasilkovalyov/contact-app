@@ -10,7 +10,8 @@
 
 //Layouts Components
 import AuthLayout from '@/layouts/AuthLayout';
-import MainLayout from '@/layouts/MainLayout';
+import AdminLayout from '@/layouts/AdminLayout';
+import PublicLayout from '@/layouts/PublicLayout';
 
 
 export default {
@@ -24,7 +25,8 @@ export default {
 
 	components: {
 		AuthLayout,
-		MainLayout
+		AdminLayout,
+		PublicLayout
 	},
 
 	computed: {

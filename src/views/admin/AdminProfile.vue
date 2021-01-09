@@ -129,11 +129,11 @@
 
 import { mapGetters, mapActions } from 'vuex';
 
-import InputField from '../components/FormsComponents/InputField';
-import FormButton from '../components/FormsComponents/FormButton';
-import ImageUpload from '../components/ImageUpload';
-import Notification from '../components/Notification';
-import ProfileBanner from '../components/ProfileBanner';
+import InputField from '@/components/FormsComponents/InputField';
+import FormButton from '@/components/FormsComponents/FormButton';
+import ImageUpload from '@/components/ImageUpload';
+import Notification from '@/components/Notification';
+import ProfileBanner from '@/components/ProfileBanner';
 
 export default {
     name: 'AdminProfile',

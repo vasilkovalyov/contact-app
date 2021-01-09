@@ -31,9 +31,9 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
-import FormEditUser from '../components/Forms/FormEditUser';
-import Notification from '../components/Notification';
-import ProfileBanner from '../components/ProfileBanner';
+import FormEditUser from '@/components/Forms/FormEditUser';
+import Notification from '@/components/Notification';
+import ProfileBanner from '@/components/ProfileBanner';
 
 export default {
     name: 'EditUser',

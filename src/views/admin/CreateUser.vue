@@ -18,8 +18,8 @@
 </template>
 
 <script>
-    import FormCreateUser from '../components/Forms/FormCreateUser';
-    import Notification from '../components/Notification';
+    import FormCreateUser from '@/components/Forms/FormCreateUser';
+    import Notification from '@/components/Notification';
 
     export default {
         name: 'CreateUser',
