@@ -1,86 +1,77 @@
 <template>
-    <div class="input-component" :class="inputClass">
-        <label class="input-field__label">
+    <div class="select-component">
+        <label class="select-field__label">
             <slot name='label'></slot>
         </label>
-        <router-link tag="a" :to="link" class="input-component__help-link">{{linkName}}</router-link>
-        <div class="input-field">
-            <div class="input-field__icon">
-                <slot name='input-icon' class="input-field__icon"></slot>
-            </div>
-            <input 
-                :type="type" 
-                :name="name" 
-                :placeholder="placeholder" 
-                class="input-field__input"
-                :value="value"
-                :disabled="disabled"
-                @blur="inputHandler($event.target.value)"
-            >
+        <div class="select-field">
+            <Selectize v-model="selected" :value="value" :settings="settings">
+                <template>
+                    <option value="">{{baseOption}}</option>
+                </template>
+                <template v-for="(option, key) in options" >
+                    <option :value="option.value" :key="key">{{option.value}}</option>
+                </template>
+            </Selectize>
         </div>
     </div>
 </template>
 <script>
+import Selectize from 'vue2-selectize'
 
 export default {
-    name: 'InputField',
+    name: 'FormSelect',
+
     props: {
         name: {
             type: String,
             default: 'text',
             required: true
         },
-        type: {
-            type: String,
-            default: 'text',
-            required: false
-        },
         label: {
             type: String,
             default: null,
             required: false
         },
-        placeholder: {
+        baseOption: {
             type: String,
-            default: 'Fill input',
+            default: 'Select option',
+            required: false
+        },
+        options: {
+            type: Array,
+            default: [],
             required: false
         },
         value: {
             type: String,
             default: '',
             required: false
-        },
-        link: {
-            type: String,
-            default: '',
-            required: false
-        },
-        linkName: {
-            type: String,
-            default: '',
-            required: false
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-            required: false
-        },
-        inputClass: '',
+        }
     },
 
-    methods: {
-        inputHandler(value) {
+    data() {
+        return {
+            settings: {}, 
+            selected: this.value
+        }
+    },
+
+    watch: {
+        selected(value, oldValue) {
             this.$emit('input', value);
         }
-    }
+    },
+
+    components: {
+        Selectize
+    },
 }
-
 </script>
-
 <style lang="scss">
     @import '../../scss/base/variables.scss';
+    @import "~selectize/dist/css/selectize.bootstrap3.css";
 
-    .input-component {
+    .select-component {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
@@ -114,9 +105,10 @@ export default {
         }
     }
 
-    .input-field {
+    .select-field {
         width: 100%;
         position: relative;
+        margin-bottom: 0;
 
         &__label {
             color: $secondary-color;
@@ -125,13 +117,16 @@ export default {
             font-size: 14px;
             margin-bottom: 13px;
             font-weight: 600;
+            text-transform: capitalize;
 
             &:empty {
                 display: none;
             }
         }
 
+        .selectize-input,
         &__input {
+            position: relative;
             border: 2px solid $light;
             width: 100%;
             font-size: 14px;
@@ -142,6 +137,8 @@ export default {
             height: 48px;
             padding: 15px 45px;
             outline: none;
+            display: flex;
+            align-items: center;
 
             &:focus,
             &:active {
@@ -151,16 +148,25 @@ export default {
             &::placeholder {
                 color: $secondary-color;
             }
+
+            &:before {
+                content: "\f228";
+                font-family: "Font Awesome 5 Free";
+                display: inline-block;
+                font-weight: 900;
+                color: $blue-light-1;
+                position: absolute;
+                top: 50%;
+                left: 15px;
+                right: auto;
+                bottom: auto;
+                height: auto;
+                transform: translateY(-50%);
+                font-size: 14px;
+            }
         }
 
-        &__icon {
-            color: $secondary-color;
-
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            color: rgb(157, 172, 192);
+        .selectize-dropdown {
             font-size: 14px;
         }
     }

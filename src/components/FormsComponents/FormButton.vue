@@ -1,5 +1,5 @@
 <template>
-    <button class="btn" :class="buttonClass ? buttonClass : []"
+    <button :type="typeButton" class="btn" :class="buttonClass ? buttonClass : []"
         :disabled="loader"
         @click.prevent="onClick" 
     >
@@ -13,7 +13,7 @@
 
 
 export default {
-    props: ['loader', 'buttonClass'],
+    props: ['loader', 'buttonClass', 'typeButton'],
 
     methods: {
         onClick(e) {
@@ -40,8 +40,6 @@ export default {
         min-width: 120px;
         cursor: pointer;
         transition: background-color .3s ease-in-out;
-
-        
 
         &__loader {
             color: transparent;

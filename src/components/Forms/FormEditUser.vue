@@ -52,22 +52,27 @@
                                 </InputField>
                             </div>
                             <div class="col col-6">
-                                <InputField
-                                    v-model="userForm.date" name="date" placeholder="Input email" type="date">
+                                <FormDatepicker
+                                    v-model="userForm.date" 
+                                    :value="userForm.date" 
+                                    name="date" 
+                                    placeholder="Input email">
                                     <template v-slot:input-icon>
                                         <i class="fas fa-envelope"></i>
                                     </template>
                                     <template v-slot:label>Date</template>
-                                </InputField>
+                                </FormDatepicker>
                             </div>
                             <div class="col col-6">
-                                <SelectField 
+                                <FormSelect 
                                     v-model="userForm.gender"
                                     :value="userForm.gender"
                                     name="gender" 
                                     baseOption="Select gender" 
-                                    :arrayOptions="genderArray"
-                                />
+                                    :options="genderArray"
+                                >
+                                    <template v-slot:label>Gender</template>
+                                </FormSelect>
                             </div>
                         </div>
                     </div>
@@ -83,6 +88,8 @@
     import InputField from '../FormsComponents/InputField';
     import FormButton from '../FormsComponents/FormButton';
     import SelectField from '../FormsComponents/SelectField';
+    import FormSelect from '../FormsComponents/FormSelect';
+    import FormDatepicker from '../FormsComponents/FormDatepicker';
 
     export default {
         name: 'FormEditUser',
@@ -133,7 +140,9 @@
             InputField,
             SelectField,
             ImageUpload,
-            FormButton
+            FormButton,
+            FormSelect,
+            FormDatepicker
         }
     }
 </script>

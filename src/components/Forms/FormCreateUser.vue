@@ -5,39 +5,60 @@
                 v-model="formData.name"
                 name="name" 
                 placeholder="Input name" 
-            />
+            >
+                <template v-slot:input-icon>
+                    <i class="fas fa-user"></i>
+                </template>
+                <template v-slot:label>Name</template>
+            </InputField>
             <InputField 
                 v-model="formData.email"
                 name="email" 
                 placeholder="Input email" 
-            />
+            >
+                <template v-slot:input-icon>
+                    <i class="fas fa-envelope"></i>
+                </template>
+                <template v-slot:label>Email</template>
+            </InputField>
             <InputField 
                 v-model="formData.nickname"
                 name="nickname" 
                 placeholder="Input nickname" 
-            />
-            <SelectField 
+            >
+                <template v-slot:input-icon>
+                    <i class="fas fa-user"></i>
+                </template>
+                <template v-slot:label>Nickname</template>
+            </InputField>
+            <FormSelect 
                 v-model="formData.gender"
                 name="gender" 
                 baseOption="Select gender" 
-                :arrayOptions="genderArray"
-            />
+                :options="genderArray"
+            >
+                <template v-slot:label>Gender</template>
+            </FormSelect>
             <InputField 
                 v-model="formData.date"
                 name="date" 
                 type="date" 
                 placeholder="Input birthbay" 
-            />
-            <button class="form-btn form-btn__create" :class="{ 'btn__loader': loader }" >Create</button>
-            <button type="reset" class="form-btn form-btn__reset">Reset</button>
+            >
+                <template v-slot:label>Date</template>
+            </InputField>
+            
+            <FormButton :buttonClass="['btn__primary']"  :loader="loader">Create</FormButton>
+            <FormButton type="reset" :buttonClass="['btn__secondary']"  >Reset</FormButton>
         </div>
-        
     </form>
 </template>
 
 <script>
     import InputField from '../FormsComponents/InputField';
-    import SelectField from '../FormsComponents/SelectField';
+    import FormSelect from '../FormsComponents/FormSelect';
+    import FormButton from '../FormsComponents/FormButton';
+    import FormDatepicker from '../FormsComponents/FormDatepicker';
 
     export default {
         data: () => ({
@@ -84,7 +105,9 @@
 
         components: {
             InputField,
-            SelectField
+            FormSelect,
+            FormDatepicker,
+            FormButton
         }
     }
 </script>

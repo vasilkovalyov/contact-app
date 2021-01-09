@@ -1,39 +1,29 @@
 <template>
-    <div class="input-component" :class="inputClass">
-        <label class="input-field__label">
+    <div class="datepicker-component">
+        <label class="datepicker-field__label">
             <slot name='label'></slot>
         </label>
-        <router-link tag="a" :to="link" class="input-component__help-link">{{linkName}}</router-link>
-        <div class="input-field">
-            <div class="input-field__icon">
-                <slot name='input-icon' class="input-field__icon"></slot>
-            </div>
-            <input 
-                :type="type" 
-                :name="name" 
-                :placeholder="placeholder" 
-                class="input-field__input"
+        <div class="datepicker-field">
+            <Datepicker 
                 :value="value"
-                :disabled="disabled"
-                @blur="inputHandler($event.target.value)"
-            >
+                :name="name"
+                format="yyyy-MM-dd"
+                @selected="changeDate"
+            />
         </div>
     </div>
 </template>
 <script>
+import Datepicker from 'vuejs-datepicker';
 
 export default {
-    name: 'InputField',
+    name: 'FormDatePicker',
+
     props: {
         name: {
             type: String,
             default: 'text',
             required: true
-        },
-        type: {
-            type: String,
-            default: 'text',
-            required: false
         },
         label: {
             type: String,
@@ -42,45 +32,36 @@ export default {
         },
         placeholder: {
             type: String,
-            default: 'Fill input',
+            default: 'Select date',
             required: false
         },
         value: {
             type: String,
             default: '',
             required: false
-        },
-        link: {
-            type: String,
-            default: '',
-            required: false
-        },
-        linkName: {
-            type: String,
-            default: '',
-            required: false
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-            required: false
-        },
-        inputClass: '',
+        }
+    },
+
+    date() {
+        return {
+        }
     },
 
     methods: {
-        inputHandler(value) {
-            this.$emit('input', value);
+        changeDate(value) {
+            this.$emit('input', new Date(value).toISOString().split('T')[0]);
         }
-    }
+    },
+
+    components: {
+        Datepicker
+    },
 }
-
 </script>
-
 <style lang="scss">
     @import '../../scss/base/variables.scss';
 
-    .input-component {
+    .datepicker-component {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
@@ -103,18 +84,9 @@ export default {
                 color: darken($primary-color, 20%);
             }
         }
-
-        &__md {
-            .input-field {
-                input {
-                    padding: 5px 40px;
-                    height: 36px;
-                }
-            }
-        }
     }
 
-    .input-field {
+    .datepicker-field {
         width: 100%;
         position: relative;
 
@@ -131,7 +103,7 @@ export default {
             }
         }
 
-        &__input {
+        input {
             border: 2px solid $light;
             width: 100%;
             font-size: 14px;
@@ -153,15 +125,20 @@ export default {
             }
         }
 
-        &__icon {
-            color: $secondary-color;
-
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            color: rgb(157, 172, 192);
-            font-size: 14px;
+        .vdp-datepicker {
+            position: relative;
+            &:before {
+                content: '\f073';
+                font-family: "Font Awesome 5 Free";
+                display: inline-block;
+                font-weight: 900;
+                color: $blue-light-1;
+                position: absolute;
+                top: 50%;
+                left: 15px;
+                transform: translateY(-50%);
+                font-size: 14px;
+            }
         }
     }
 </style>

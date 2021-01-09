@@ -10,8 +10,20 @@
         <div class="user-profile-nav__dropdown">
             <ul>
                 <li>
-                    <router-link to="/admin-profile">
+                    <router-link to="/">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/create">
                         <i class="fas fa-user"></i>
+                        <span>Create user</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/admin-profile">
+                        <i class="fas fa-user-shield"></i>
                         <span>View profile</span>
                     </router-link>
                 </li>
