@@ -1,5 +1,5 @@
 <template>
-    <div class="select-component">
+    <div class="select-component" :class="[!hasIcon ? 'select-component__without-icon' : '']">
         <label class="select-field__label">
             <slot name='label'></slot>
         </label>
@@ -46,7 +46,12 @@ export default {
             type: String,
             default: '',
             required: false
-        }
+        },
+        hasIcon: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
     },
 
     data() {
@@ -95,11 +100,15 @@ export default {
             }
         }
 
-        &__md {
-            .input-field {
-                input {
-                    padding: 5px 40px;
-                    height: 36px;
+        &__without-icon {
+            .select-field {
+                .selectize-input {
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    
+                    &:before {
+                        display: none;
+                    }
                 }
             }
         }

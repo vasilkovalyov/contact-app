@@ -6,27 +6,27 @@
                 <p>Create a new account for My Contribution</p>
             </div>
             <InputField
-                v-model="formData.firstName" name="first-name" placeholder="First Name">
+                v-model="formData.firstName" name="first-name" placeholder="First Name" :hasIcon="true">
                 <template v-slot:input-icon>
                     <i class="fas fa-user"></i>
                 </template>
             </InputField>
-            <InputField v-model="formData.lastName" name="last-name" placeholder="Last Name">
+            <InputField v-model="formData.lastName" name="last-name" placeholder="Last Name" :hasIcon="true">
                 <template v-slot:input-icon>
                     <i class="fas fa-user"></i>
                 </template>
             </InputField>
-            <InputField v-model="formData.jobTitle" name="job" placeholder="Job Title">
+            <InputField v-model="formData.jobTitle" name="job" placeholder="Job Title" :hasIcon="true">
                 <template v-slot:input-icon>
                     <i class="fas fa-user-md"></i>
                 </template>
             </InputField>
-            <InputField v-model="formData.email" name="email" placeholder="Email">
+            <InputField v-model="formData.email" name="email" placeholder="Email" :hasIcon="true">
                 <template v-slot:input-icon>
                     <i class="fas fa-envelope"></i>
                 </template>
             </InputField>
-            <InputField v-model="formData.password" name="password" type="password" placeholder="Password">
+            <InputField v-model="formData.password" name="password" type="password" placeholder="Password" :hasIcon="true">
                 <template v-slot:input-icon>
                         <i class="fas fa-lock"></i>
                 </template>

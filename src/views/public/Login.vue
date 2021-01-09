@@ -11,6 +11,7 @@
                 :placeholder="formData.email.placeholder"
                 :link="formData.email.link"
                 :linkName="formData.email.linkName"
+                :hasIcon="true"
             >
                 <template v-slot:input-icon>
                     <i class="fas fa-envelope"></i>
@@ -24,6 +25,7 @@
                 :placeholder="formData.password.placeholder"
                 :link="formData.password.link"
                 :linkName="formData.password.linkName"
+                :hasIcon="true"
             >
                 <template v-slot:input-icon>
                     <i class="fas fa-lock"></i>
@@ -84,7 +86,7 @@ export default {
                 this.loader = true;
                 await this.$store.dispatch('signIn', formData);
                 this.loader = false;
-                this.$router.push('/');
+                this.$router.push('/admin-profile');
             } catch(error) {
 
                 console.log(error);

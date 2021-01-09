@@ -11,6 +11,7 @@
                 :placeholder="formData.email.placeholder"
                 :link="formData.email.link"
                 :linkName="formData.email.linkName"
+                :hasIcon="true"
             >
                 <template v-slot:input-icon>
                     <i class="fas fa-envelope"></i>

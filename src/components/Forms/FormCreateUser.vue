@@ -5,6 +5,7 @@
                 v-model="formData.name"
                 name="name" 
                 placeholder="Input name" 
+                :hasIcon="true"
             >
                 <template v-slot:input-icon>
                     <i class="fas fa-user"></i>
@@ -15,6 +16,7 @@
                 v-model="formData.email"
                 name="email" 
                 placeholder="Input email" 
+                :hasIcon="true"
             >
                 <template v-slot:input-icon>
                     <i class="fas fa-envelope"></i>
@@ -25,6 +27,7 @@
                 v-model="formData.nickname"
                 name="nickname" 
                 placeholder="Input nickname" 
+                :hasIcon="true"
             >
                 <template v-slot:input-icon>
                     <i class="fas fa-user"></i>
@@ -36,18 +39,18 @@
                 name="gender" 
                 baseOption="Select gender" 
                 :options="genderArray"
+                :hasIcon="true"
             >
                 <template v-slot:label>Gender</template>
             </FormSelect>
-            <InputField 
-                v-model="formData.date"
+            <FormDatepicker
+                v-model="formData.date" 
+                :value="formData.date" 
                 name="date" 
-                type="date" 
-                placeholder="Input birthbay" 
-            >
+                placeholder="Input birthbay"
+                :hasIcon="true">
                 <template v-slot:label>Date</template>
-            </InputField>
-            
+            </FormDatepicker>
             <FormButton :buttonClass="['btn__primary']"  :loader="loader">Create</FormButton>
             <FormButton type="reset" :buttonClass="['btn__secondary']"  >Reset</FormButton>
         </div>

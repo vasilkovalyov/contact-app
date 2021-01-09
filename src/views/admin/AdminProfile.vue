@@ -86,7 +86,12 @@
                                                 <div class="confirm-password-form__input-wrapper">
                                                     <InputField 
                                                         v-model="securityDate.password" 
-                                                        name="password" type="password" placeholder="Password" :inputClass="['input-component__md']">
+                                                        name="password" 
+                                                        type="password"
+                                                        placeholder="Password" 
+                                                        :hasIcon="true"
+                                                        sizeInput="md"
+                                                    >
                                                         <template v-slot:input-icon>
                                                             <i class="fas fa-lock"></i>
                                                         </template>
@@ -95,7 +100,12 @@
                                                 <div class="confirm-password-form__input-wrapper">
                                                     <InputField 
                                                         v-model="securityDate.confirmPassword" 
-                                                        name="confirm-password" type="password" placeholder="Confirm Password" :inputClass="['input-component__md']">
+                                                        name="confirm-password" 
+                                                        type="password" 
+                                                        placeholder="Confirm Password"
+                                                        :hasIcon="true"
+                                                        sizeInput="md"
+                                                    >
                                                         <template v-slot:input-icon>
                                                             <i class="fas fa-lock"></i>
                                                         </template>

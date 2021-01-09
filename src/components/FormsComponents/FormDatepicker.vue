@@ -1,5 +1,5 @@
 <template>
-    <div class="datepicker-component">
+    <div class="datepicker-component" :class="[!hasIcon ? 'datepicker-component__without-icon' : '']">
         <label class="datepicker-field__label">
             <slot name='label'></slot>
         </label>
@@ -39,7 +39,12 @@ export default {
             type: String,
             default: '',
             required: false
-        }
+        },
+        hasIcon: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
     },
 
     date() {
@@ -82,6 +87,21 @@ export default {
 
             &:hover {
                 color: darken($primary-color, 20%);
+            }
+        }
+
+        &__without-icon {
+            .datepicker-field {
+                input {
+                    padding-left: 15px;
+                    padding-right: 15px;
+                }
+
+                .vdp-datepicker {
+                    &:before {
+                        display: none;
+                    }
+                }
             }
         }
     }

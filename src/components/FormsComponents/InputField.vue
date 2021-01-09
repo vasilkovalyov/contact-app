@@ -1,11 +1,15 @@
 <template>
-    <div class="input-component" :class="inputClass">
+    <div class="input-component" 
+        :class="[
+            'input-component__'+sizeInput, 
+            !hasIcon ? 'input-component__without-icon' : ''
+        ]">
         <label class="input-field__label">
             <slot name='label'></slot>
         </label>
         <router-link tag="a" :to="link" class="input-component__help-link">{{linkName}}</router-link>
         <div class="input-field">
-            <div class="input-field__icon">
+            <div class="input-field__icon" v-if="hasIcon">
                 <slot name='input-icon' class="input-field__icon"></slot>
             </div>
             <input 
@@ -65,7 +69,16 @@ export default {
             default: false,
             required: false
         },
-        inputClass: '',
+        hasIcon: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
+        sizeInput: {
+            type: String,
+            default: '',
+            required: false
+        },
     },
 
     methods: {
@@ -109,6 +122,24 @@ export default {
                 input {
                     padding: 5px 40px;
                     height: 36px;
+                }
+            }
+
+            &.input-component__without-icon {
+                .input-field {
+                    input {
+                        padding-left: 10px;
+                        padding-right: 10px;
+                    }
+                }
+            }
+        }
+
+        &__without-icon {
+            .input-field {
+                &__input {
+                    padding-left: 15px;
+                    padding-right: 15px;
                 }
             }
         }

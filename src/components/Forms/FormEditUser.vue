@@ -26,7 +26,11 @@
                         <div class="df-row">
                             <div class="col col-6">
                                 <InputField
-                                    v-model="userForm.name" name="name" placeholder="Input name">
+                                    v-model="userForm.name" 
+                                    name="name" 
+                                    placeholder="Input name" 
+                                    :hasIcon="true"
+                                >
                                     <template v-slot:input-icon>
                                         <i class="fas fa-user"></i>
                                     </template>
@@ -35,7 +39,11 @@
                             </div>
                             <div class="col col-6">
                                 <InputField
-                                    v-model="userForm.nickname" name="nickname" placeholder="Input nickname">
+                                    v-model="userForm.nickname" 
+                                    name="nickname" 
+                                    placeholder="Input nickname" 
+                                    :hasIcon="true"
+                                >
                                     <template v-slot:input-icon>
                                         <i class="fas fa-user"></i>
                                     </template>
@@ -44,7 +52,11 @@
                             </div>
                             <div class="col col-6">
                                 <InputField
-                                    v-model="userForm.email" name="email" placeholder="Input email">
+                                    v-model="userForm.email" 
+                                    name="email" 
+                                    placeholder="Input email" 
+                                    :hasIcon="true"
+                                >
                                     <template v-slot:input-icon>
                                         <i class="fas fa-envelope"></i>
                                     </template>
@@ -56,7 +68,9 @@
                                     v-model="userForm.date" 
                                     :value="userForm.date" 
                                     name="date" 
-                                    placeholder="Input email">
+                                    placeholder="Input email"
+                                    :hasIcon="true"
+                                >
                                     <template v-slot:input-icon>
                                         <i class="fas fa-envelope"></i>
                                     </template>
@@ -70,6 +84,7 @@
                                     name="gender" 
                                     baseOption="Select gender" 
                                     :options="genderArray"
+                                    :hasIcon="true"
                                 >
                                     <template v-slot:label>Gender</template>
                                 </FormSelect>
