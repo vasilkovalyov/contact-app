@@ -102,7 +102,6 @@
     import ImageUpload from '../ImageUpload';
     import InputField from '../FormsComponents/InputField';
     import FormButton from '../FormsComponents/FormButton';
-    import SelectField from '../FormsComponents/SelectField';
     import FormSelect from '../FormsComponents/FormSelect';
     import FormDatepicker from '../FormsComponents/FormDatepicker';
 
@@ -153,7 +152,6 @@
 
         components: {
             InputField,
-            SelectField,
             ImageUpload,
             FormButton,
             FormSelect,

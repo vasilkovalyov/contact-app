@@ -32,7 +32,7 @@ export default {
         name: {
             type: String,
             default: 'text',
-            required: true
+            required: false
         },
         type: {
             type: String,

@@ -52,6 +52,12 @@ const routes = [
 		component: () => import('../views/admin/CreateQuizGame.vue')
 	},
 	{
+		path: '/create-quiz-questions',
+		name: 'CreateQuizQuestions',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/CreateQuizQuestions.vue')
+	},
+	{
 		path: '/quiz-games',
 		name: 'QuizGames',
 		meta: { layout: 'admin-layout', auth: true },

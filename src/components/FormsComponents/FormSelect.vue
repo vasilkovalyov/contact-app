@@ -24,8 +24,8 @@ export default {
     props: {
         name: {
             type: String,
-            default: 'text',
-            required: true
+            default: 'Select',
+            required: false
         },
         label: {
             type: String,

@@ -28,6 +28,12 @@
                     </router-link>
                 </li>
                 <li>
+                    <router-link to="/create-quiz-questions">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Create quiz questions</span>
+                    </router-link>
+                </li>
+                <li>
                     <router-link to="/quiz-games">
                         <i class="fas fa-gamepad"></i>
                         <span>All quiz games</span>
