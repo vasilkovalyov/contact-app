@@ -9,7 +9,7 @@
                         <ul class="question-view__list">
                             <li v-for="(answer, j) in question.questionsArray" :key="j">
                                 {{answer}}
-                                <template v-if="j === question.trueAnswer">
+                                <template v-if="j === parseInt(question.trueAnswer)">
                                     <span class="question-view__list-complete">correct answer</span>
                                 </template>
                             </li>
