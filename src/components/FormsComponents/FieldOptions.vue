@@ -20,7 +20,7 @@
 export default {
     name: 'FieldOptions',
 
-    props: ['caption', 'countOptions'],
+    props: ['caption', 'countOptions', 'data', 'answer'],
 
     data() {
         return {
@@ -40,12 +40,18 @@ export default {
             })
         },
         'dataOptions.trueAnswer'(old, newValue) {
+            this.trueAnswer = old;
             this.$emit('handleChangeOptions', {
                 options: this.dataOptions.options,
                 trueAnswer: old,
             })
         }
     },
+
+    async mounted() {
+        this.dataOptions.options = await this.data || [];
+        this.dataOptions.trueAnswer = await this.answer || '';
+    }
 }
 </script>
 

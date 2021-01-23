@@ -81,7 +81,7 @@ export default {
                 this.loader = true;
                 await this.$store.dispatch('signUp', formData);
                 this.loader = false;
-                this.$router.push('/');
+                this.$router.push('/admin');
             } catch(error) {
                 console.log(error);
             }

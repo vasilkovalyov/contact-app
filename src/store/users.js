@@ -25,6 +25,7 @@ export default  {
 
         async loadUsers(state, payload) {
             const users = await firebase.loadPosts(payload);
+            
             state.commit('setAllUsers', users);
         },
 

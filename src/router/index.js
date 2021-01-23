@@ -4,9 +4,7 @@ import firebase from 'firebase/app';
 
 Vue.use(VueRouter)
 
-
 import Home from '../views/public/Home.vue';
-
 
 const routes = [
 	{
@@ -34,48 +32,77 @@ const routes = [
 		component: () => import('../views/public/Register.vue')
 	},
 	{
-		path: '/edit/:id',
-		name: 'EditUser',
+		path: '/admin',
+		name: 'HomeAdmin',
 		meta: { layout: 'admin-layout', auth: true },
-		component: () => import('../views/admin/EditUser.vue')
+		component: () => import('../views/admin/HomeAdmin.vue')
 	},
 	{
-		path: '/create',
-		name: 'CreateUser',
-		meta: { layout: 'admin-layout', auth: true },
-		component: () => import('../views/admin/CreateUser.vue')
-	},
-	{
-		path: '/create-quiz-game',
-		name: 'CreateQuizGame',
-		meta: { layout: 'admin-layout', auth: true },
-		component: () => import('../views/admin/CreateQuizGame.vue')
-	},
-	{
-		path: '/create-quiz-questions',
-		name: 'CreateQuizQuestions',
-		meta: { layout: 'admin-layout', auth: true },
-		component: () => import('../views/admin/CreateQuizQuestions.vue')
-	},
-	{
-		path: '/quiz-games',
-		name: 'QuizGames',
-		meta: { layout: 'admin-layout', auth: true },
-		component: () => import('../views/admin/QuizGames.vue')
-	},
-	{
-		path: '/users',
-		name: 'Users',
-		meta: { layout: 'admin-layout', auth: true },
-		component: () => import('../views/admin/Users.vue')
-	},
-	{
-		path: '/admin-profile',
+		path: '/admin/admin-profile',
 		name: 'AdminProfile',
 		meta: { layout: 'admin-layout', auth: true },
 		component: () => import('../views/admin/AdminProfile.vue')
 	},
-
+	{
+		path: '/admin/users',
+		name: 'Users',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/users/Users.vue')
+	},
+	{
+		path: '/admin/create',
+		name: 'CreateUser',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/users/CreateUser.vue')
+	},
+	{
+		path: '/admin/edit/:id',
+		name: 'EditUser',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/users/EditUser.vue')
+	},
+	{
+		path: '/admin/quiz-games',
+		name: 'QuizGames',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/games/QuizGames.vue')
+	},
+	{
+		path: '/admin/create-quiz-game',
+		name: 'CreateQuizGame',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/games/CreateQuizGame.vue')
+	},
+	{
+		path: '/admin/edit-game/:id',
+		name: 'EditGame',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/games/EditGame.vue')
+	},
+	{
+		path: '/admin/quiz-questions',
+		name: 'QuizQuestions',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/questions/QuizQuestions.vue')
+	},
+	{
+		path: '/admin/view-questions/:id',
+		name: 'ViewQuestions',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/questions/ViewQuestions.vue')
+	},
+	{
+		path: '/admin/create-quiz-questions',
+		name: 'CreateQuizQuestions',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/questions/CreateQuizQuestions.vue')
+	},
+	{
+		path: '/admin/edit-question/game/:game/question/:question',
+		name: 'EditQuestion',
+		meta: { layout: 'admin-layout', auth: true },
+		component: () => import('../views/admin/questions/EditQuestion.vue')
+	},
 ]
 
 const router = new VueRouter({

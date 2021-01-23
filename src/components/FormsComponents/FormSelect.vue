@@ -4,19 +4,20 @@
             <slot name='label'></slot>
         </label>
         <div class="select-field">
-            <Selectize v-model="selected" :value="value" :settings="settings">
-                <template>
-                    <option value="">{{baseOption}}</option>
-                </template>
-                <template v-for="(option, key) in options" >
-                    <option :value="option.value" :key="key">{{option.value}}</option>
-                </template>
-            </Selectize>
+            <v-select
+                :filterable="false"
+                :searchable="false"
+                v-model="selected"
+                :options="options"
+                @input="setSelected"
+            ></v-select>
         </div>
     </div>
 </template>
 <script>
-import Selectize from 'vue2-selectize'
+
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 
 export default {
     name: 'FormSelect',
@@ -42,11 +43,6 @@ export default {
             default: [],
             required: false
         },
-        value: {
-            type: String,
-            default: '',
-            required: false
-        },
         hasIcon: {
             type: Boolean,
             default: false,
@@ -54,27 +50,28 @@ export default {
         },
     },
 
+
+    methods: {
+        setSelected(value) {
+            this.$emit('onChange', value);
+        },
+    },
+
     data() {
         return {
             settings: {}, 
-            selected: this.value
+            selected: null 
         }
     },
 
-    watch: {
-        selected(value, oldValue) {
-            this.$emit('input', value);
-        }
-    },
 
     components: {
-        Selectize
+        vSelect,
     },
 }
 </script>
 <style lang="scss">
     @import '../../scss/base/variables.scss';
-    @import "~selectize/dist/css/selectize.bootstrap3.css";
 
     .select-component {
         width: 100%;
@@ -102,13 +99,13 @@ export default {
 
         &__without-icon {
             .select-field {
-                .selectize-input {
+                > .v-select {
                     padding-left: 15px;
                     padding-right: 15px;
-                    
-                    &:before {
-                        display: none;
-                    }
+                }
+                
+                &:before {
+                    display: none;
                 }
             }
         }
@@ -118,6 +115,53 @@ export default {
         width: 100%;
         position: relative;
         margin-bottom: 0;
+
+
+        > .v-select {
+            position: relative;
+            border: 2px solid $light;
+            width: 100%;
+            font-size: 14px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 11px 1px rgba(233,236,240,0);
+            font-family: "Roboto";
+            transition: box-shadow .3s ease-in-out;
+            height: 48px;
+            padding: 15px 0 15px 45px;
+            outline: none;
+            display: flex;
+            align-items: center;
+
+            .vs__dropdown-toggle {
+                width: 100%;
+                border: none;
+            }
+
+            &:focus,
+            &:active {
+                box-shadow: 0px 0px 11px 1px #e9ecf0;
+            }
+
+            &::placeholder {
+                color: $secondary-color;
+            }
+        }
+
+        &:before {
+            content: "\f228";
+            font-family: "Font Awesome 5 Free";
+            display: inline-block;
+            font-weight: 900;
+            color: $blue-light-1;
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            right: auto;
+            bottom: auto;
+            height: auto;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
 
         &__label {
             color: $secondary-color;
@@ -132,48 +176,8 @@ export default {
                 display: none;
             }
         }
-
-        .selectize-input,
-        &__input {
-            position: relative;
-            border: 2px solid $light;
-            width: 100%;
-            font-size: 14px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 11px 1px rgba(233,236,240,0);
-            font-family: "Roboto";
-            transition: box-shadow .3s ease-in-out;
-            height: 48px;
-            padding: 15px 45px;
-            outline: none;
-            display: flex;
-            align-items: center;
-
-            &:focus,
-            &:active {
-                box-shadow: 0px 0px 11px 1px #e9ecf0;
-            }
-
-            &::placeholder {
-                color: $secondary-color;
-            }
-
-            &:before {
-                content: "\f228";
-                font-family: "Font Awesome 5 Free";
-                display: inline-block;
-                font-weight: 900;
-                color: $blue-light-1;
-                position: absolute;
-                top: 50%;
-                left: 15px;
-                right: auto;
-                bottom: auto;
-                height: auto;
-                transform: translateY(-50%);
-                font-size: 14px;
-            }
-        }
+        
+            
 
         .selectize-dropdown {
             font-size: 14px;

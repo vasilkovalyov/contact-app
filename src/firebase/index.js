@@ -81,11 +81,10 @@ class Firebase {
 
         return new Promise(
             function(resolve, reject) {
-                const newPostKey = database.ref().child(typePost).push(userData).key;
-
-                if(newPostKey) {
-                    return resolve(newPostKey);
-                } else {
+                try {
+                    const newPostKey = database.ref().child(typePost).push(userData).key;
+                    return newPostKey ? resolve(newPostKey) : reject(e);
+                } catch(e) {
                     return reject(e);
                 }
             }
@@ -177,13 +176,66 @@ class Firebase {
         )
     }
 
-    async uploadImageAndGetUrl(typePost, image) {
-        console.log(image);
-        const storageRef = await this.storage.ref(`${typePost}/${image.name}`);
-        return await storageRef.put(image)
-        .then(function(snapshot) {
-            return snapshot.ref.getDownloadURL();
+    addToCollectionPost(typePost, property, payload) {
+        const database = this.database;
+        const { key, data } = payload;
+
+        return new Promise(
+            function(resolve, reject) {
+                try {
+                    const newPostKey = database
+                        .ref(`${typePost}/${key}`)
+                        .child(property)
+                        .push({...data}).key;
+                
+                    return newPostKey ? resolve(newPostKey) : reject(e)
+
+                } catch(e) {
+                    return reject(e);
+                }
+            }
+        )
+    }
+
+    async getFromCollectionPost(typePost, collection ,payload) {
+        const database = this.database;
+        const { keyPost, keyCollectionPost } = payload;
+
+        const dbRef = await database.ref(`${typePost}/`+keyPost).orderByChild('questions');
+        const response = await dbRef.once('value').then(function(snapshot) {
+            const targetPost = snapshot.child(collection).child(keyCollectionPost).val();
+            if(targetPost) {
+                return targetPost;
+            } else {
+                return null;
+            }
         })
+
+        return response;
+    }
+
+    async setPostInTheCollection(typePost, collection, payload) {
+        const database = this.database;
+        const { keyPost, keyCollectionPost } = payload;
+        const { question, questionsArray, trueAnswer } = payload.dataPost.data;
+
+        const dbCollectionRef = await database.ref(`${typePost}/`+keyPost).child(collection);
+
+        dbCollectionRef.child(keyCollectionPost).set({
+            ...payload.dataPost.data,
+            question: question,
+            questionsArray: [...questionsArray],
+            trueAnswer: trueAnswer,
+        });
+    }
+
+    async uploadImageAndGetUrl(typePost, image) {
+        const storageRef = await this.storage.ref(`${typePost}/${image.name}`);
+
+        return await storageRef.put(image)
+            .then(function(snapshot) {
+                return snapshot.ref.getDownloadURL();
+            })
     }
 
     async savePost(typePost, payload) {

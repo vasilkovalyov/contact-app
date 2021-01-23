@@ -86,9 +86,8 @@ export default {
                 this.loader = true;
                 await this.$store.dispatch('signIn', formData);
                 this.loader = false;
-                this.$router.push('/admin-profile');
+                this.$router.push('/admin');
             } catch(error) {
-
                 console.log(error);
             }
         },

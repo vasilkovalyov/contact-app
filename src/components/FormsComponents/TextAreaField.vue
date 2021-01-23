@@ -87,6 +87,9 @@ export default {
             transition: box-shadow .3s ease-in-out;
             padding: 15px;
             outline: none;
+            max-width: 100%;
+            min-width: 100%;
+            min-height: 130px;
 
             &:focus,
             &:active {

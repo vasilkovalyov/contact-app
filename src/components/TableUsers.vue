@@ -29,7 +29,7 @@
                             <input :value="user.key" v-model="selectedUsers" type="checkbox">
                         </td>
                         <td>
-                            <router-link :to="'/edit/'+user.key">
+                            <router-link :to="'/admin/edit/'+user.key">
                                 <template v-if="user.image">
                                     <img :src="user.image" :alt="user.name" class="table__image">
                                 </template>

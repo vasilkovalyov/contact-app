@@ -9,40 +9,10 @@
         </div>
         <div class="user-profile-nav__dropdown">
             <ul>
-                <li>
-                    <router-link to="/">
-                        <i class="fas fa-home"></i>
-                        <span>Home</span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/users">
-                        <i class="fas fa-users"></i>
-                        <span>Users</span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/create-quiz-game">
-                        <i class="fas fa-gamepad"></i>
-                        <span>Create quiz game</span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/create-quiz-questions">
-                        <i class="fas fa-gamepad"></i>
-                        <span>Create quiz questions</span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/quiz-games">
-                        <i class="fas fa-gamepad"></i>
-                        <span>All quiz games</span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/admin-profile">
-                        <i class="fas fa-user-shield"></i>
-                        <span>View profile</span>
+                <li v-for="(navItem, i) in navList" :key="i">
+                    <router-link :to="navItem.link">
+                        <i class="fas" :class="navItem.icon"></i>
+                        <span>{{navItem.name}}</span>
                     </router-link>
                 </li>
                 <li>
@@ -62,6 +32,43 @@ export default {
     name: 'UserProfileNav',
 
     props: ['user'],
+
+    data() {
+        return {
+            navList: [
+                {
+                    link: '/admin/admin-profile',
+                    icon: 'fa-user-cog',
+                    name: 'Admin profile',
+                },
+                {
+                    link: '/admin/users',
+                    icon: 'fa-users',
+                    name: 'Users',
+                },
+                {
+                    link: '/admin/create-quiz-game',
+                    icon: 'fa-gamepad',
+                    name: 'Create quiz game',
+                },
+                {
+                    link: '/admin/create-quiz-questions',
+                    icon: 'fa-gamepad',
+                    name: 'Create quiz questions',
+                },
+                {
+                    link: '/admin/quiz-games',
+                    icon: 'fa-gamepad',
+                    name: 'All quiz games',
+                },
+                {
+                    link: '/admin/quiz-questions',
+                    icon: 'fa-gamepad',
+                    name: 'All quiz questions',
+                }
+            ]
+        }
+    },
 
     methods: {
         async signOut() {

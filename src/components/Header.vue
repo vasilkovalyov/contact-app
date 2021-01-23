@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <div class="container">
-            <router-link to="/" tag="a" class="header__logo">Vue Contact App</router-link>
+            <router-link to="/admin" tag="a" class="header__logo">Quiz App</router-link>
             <nav class="header-nav">
                 <template v-if="getAuthUserDate">
                     <UserProfileNav 

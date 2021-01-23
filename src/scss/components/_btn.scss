@@ -64,6 +64,19 @@
         width: 100%;
         padding: 15px;
     }
+
+    &__tip {
+        position: relative;
+        right: -2px;
+        display: inline-block;
+        color: $primary-color;
+        background-color: $white;
+        border-radius: 50%;
+        min-width: 15px;
+        height: 15px;
+        font-size: 13px;
+        font-weight: $font-bold;
+    }
 }
 
 @keyframes spin {
