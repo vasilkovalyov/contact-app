@@ -21,7 +21,6 @@
                             <template v-slot:label>Questions name</template>
                         </InputField>
                         <template v-if="loading">
-                            
                             <FieldOptions
                                 caption="Options"
                                 :data="formData.questionsArray"
@@ -119,7 +118,7 @@ export default {
                         ...this.formData,
                         questionsArray: [...this.formData.questionsArray],
                         question: this.formData.question,
-                        trueAnswer: this.formData.trueAnswer
+                        trueAnswer: (this.formData.trueAnswer).toString()
                     }
                 }
 
