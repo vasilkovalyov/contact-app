@@ -16,18 +16,21 @@
                             <td></td>
                         </tr>
                     </thead>
-                    <template v-if="loader === true || questions.length > 0">
+                    <template v-if="isLoadData === true || questions.length > 0">
                         <tbody class="table__body">
-                            <tr v-for="(item, i) in Object.values(questions)" :key="Object.keys(questions)[i]">
+                            <tr v-for="(item, i) in getQuestions" :key="getQuestionKey(i)">
                                 <td>{{i+1}}</td>
                                 <td>{{item.question}}</td>
                                 <td>{{item.game.label}}</td>
                                 <td>{{item.dateCreated}}</td>
                                 <td colspan="3">
                                     <router-link 
-                                        :to="{ path: `/admin/edit-question/game/${item.game.code}/question/${Object.keys(questions)[i]}`}"
+                                        :to="{ path: `/admin/edit-question/game/${item.game.code}/question/${getQuestionKey(i)}`}"
                                         class="btn btn__secondary">Edit</router-link>
-                                    <router-link to="/" class="btn btn__third">Delete</router-link>
+                                    <FormButton :buttonClass="['btn__third']" @clickHandler="removeHandler({
+                                        keyPost: item.game.code,
+                                        keyCollectionPost: getQuestionKey(i)
+                                    })">Delete</FormButton>
                                 </td>
                             </tr>
                         </tbody>
@@ -44,11 +47,21 @@
                 </table>
             </div>
         </div>
+        <template v-if="isShowNotification">
+            <Notification
+                :message="notification.message"
+                :type="notification.type"
+                :timeout="2000"
+                @closeNotification="closeNotification"
+            />
+        </template>
     </section>
 </template>
 <script>
 
 import firebase from '@/firebase';
+import FormButton from '@/components/FormsComponents/FormButton';
+import Notification from '@/components/Notification';
 
 export default {
     name: 'QuizQuestions',
@@ -56,7 +69,13 @@ export default {
     data() {
         return {
             questions: [],
-            loader: false,
+            isLoadData: false,
+            loaderBtnDelete: false,
+            isShowNotification: false,
+            notification: {
+                message: '',
+                type: ''
+            },
         }
     },
 
@@ -70,13 +89,57 @@ export default {
         })
 
         this.questions = await newArrayPosts;
-        this.loader = true;
+        this.isLoadData = true;
     },
 
     methods: {
+        async removeHandler(payload) {
+            
+            try {
+                this.loaderBtnDelete = true;
+                await firebase.removePostFromTheCollection('games', 'questions', payload);
+                delete this.questions[payload.keyCollectionPost];
+                this.questions = {...this.questions}
+                this.initNotification(true);
+                this.loaderBtnDelete = false;
+            } catch(e) {
+                console.log(e);
+                this.initNotification(false);
+                this.loaderBtnDelete = false;
+            }
+        },
+
+        closeNotification() {
+            this.isShowNotification = false;
+        },
+
+        initNotification(flag) {
+            this.isShowNotification = true;
+
+            if(flag) {
+                this.notification.message = 'Quiz Question Remove - Successfull',
+                this.notification.type = 'successfull'
+            } else {
+                this.notification.message = 'Quiz Question Remove - Error',
+                this.notification.type = 'error'
+            }
+        },
+
+        getQuestionKey(key) {
+            return Object.keys(this.questions)[key];
+        }
     },
 
-    computed: {},
+    computed: {
+        getQuestions() {
+            return Object.values(this.questions)
+        },
+    },
+
+    components: {
+        FormButton,
+        Notification
+    }
 }
 </script>
 

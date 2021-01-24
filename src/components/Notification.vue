@@ -37,8 +37,8 @@ export default {
 
 <style lang="scss">
     .notification {
-        position: absolute;
-        top: 100px;
+        position: fixed;
+        top: 50px;
         right: 50px;
         padding: 12px;
         border-radius: 4px;
@@ -52,8 +52,6 @@ export default {
         &.error {
             background-color: #c82333;
         }
-
-        
     }
 
     .v-notification-animate {

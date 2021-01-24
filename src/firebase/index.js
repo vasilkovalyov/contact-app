@@ -215,18 +215,32 @@ class Firebase {
     }
 
     async setPostInTheCollection(typePost, collection, payload) {
-        const database = this.database;
         const { keyPost, keyCollectionPost } = payload;
         const { question, questionsArray, trueAnswer } = payload.dataPost.data;
 
-        const dbCollectionRef = await database.ref(`${typePost}/`+keyPost).child(collection);
+        try {
+            const dbCollectionRef = await this.database.ref(`${typePost}/`+keyPost).child(collection);
 
-        dbCollectionRef.child(keyCollectionPost).set({
-            ...payload.dataPost.data,
-            question: question,
-            questionsArray: [...questionsArray],
-            trueAnswer: trueAnswer,
-        });
+            dbCollectionRef.child(keyCollectionPost).set({
+                ...payload.dataPost.data,
+                question: question,
+                questionsArray: [...questionsArray],
+                trueAnswer: trueAnswer,
+            });
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    async removePostFromTheCollection(typePost, collection, payload) {
+        const { keyPost, keyCollectionPost } = payload;
+        
+        try {
+            const dbCollectionRef = await this.database.ref(`${typePost}/`+keyPost).child(collection);
+            await dbCollectionRef.child(keyCollectionPost).remove();
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     async uploadImageAndGetUrl(typePost, image) {

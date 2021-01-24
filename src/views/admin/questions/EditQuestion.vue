@@ -127,6 +127,7 @@ export default {
                     keyPost: this.$route.params.game,
                     keyCollectionPost: this.$route.params.question,
                 });
+                
                 this.initNotification(true);
             } catch(e) {
                 this.initNotification(false);
