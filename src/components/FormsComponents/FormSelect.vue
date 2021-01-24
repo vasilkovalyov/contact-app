@@ -48,13 +48,43 @@ export default {
             default: false,
             required: false
         },
+        value: {
+            type: String,
+            default: '',
+            required: false
+        },
+        typeGetOptions: {
+            type: String,
+            default: 'entries',
+            required: false
+        }
     },
 
 
     methods: {
         setSelected(value) {
-            this.$emit('onChange', value);
+            switch(this.typeGetOptions) {
+                case 'entries' : {
+                    this.$emit('onChange', value);  
+                    break;
+                }
+                case 'keys' : {
+                    this.$emit('onChange', value.code);  
+                    break;
+                }
+                case 'values' : {
+                    this.$emit('onChange', value.label);  
+                    break;
+                }
+                default: {
+                    return 0;
+                }
+            }
         },
+    },
+
+    async mounted() {
+        this.selected = await this.value;
     },
 
     data() {

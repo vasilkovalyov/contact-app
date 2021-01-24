@@ -85,6 +85,8 @@
                                     baseOption="Select gender" 
                                     :options="genderArray"
                                     :hasIcon="true"
+                                    typeGetOptions="values"
+                                    @onChange="onChangeSelect"
                                 >
                                     <template v-slot:label>Gender</template>
                                 </FormSelect>
@@ -115,8 +117,8 @@
                 userForm: {...this.user},
                 loader: false,
                 genderArray: [
-                    {'value': 'male'},
-                    {'value': 'female'},
+                    {'code': 'male', 'label': 'male'},
+                    {'code': 'female', 'label': 'female'},
                 ]
             }
         },
@@ -147,7 +149,14 @@
                     ...this.userForm,
                     image
                 }
-            }
+            },
+
+            onChangeSelect(gender) {
+                this.userForm = {
+                    ...this.userForm,
+                    gender
+                }
+            },
         },
 
         components: {
