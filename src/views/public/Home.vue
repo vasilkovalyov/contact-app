@@ -58,7 +58,7 @@ export default {
         ...mapGetters(['getAuthUserDate']),
 
         getDisabledNext() {
-            return this.answerObjArray[this.targetPageCount].numberAnswer === '' || this.targetPageCount >= this.totalPageCount ? true : false;
+            return  this.targetPageCount >= this.totalPageCount || this.answerObjArray[this.targetPageCount].numberAnswer === '' ? true : false;
         },
         getDisabledPrev() {
             return this.targetPageCount === 0 ? true : false;
