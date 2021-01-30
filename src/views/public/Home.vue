@@ -19,20 +19,12 @@
                     </div>
                 </form>
                 <div class="quiz-navigation">
-                    <Progress
-                        :targetPage="targetPageCount+1"
-                        :totalPages="totalPageCount"
-                    >
+                    <Progress :targetPage="targetPageCount+1" :totalPages="totalPageCount">
                         <template v-slot:title>Questions</template>
                     </Progress>
                     <div class="quiz-navigation__btn-wrap">
-                        <button class="btn"
-                            :disabled="getDisabledPrev"
-                            @click="onPrevPage()">Prev</button>
-                        <button class="btn"
-                            :class="[]" 
-                            :disabled="getDisabledNext"
-                            @click="onNextPage()">Next</button>
+                        <button class="btn" :disabled="getDisabledPrev" @click="onPrevPage()">Prev</button>
+                        <button class="btn" :disabled="getDisabledNext" @click="onNextPage()">Next</button>
                     </div>
                 </div>
             </div>
@@ -45,6 +37,7 @@
 
 import firebase from '@/firebase';
 
+import { mapGetters } from 'vuex';
 
 import Progress from '@/components/Progress';
 
@@ -56,16 +49,16 @@ export default {
             questions: [],
             targetPageCount: 0,
             totalPageCount: 0,
-            loading: false,
             answerObjArray: [],
-            selected: [],
+            loading: false,
         }
     },
 
     computed: {
+        ...mapGetters(['getAuthUserDate']),
 
         getDisabledNext() {
-            return this.targetPageCount >= this.totalPageCount ? true : false;
+            return this.answerObjArray[this.targetPageCount].numberAnswer === '' || this.targetPageCount >= this.totalPageCount ? true : false;
         },
         getDisabledPrev() {
             return this.targetPageCount === 0 ? true : false;
@@ -190,6 +183,7 @@ export default {
                 display: block;
                 padding: 50px;
                 cursor: pointer;
+                font-weight: 600;
                 transition: background 0.3s linear, color 0.3s linear;
 
                 &.active {
