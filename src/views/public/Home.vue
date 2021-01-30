@@ -45,6 +45,7 @@
 
 import firebase from '@/firebase';
 
+
 import Progress from '@/components/Progress';
 
 export default {
@@ -62,6 +63,7 @@ export default {
     },
 
     computed: {
+
         getDisabledNext() {
             return this.targetPageCount >= this.totalPageCount ? true : false;
         },

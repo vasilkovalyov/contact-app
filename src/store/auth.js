@@ -66,7 +66,6 @@ export default  {
 
         async onAuthUser(store) {
             const response = await firebase.auth.currentUser;
-
             if(response) {
                 const uid = response.uid;
                 const authPost = await firebase.getPostByPropUid('auth-users', uid);
