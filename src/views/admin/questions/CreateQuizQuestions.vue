@@ -25,7 +25,7 @@
                         :countOptions="countOptions"
                         @handleChangeOptions="handleChangeOptions"
                     />
-                    <FormButton :buttonClass="['btn__primary']" @clickHandler="formSubmit" :loader="loader">Create Question</FormButton>
+                    <FormButton :buttonClass="['v-btn__primary']" @clickHandler="formSubmit" :loader="loader">Create Question</FormButton>
                 </form>
             </div>
         </div>

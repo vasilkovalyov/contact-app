@@ -29,8 +29,8 @@
                                 @handleChangeOptions="handleChangeOptions"
                             />
                         </template>
-                        <FormButton :buttonClass="['btn__primary']" @clickHandler="formSubmit" :loader="loader">Save Question</FormButton>
-                        <router-link to="/admin/quiz-questions" tag="a" class="btn btn__primary">Back</router-link>
+                        <FormButton :buttonClass="['v-btn__primary']" @clickHandler="formSubmit" :loader="loader">Save Question</FormButton>
+                        <router-link to="/admin/quiz-questions" tag="a" class="v-btn v-btn__primary">Back</router-link>
                     </form>
                 </div>
             </div>
@@ -95,6 +95,7 @@ export default {
                 if(data) this.loading = true;
 
             })
+            console.log(this.formData);
         } catch(e) {
             console.log(e.message);
         }

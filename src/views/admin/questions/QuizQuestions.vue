@@ -26,8 +26,8 @@
                                 <td colspan="3">
                                     <router-link 
                                         :to="{ path: `/admin/edit-question/game/${item.game.code}/question/${getQuestionKey(i)}`}"
-                                        class="btn btn__secondary">Edit</router-link>
-                                    <FormButton :buttonClass="['btn__third']" @clickHandler="removeHandler({
+                                        class="v-btn v-btn__secondary">Edit</router-link>
+                                    <FormButton :buttonClass="['v-btn__third']" @clickHandler="removeHandler({
                                         keyPost: item.game.code,
                                         keyCollectionPost: getQuestionKey(i)
                                     })">Delete</FormButton>

@@ -16,7 +16,7 @@
                     <div class="profile-info__header">
                         <span class="profile-info__caption">Your Profile</span>
                         <div class="btn-wrap">
-                            <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSave" :loader="loader">Save</FormButton>
+                            <FormButton :buttonClass="['v-btn__primary']" @clickHandler="handleClickSave" :loader="loader">Save</FormButton>
                         </div>
                     </div>
                     <div class="profile-info__category">

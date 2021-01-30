@@ -197,11 +197,24 @@ class Firebase {
         )
     }
 
-    async getFromCollectionPost(typePost, collection ,payload) {
-        const database = this.database;
+    async getAllPostFromCollection(typePost, collection, payload) {
+        const dbRef = await this.database.ref(`${typePost}/${payload}`).once('value');
+        // const response = await dbRef.once('value').then(function(snapshot) {
+        //     const targetPost = snapshot.child(collection).child(keyCollectionPost).val();
+        //     if(targetPost) {
+        //         return targetPost;
+        //     } else {
+        //         return null;
+        //     }
+        // })
+
+        return dbRef.val()[collection];
+    }
+
+    async getFromCollectionPost(typePost, collection, payload) {
         const { keyPost, keyCollectionPost } = payload;
 
-        const dbRef = await database.ref(`${typePost}/`+keyPost).orderByChild('questions');
+        const dbRef = await this.database.ref(`${typePost}/`+keyPost).orderByChild('questions');
         const response = await dbRef.once('value').then(function(snapshot) {
             const targetPost = snapshot.child(collection).child(keyCollectionPost).val();
             if(targetPost) {

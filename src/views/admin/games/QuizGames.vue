@@ -24,11 +24,11 @@
                                 <td>{{game.description}}</td>
                                 <td>{{game.time}}</td>
                                 <td colspan="3">
-                                    <router-link :to="'/admin/view-questions/'+game.key" class="btn btn__primary">View Questions
+                                    <router-link :to="'/admin/view-questions/'+game.key" class="v-btn v-btn__primary">View Questions
                                         <span class="btn__tip">{{getQuestionsLength(game.questions)}}</span>
                                     </router-link>
-                                    <router-link :to="'/admin/edit-game/'+game.key" class="btn btn__secondary">Edit</router-link>
-                                    <FormButton :buttonClass="['btn__third']" @clickHandler="onClickRemove(game.key)">Delete</FormButton>
+                                    <router-link :to="'/admin/edit-game/'+game.key" class="v-btn v-btn__secondary">Edit</router-link>
+                                    <FormButton :buttonClass="['v-btn__third']" @clickHandler="onClickRemove(game.key)">Delete</FormButton>
                                 </td>
                             </tr>
                         </tbody>

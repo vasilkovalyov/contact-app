@@ -26,8 +26,8 @@
                         >
                             <template v-slot:label>Time (in minute)</template>
                         </InputField>
-                        <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSave" :loader="loader">Save Quiz</FormButton>
-                        <router-link to="/admin/quiz-games" tag="a" class="btn btn__primary">Back</router-link>
+                        <FormButton :buttonClass="['v-btn__primary']" @clickHandler="handleClickSave" :loader="loader">Save Quiz</FormButton>
+                        <router-link to="/admin/quiz-games" tag="a" class="v-btn v-btn__primary">Back</router-link>
                     </form>
                 </div>
             </div>

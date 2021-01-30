@@ -25,7 +25,7 @@
                                 <div class="profile-info__header">
                                     <span class="profile-info__caption">Your Profile</span>
                                     <div class="btn-wrap">
-                                        <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSave" :loader="loaderMainForm">Save</FormButton>
+                                        <FormButton :buttonClass="['v-btn__primary']" @clickHandler="handleClickSave" :loader="loaderMainForm">Save</FormButton>
                                     </div>
                                 </div>
                                 <div class="profile-info__category">
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="profile-info">
+                            <div class="profile-info disabled">
                                 <div class="profile-info__category">
                                     <span class="profile-info__category-title">Security</span>
                                 </div>
@@ -112,7 +112,7 @@
                                                     </InputField>
                                                 </div>
                                                 <div class="btn-wrap">
-                                                    <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSavePassword" :loader="loaderPassword">Save</FormButton>
+                                                    <FormButton :buttonClass="['v-btn__primary']" @clickHandler="handleClickSavePassword" :loader="loaderPassword">Save</FormButton>
                                                 </div>
                                             </form>
                                         </div>

@@ -25,7 +25,7 @@
                     >
                         <template v-slot:label>Time (in minute)</template>
                     </InputField>
-                    <FormButton :buttonClass="['btn__primary']" @clickHandler="handleClickSave" :loader="loader">Create Quiz</FormButton>
+                    <FormButton :buttonClass="['v-btn__primary']" @clickHandler="handleClickSave" :loader="loader">Create Quiz</FormButton>
                 </form>
             </div>
         </div>

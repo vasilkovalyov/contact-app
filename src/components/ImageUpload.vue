@@ -12,8 +12,8 @@
         </div>
         <div class="image-upload__btn-wrap">
             <input type="file" :name="name" ref="file" hidden @change="handleFileUpload">
-            <FormButton :buttonClass="['btn__primary']" @clickHandler="submitFile">Upload</FormButton>
-            <FormButton :buttonClass="['btn__secondary']" @clickHandler="handleClickReset">Reset</FormButton>
+            <FormButton :buttonClass="['v-btn__primary']" @clickHandler="submitFile">Upload</FormButton>
+            <FormButton :buttonClass="['v-btn__secondary']" @clickHandler="handleClickReset">Reset</FormButton>
         </div>
     </div>
 </template>

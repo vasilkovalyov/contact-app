@@ -33,7 +33,7 @@
                 <template v-slot:label>Password</template>
             </InputField>
             <div class="auth-form__btn-wrap">
-                <FormButton :buttonClass="['btn__primary', 'btn__wide']" @clickHandler="clickHandler" :loader="loader" >Login</FormButton>
+                <FormButton :buttonClass="['v-btn__primary', 'v-btn__wide']" @clickHandler="clickHandler" :loader="loader" >Login</FormButton>
                 <p>New to our platform? <router-link to="/register">Create an account</router-link> </p>
             </div>
         </form>

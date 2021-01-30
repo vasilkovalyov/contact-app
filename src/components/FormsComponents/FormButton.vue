@@ -1,5 +1,5 @@
 <template>
-    <button :type="typeButton" class="btn" :class="buttonClass ? buttonClass : []"
+    <button :type="typeButton" class="v-btn" :class="buttonClass ? buttonClass : []"
         :disabled="loader"
         @click.prevent="onClick" 
     >

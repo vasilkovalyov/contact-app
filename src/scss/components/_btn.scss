@@ -1,4 +1,4 @@
-.btn {
+.v-btn {
     color: $white;
 
     position: relative;
@@ -60,6 +60,8 @@
         }
     }
 
+    
+
     &__wide {
         width: 100%;
         padding: 15px;
@@ -76,6 +78,28 @@
         min-height: 15px;
         font-size: 13px;
         font-weight: $font-bold;
+    }
+}
+
+.btn {
+    background: linear-gradient(86.51deg, #2FB0F9 3.31%, #376FFE 85.1%);
+    box-shadow: 0px 5px 20px rgba(52, 138, 252, 0.4);
+    border-radius: 30px;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: $white;
+    border: none;
+    padding: 9px 20px;
+    min-width: 135px;
+    outline: none;
+    cursor: pointer;
+
+
+    &[disabled] {
+        opacity: 0.6;
+        pointer-events: none;
     }
 }
 

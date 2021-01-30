@@ -32,7 +32,7 @@
                 </template>
             </InputField>
             <div class="auth-form__btn-wrap">
-                <FormButton :buttonClass="['btn__primary', 'btn__wide']" @clickHandler="clickHandler" :loader="loader">Register</FormButton>
+                <FormButton :buttonClass="['v-btn__primary', 'v-btn__wide']" @clickHandler="clickHandler" :loader="loader">Register</FormButton>
                 <p>Do you have an account? <router-link tag="a" to="/login">Return to login</router-link></p>
             </div>
         </form>

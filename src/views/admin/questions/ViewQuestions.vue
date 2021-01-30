@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="btn-wrap">
-                    <router-link to="/admin/quiz-games" tag="a" class="btn btn__primary">Back</router-link>
+                    <router-link to="/admin/quiz-games" tag="a" class="v-btn v-btn__primary">Back</router-link>
                 </div>
             </div>
         </section>

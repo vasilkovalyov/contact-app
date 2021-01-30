@@ -22,5 +22,11 @@ export default {
 <style lang="scss">
     .wrapper-main {
         min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+
+        .main {
+            flex: 1;
+        }
     }
 </style>

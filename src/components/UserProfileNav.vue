@@ -37,6 +37,11 @@ export default {
         return {
             navList: [
                 {
+                    link: '/',
+                    icon: 'fa-home',
+                    name: 'Home page',
+                },
+                {
                     link: '/admin/admin-profile',
                     icon: 'fa-user-cog',
                     name: 'Admin profile',

@@ -51,8 +51,8 @@
                 :hasIcon="true">
                 <template v-slot:label>Date</template>
             </FormDatepicker>
-            <FormButton :buttonClass="['btn__primary']"  :loader="loader">Create</FormButton>
-            <FormButton type="reset" :buttonClass="['btn__secondary']"  >Reset</FormButton>
+            <FormButton :buttonClass="['v-btn__primary']"  :loader="loader">Create</FormButton>
+            <FormButton type="reset" :buttonClass="['v-btn__secondary']"  >Reset</FormButton>
         </div>
     </form>
 </template>
