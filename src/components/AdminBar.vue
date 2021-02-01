@@ -81,6 +81,7 @@
         background-color: #1976d2;
         color: #ffffff;
         padding: 8px 0;
+        z-index: 2;
         
         .container  {
             display: flex;
