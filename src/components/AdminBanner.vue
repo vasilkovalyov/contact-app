@@ -1,5 +1,5 @@
 <template>
-    <section class="section-profile-banner" :style="{ backgroundImage: 'url(/images/' + image + ')' }">
+    <section class="section-admin-banner" :style="{ backgroundImage: 'url(/images/' + image + ')' }">
         <div class="container">
             <h1>{{captionBanner}}
                 <template v-if="userName">
@@ -16,7 +16,7 @@
 <script>
 
 export default {
-    name: 'ProfileBanner',
+    name: 'AdminBanner',
 
     props: {
         captionBanner: {
@@ -42,34 +42,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss">
-    @import '../scss/base/variables.scss';
-
-    .section-profile-banner {
-        color: $white;
-
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        padding: 92px 0 108px;
-        margin-bottom: -74px;
-
-        h1 {
-            font-size: 36px;
-            color: inherit;
-        }
-    }
-
-    .dashboard-breadcrumbs {
-        font-size: 14px;
-        padding: 0;
-        margin: 0;
-        list-style-type: none;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        color: inherit;
-    }
-
-</style>

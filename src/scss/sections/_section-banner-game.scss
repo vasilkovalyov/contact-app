@@ -1,0 +1,9 @@
+.section-banner-game {
+    display: flex;
+    min-height: 100vh;
+    background: radial-gradient(63.46% 63.46% at 49.87% 63.46%, #A4D8F5 0%, #2FB0F9 100%);
+
+    @include media('>=tablet') {
+        padding: 100px 0;
+    }
+}

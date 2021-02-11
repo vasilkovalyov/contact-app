@@ -4,11 +4,35 @@
 @import 'base/reset';
 @import 'base/typography';
 
-@import 'components/table';
 @import 'components/btn';
+@import 'components/forms';
+@import 'components/table';
+@import 'components/search';
 @import 'components/results';
+@import 'components/progress';
+@import 'components/admin-bar';
+@import 'components/quiz-results';
+@import 'components/notification';
+@import 'components/image-upload';
+@import 'components/profile-panel';
+@import 'components/game-categoies';
+@import 'components/user-profile-nav';
+@import 'components/quiz-results-details';
+@import 'components/question-view-wrapper';
 
-@import 'sections/section-quiz-game';
+@import 'form-components/input';
+@import 'form-components/select';
+@import 'form-components/textarea';
+@import 'form-components/datepicker';
+@import 'form-components/field-options';
+
+@import 'sections/section-auth';
+@import 'sections/section-profile';
 @import 'sections/section-quiz-app';
+@import 'sections/section-admin-banner';
+@import 'sections/section-admin-default';
+@import 'sections/section-banner-game';
 
-@import 'layout/common.scss';
+
+@import 'layout/header';
+@import 'layout/common';

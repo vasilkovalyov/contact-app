@@ -1,16 +1,5 @@
 <template>
     <div class="table-wrapper">
-        <div class="table-wrapper__header">
-            <span class="table-wrapper__caption">Users</span>
-            <template v-if="selectedUsers.length === 1">
-                <div class="table-buttons-config">
-                    <div class="table-buttons-config__btn-wrap">
-                        <router-link  :to="'/edit/'+selectedUsers[0]" class="table__btn table__btn-edit">Edit user</router-link>
-                        <button class="table__btn table__btn-remove" @click.prevent="removeHandleClick(selectedUsers[0])">Remove user</button>
-                    </div>
-                </div>
-            </template>
-        </div>
         <table class="table">
             <thead class="table__header">
                 <tr>
@@ -23,8 +12,8 @@
                 </tr>
             </thead>
             <template v-if="users.length > 0">
-                <tbody class="table__body"  v-for="user in users" :key="user.key">
-                    <tr class="table">
+                <tbody class="table__body"  >
+                    <tr v-for="user in users" :key="user.key">
                         <td>
                             <input :value="user.key" v-model="selectedUsers" type="checkbox">
                         </td>
@@ -112,10 +101,6 @@ export default {
                 this.initNotification(false);
                 console.log(e);
             }
-        },
-
-        selected() {
-
         },
 
         closeNotification() {

@@ -26,33 +26,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss">
-    .progress {
-        max-width: 280px;
-        width: 100%;
-
-        &__head {
-            text-transform: uppercase;
-            color: #2FB0F9;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        &__line-wrap {
-            background-color: #319FFA;
-            height: 6px;
-            width: 100%;
-            position: relative;
-        }
-
-        &__line {
-            background-color: #FDDF54;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            transition: width 0.3s linear;
-        }
-    }
-</style>

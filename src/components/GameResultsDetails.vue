@@ -27,12 +27,7 @@
 <script>
 export default {
     name: 'GameResultsDetails',
-
     props: ['gameDetails'],
-
-    data() {
-        return {}
-    },
 
     methods: {
         handleCloseResultDetails() {

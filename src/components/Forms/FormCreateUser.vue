@@ -58,6 +58,7 @@
 </template>
 
 <script>
+    import { clearFormObject } from '@/helpers'
     import InputField from '../FormsComponents/InputField';
     import FormSelect from '../FormsComponents/FormSelect';
     import FormButton from '../FormsComponents/FormButton';
@@ -90,7 +91,7 @@
                     this.$store.dispatch('createUser', formData)
                     this.$emit('initNotification', true);
                     this.loader = false;     
-                    this.clearForm(this.formData);
+                    clearFormObject(this.formData);
 
                 } catch(error) {
                     console.error(error.message);
@@ -98,12 +99,6 @@
                     this.loader = false;  
                 }
             },
-
-            clearForm(formData) {
-                Object.keys(formData).forEach(function(key,index) {
-                    formData[key] = '';
-                });
-            }
         },
 
         components: {

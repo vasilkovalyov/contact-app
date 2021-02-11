@@ -1,6 +1,6 @@
 <template>
     <div class="auth-profile-page">
-        <ProfileBanner 
+        <AdminBanner 
             captionBanner="Admin"
             :userName="getName"
             typePage="Admin settings"
@@ -8,11 +8,11 @@
         />
         <section class="section-profile">
             <div class="container">
-                <form class="form-profile">
-                    <div class="df-row">
-                        <div class="col col-4">
-                            <div class="profile-photo">
-                                <span class="profile-photo__caption">Profile Photo</span>
+                <div class="section-profile__content">
+                    <div class="section-profile__row">
+                        <div class="section-profile__col section-profile__col-4">
+                            <div class="profile-panel profile-photo">
+                                <span class="profile-panel__caption profile-photo__caption">Profile Photo</span>
                                 <ImageUpload 
                                     name="image-user"
                                     :image="userForm.image"
@@ -20,20 +20,20 @@
                                 />
                             </div>
                         </div>
-                        <div class="col col-8">
-                            <div class="profile-info" >
-                                <div class="profile-info__header">
-                                    <span class="profile-info__caption">Your Profile</span>
+                        <div class="section-profile__col section-profile__col-8">
+                            <div class="profile-panel">
+                                <div class="profile-panel__header">
+                                    <span class="profile-panel__caption">Your Profile</span>
                                     <div class="btn-wrap">
                                         <FormButton :buttonClass="['v-btn__primary']" @clickHandler="handleClickSave" :loader="loaderMainForm">Save</FormButton>
                                     </div>
                                 </div>
-                                <div class="profile-info__category">
-                                    <span class="profile-info__category-title">BASICS</span>
+                                <div class="profile-panel__category">
+                                    <span class="profile-panel__category-title">BASICS</span>
                                 </div>
-                                <div class="profile-info__form" v-if="userForm">
-                                    <div class="df-row">
-                                        <div class="col col-6">
+                                <div class="profile-panel__form" v-if="userForm">
+                                    <div class="profile-panel__row">
+                                        <div class="profile-panel__col profile-panel__col-6">
                                             <InputField
                                                 v-model="userForm.firstName" name="first-name" placeholder="Name">
                                                 <template v-slot:input-icon>
@@ -42,7 +42,7 @@
                                                 <template v-slot:label>First Name</template>
                                             </InputField>
                                         </div>
-                                        <div class="col col-6">
+                                        <div class="profile-panel__col profile-panel__col-6">
                                             <InputField
                                                 v-model="userForm.lastName" name="last-name" placeholder="Name">
                                                 <template v-slot:input-icon>
@@ -51,7 +51,7 @@
                                                 <template v-slot:label>Last Name</template>
                                             </InputField>
                                         </div>
-                                        <div class="col col-6">
+                                        <div class="profile-panel__col profile-panel__col-6">
                                             <InputField v-model="userForm.jobTitle" name="job" placeholder="Job Title">
                                                 <template v-slot:input-icon>
                                                     <i class="fas fa-user-md"></i>
@@ -59,7 +59,7 @@
                                                 <template v-slot:label>Job Title</template>
                                             </InputField>
                                         </div>
-                                        <div class="col">
+                                        <div class="profile-panel__col">
                                             <InputField v-model="userForm.email" name="email" placeholder="Email" :disabled="true">
                                                 <template v-slot:input-icon>
                                                     <i class="fas fa-envelope"></i>
@@ -71,17 +71,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="profile-info disabled">
-                                <div class="profile-info__category">
-                                    <span class="profile-info__category-title">Security</span>
+                        <div class="section-profile__col">
+                            <div class="profile-panel disabled">
+                                <div class="profile-panel__category">
+                                    <span class="profile-panel__category-title">Security</span>
                                 </div>
-                                <div class="profile-info-password-form">
-                                    <div class="df-row">
-                                        <div class="col col-2">
-                                            <span class="profile-info__caption">Change Password</span>
+                                <div class="profile-panel__password-form">
+                                    <div class="profile-panel__row">
+                                        <div class="profile-panel__col profile-panel__col-4">
+                                            <span class="profile-panel__caption">Change Password</span>
                                         </div>
-                                        <div class="col col-10">
+                                        <div class="profile-panel__col profile-panel__col-8">
                                             <form class="confirm-password-form">
                                                 <div class="confirm-password-form__input-wrapper">
                                                     <InputField 
@@ -121,7 +121,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </section>
         <template v-if="isShowNotification">
@@ -143,7 +143,7 @@ import InputField from '@/components/FormsComponents/InputField';
 import FormButton from '@/components/FormsComponents/FormButton';
 import ImageUpload from '@/components/ImageUpload';
 import Notification from '@/components/Notification';
-import ProfileBanner from '@/components/ProfileBanner';
+import AdminBanner from '@/components/AdminBanner';
 
 export default {
     name: 'AdminProfile',
@@ -230,7 +230,7 @@ export default {
         FormButton,
         ImageUpload,
         Notification,
-        ProfileBanner
+        AdminBanner
     }
 }
 

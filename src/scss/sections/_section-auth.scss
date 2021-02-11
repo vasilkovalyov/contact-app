@@ -1,0 +1,54 @@
+.section-auth {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    &__inner {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    &__header {
+        margin-bottom: 40px;
+    }
+
+    .logo {
+        color: $secondary-color;
+    
+        font-weight: 500;
+        font-size: 24px;
+        text-align: center;
+        
+    
+        img {
+            display: block;
+            width: 270px;
+            margin: 0 auto;
+        }
+    
+        &__text {
+            display: block;
+        }
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 50%;
+        background-size: cover;
+        background-position: bottom left;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        max-width: 480px;
+        width: 100%;
+        padding: 64px 0;
+    }
+}
+
+
+

@@ -1,22 +1,18 @@
 <template>
-    <section class="section-users">
+    <section class="section-admin-default">
         <div class="container">
-            <div class="section-users__header">
-                <div class="df-row">
-                    <div class="col col-6">
-                        <h1>Users</h1>
+            <AdminSectionHeader>
+                <template v-slot:title>Search Users</template>
+                <template v-slot:search>
+                    <div class="search-wrap">
+                        <Search 
+                            placeholder="Search Users"
+                            @handleClickSearch="handleClickSearch"
+                        />
                     </div>
-                    <div class="col col-6">
-                        <div class="search-wrap">
-                            <Search 
-                                placeholder="Search Users"
-                                @handleClickSearch="handleClickSearch"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="section-users__panel">
+                </template>
+            </AdminSectionHeader>
+            <div class="section-admin-default__body">
                 <TableUser :users="this.getUsers"  />
             </div>
         </div>
@@ -27,6 +23,7 @@
 
 import Search from '@/components/Search';
 import TableUser from '@/components/TableUsers';
+import AdminSectionHeader from '@/components/AdminSectionHeader';
 
 import { mapGetters, mapActions } from 'vuex';
 
@@ -41,7 +38,8 @@ export default {
 
     components: {
         Search,
-        TableUser
+        TableUser,
+        AdminSectionHeader
     },
 
     mounted() {
@@ -59,46 +57,4 @@ export default {
         } 
     }
 }
-
 </script>
-
-<style lang="scss">
-    .section-users {
-        padding: 40px 0;
-
-        &__head-configuration {
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-weight: 500;
-            margin: 0 20px 0 0;
-            color: #525F7F;
-        }
-
-        &__header {
-            margin-bottom: 40px;
-
-            .df-row {
-                display: flex;
-                align-items: center;
-
-                .col {
-                    &.col-6 {
-                        width: 50%;
-                    }
-                }
-            }
-        }
-
-        .search-wrap {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        &__panel {
-            background-color: #fff;
-            box-shadow: 0 0 11px 1px rgba(0,0,0,0.2);
-        }
-    }
-</style>

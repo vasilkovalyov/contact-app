@@ -1,50 +1,53 @@
 <template>
-    <section class="section-quiz-questions">
+    <section class="section-admin-default">
         <div class="container">
-            <h1>Quiz Questions</h1>
-
-            <div class="quiz-panel">
-                <table class="table">
-                    <thead class="table__header">
-                        <tr>
-                            <td>#</td>
-                            <td>Question</td>
-                            <td>Quiz</td>
-                            <td>Created</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <template v-if="isLoadData === true || questions.length > 0">
-                        <tbody class="table__body">
-                            <tr v-for="(item, i) in getQuestions" :key="getQuestionKey(i)">
-                                <td>{{i+1}}</td>
-                                <td>{{item.question}}</td>
-                                <td>{{item.game.label}}</td>
-                                <td>{{item.dateCreated}}</td>
-                                <td colspan="3">
-                                    <router-link 
-                                        :to="{ path: `/admin/edit-question/game/${item.game.code}/question/${getQuestionKey(i)}`}"
-                                        class="v-btn v-btn__secondary">Edit</router-link>
-                                    <FormButton :buttonClass="['v-btn__third']" @clickHandler="removeHandler({
-                                        keyPost: item.game.code,
-                                        keyCollectionPost: getQuestionKey(i)
-                                    })">Delete</FormButton>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </template>
-                    <template v-else>
-                        <tbody>
+            <AdminSectionHeader>
+                <template v-slot:title>Quiz Questions</template>
+            </AdminSectionHeader>
+            <div class="section-admin-default__body">
+                <div class="table-wrapper">
+                    <table class="table">
+                        <thead class="table__header">
                             <tr>
-                                <td colspan="6">
-                                    <span>Games not a found</span>
-                                </td>
+                                <td>#</td>
+                                <td>Question</td>
+                                <td>Quiz</td>
+                                <td>Created</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                        </tbody>
-                    </template>
-                </table>
+                        </thead>
+                        <template v-if="isLoadData === true || questions.length > 0">
+                            <tbody class="table__body">
+                                <tr v-for="(item, i) in getQuestions" :key="getQuestionKey(i)">
+                                    <td>{{i+1}}</td>
+                                    <td>{{item.question}}</td>
+                                    <td>{{item.game.label}}</td>
+                                    <td>{{item.dateCreated}}</td>
+                                    <td colspan="3">
+                                        <router-link 
+                                            :to="{ path: `/admin/edit-question/game/${item.game.code}/question/${getQuestionKey(i)}`}"
+                                            class="v-btn v-btn__secondary">Edit</router-link>
+                                        <FormButton :buttonClass="['v-btn__third']" @clickHandler="removeHandler({
+                                            keyPost: item.game.code,
+                                            keyCollectionPost: getQuestionKey(i)
+                                        })">Delete</FormButton>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </template>
+                        <template v-else>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6">
+                                        <span>Games not a found</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </template>
+                    </table>
+                </div>
             </div>
         </div>
         <template v-if="isShowNotification">
@@ -62,6 +65,7 @@
 import firebase from '@/firebase';
 import FormButton from '@/components/FormsComponents/FormButton';
 import Notification from '@/components/Notification';
+import AdminSectionHeader from '@/components/AdminSectionHeader';
 
 export default {
     name: 'QuizQuestions',
@@ -138,7 +142,8 @@ export default {
 
     components: {
         FormButton,
-        Notification
+        Notification,
+        AdminSectionHeader
     }
 }
 </script>

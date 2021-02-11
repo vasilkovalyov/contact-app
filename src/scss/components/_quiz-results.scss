@@ -1,0 +1,51 @@
+.quiz-results {
+    position: relative;
+    flex: 1;
+    
+    .container {
+        display: flex;
+        align-items: center;
+        max-width: 90%;
+    }
+
+    &__bg-category {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+
+    &__content {
+        width: 50%;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        max-width: 568px;
+        width: 100%;
+        padding-top: 125px;
+
+
+        h3 {
+            font-size: 55px;
+            color: $white;
+        }
+    }
+
+    &__image {
+        position: relative;
+        z-index: 1;
+        margin-left: auto;
+    }
+
+    &__score {
+        color: $white;
+        font-weight: $font-bold;
+        font-size: 110px;
+
+        > span {
+            font-size: 30px;
+            margin: 0 10px;
+        }
+    }
+}

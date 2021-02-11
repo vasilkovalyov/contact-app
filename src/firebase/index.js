@@ -199,15 +199,6 @@ class Firebase {
 
     async getAllPostFromCollection(typePost, collection, payload) {
         const dbRef = await this.database.ref(`${typePost}/${payload}`).once('value');
-        // const response = await dbRef.once('value').then(function(snapshot) {
-        //     const targetPost = snapshot.child(collection).child(keyCollectionPost).val();
-        //     if(targetPost) {
-        //         return targetPost;
-        //     } else {
-        //         return null;
-        //     }
-        // })
-
         return dbRef.val()[collection];
     }
 

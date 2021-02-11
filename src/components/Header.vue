@@ -22,10 +22,6 @@ import UserProfileNav from './UserProfileNav';
 export default {
     name: 'Header',
 
-    data: () => ({
-
-    }),
-
     computed: {
         ...mapGetters(['getAuthUserDate'])
     },
@@ -33,57 +29,5 @@ export default {
     components: {
         UserProfileNav
     },
-
-   
 }
 </script>
-
-<style lang="scss">
-    .header {
-        padding: 14px 0;
-        color: #525F7F;
-        background-color: #ffffff;
-
-        &__logo {
-            margin-right: 10px;
-        }
-
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-    }
-
-    .header-nav-list {
-        padding: 0;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        list-style-type: none;
-
-        li {
-            &:not(:first-child) {
-                margin-left: 15px;
-            }
-        }
-
-        a,
-        button {
-            transition: opacity 0.3s linear;
-
-            &:hover {
-                opacity: 0.7;
-            }
-        }
-    }
-
-    .btn-sign-out {
-        background: transparent;
-        border: none;
-        color: #ffffff;
-        font-size: 20px;
-        cursor: pointer;
-       
-    }
-</style>

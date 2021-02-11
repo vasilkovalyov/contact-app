@@ -1,0 +1,51 @@
+.section-admin-default {
+    padding: 40px 0;
+
+    &__header {
+        margin-bottom: 40px;
+    }
+
+    &__body {
+        background-color: #fff;
+        box-shadow: 0 0 11px 1px rgba(0,0,0,0.2);
+        
+        form {
+            padding: 20px;
+
+            @include media('>=tablet') {
+                padding: 50px;
+            }
+        }
+    }
+
+    &__row {
+        @include media('>=tablet') {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__col {
+        &-6 {
+            @include media('>=tablet') {
+                width: 50%;
+            }
+
+            &:not(:only-child) {
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    h1 {
+        color: $secondary-color;
+        margin-bottom: 40px;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .search-wrap {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

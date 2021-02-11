@@ -3,7 +3,7 @@
         <form class="auth-form">
             <div class="auth-form__header">
                 <h2>Register</h2>
-                <p>Create a new account for My Contribution</p>
+                <p>Create a new account for Quiz Admin</p>
             </div>
             <InputField
                 v-model="formData.firstName" name="first-name" placeholder="First Name" :hasIcon="true">

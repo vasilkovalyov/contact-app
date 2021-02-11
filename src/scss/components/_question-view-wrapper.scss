@@ -1,0 +1,42 @@
+.question-view-wrapper {
+    padding: 50px;
+
+    .question-view-list {
+        margin-bottom: 30px;
+    }
+}
+
+.question-view {
+    margin-bottom: 20px;
+
+    &__question {
+        border-bottom: 1px solid;
+        padding-bottom: 5px;
+    }
+
+    &__list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0 0 0 10px;
+
+        &-complete {
+            color: $white;
+            background-color: $primary-color;
+            font-size: 12px;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 2px 5px;
+            margin-left: 5px;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            
+            &:not(:last-child) {
+                margin-bottom: 10px;
+            }
+        }
+
+    }
+}

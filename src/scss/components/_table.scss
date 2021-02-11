@@ -1,4 +1,7 @@
 .table-wrapper {
+    overflow-x: auto;
+    padding-bottom: 20px;
+    
     &__header {
         padding: 20px 40px 20px 30px;
         height: 80px;
@@ -16,8 +19,8 @@
 
 .table {
     border-collapse: collapse;
-    width: 100%;
     font-size: 14px;
+    min-width: 1150px;
 
     &__header {
         font-size: 10px;

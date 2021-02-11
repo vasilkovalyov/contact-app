@@ -1,9 +1,11 @@
 <template>
-    <section class="section-quiz-game">
+    <section class="section-admin-default">
         <div class="container">
-            <h1>Create Quiz Game</h1>
-            <div class="quiz-panel">
-                <form class="form-create-quiz">
+            <AdminSectionHeader>
+                <template v-slot:title>Create Quiz Game</template>
+            </AdminSectionHeader>
+            <div class="section-admin-default__body">
+                <form class="form-admin-game">
                     <InputField 
                         v-model="formData.name"
                         name="quiz-name" 
@@ -43,10 +45,13 @@
 
 import { mapActions } from 'vuex';
 
+import { clearFormObject } from '@/helpers';
+
 import InputField from '@/components/FormsComponents/InputField';
 import TextAreaField from '@/components/FormsComponents/TextAreaField';
 import FormButton from '@/components/FormsComponents/FormButton';
 import Notification from '@/components/Notification';
+import AdminSectionHeader from '@/components/AdminSectionHeader';
 
 export default {
     name: 'CreateQuizGame',
@@ -76,7 +81,7 @@ export default {
             try {
                 await this.onCreateGame(formData);
                 this.initNotification(true);
-                this.clearForm(this.formData);
+                clearFormObject(this.formData);
             } catch(e) {
                 this.initNotification(false);
                 console.log(e);
@@ -98,12 +103,6 @@ export default {
                 this.notification.type = 'error'
             }
         },
-
-        clearForm(formData) {
-            Object.keys(formData).forEach(function(key,index) {
-                formData[key] = '';
-            });
-        }
     },
     
     components: {
@@ -111,18 +110,7 @@ export default {
         InputField,
         TextAreaField,
         FormButton,
+        AdminSectionHeader
     }
 }
 </script>
-
-<style lang="scss">
-    @import '../../../scss/main.scss';
-
-    h1 {
-        color: $blue-dark-1;
-    }
-
-    .form-create-quiz {
-        padding: 50px;
-    }
-</style>

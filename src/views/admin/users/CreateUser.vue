@@ -1,10 +1,12 @@
 <template>
-    <section class="section-create-user">
+    <section class="section-admin-default">
         <div class="container">
-            <h1>Create User</h1>
-            <FormCreateUser 
-                @initNotification="initNotification"  
-            />
+            <AdminSectionHeader>
+                <template v-slot:title>Create User</template>
+            </AdminSectionHeader>
+            <div class="section-admin-default__body">
+                <FormCreateUser @initNotification="initNotification" />
+            </div>
         </div>
         <template v-if="isShowNotification">
             <Notification
@@ -20,6 +22,7 @@
 <script>
     import FormCreateUser from '@/components/Forms/FormCreateUser';
     import Notification from '@/components/Notification';
+    import AdminSectionHeader from '@/components/AdminSectionHeader';
 
     export default {
         name: 'CreateUser',
@@ -36,7 +39,8 @@
 
         components: {
             FormCreateUser,
-            Notification
+            Notification,
+            AdminSectionHeader
         },
 
         methods: {
@@ -56,14 +60,5 @@
                 }
             }
         }
-
-        
     }
 </script>
-
-<style lang="scss">
-    .section-create-user {
-        padding: 20px 0;
-    }
-
-</style>

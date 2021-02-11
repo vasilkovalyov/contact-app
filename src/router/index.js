@@ -11,7 +11,14 @@ const routes = [
 		path: '/',
 		name: 'Home',
 		meta: { layout: 'public-layout' },
-		component: Home
+		component: Home,
+	},
+	{
+		path: '/game',
+		name: 'Game',
+		meta: { layout: 'public-layout' },
+		props: true,
+		component: () => import('../views/public/Game.vue')
 	},
 	{
 		path: '/login',

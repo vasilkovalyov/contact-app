@@ -1,9 +1,11 @@
 <template>
-    <section class="section-quiz-game">
+    <section class="section-admin-default">
         <div class="container">
-            <h1>Create Quiz Questions</h1>
-            <div class="quiz-panel">
-                 <form class="form-create-quiz">
+            <AdminSectionHeader>
+                <template v-slot:title>Create Quiz Questions</template>
+            </AdminSectionHeader>
+            <div class="section-admin-default__body">
+                 <form class="form-admin-question">
                     <FormSelect 
                         name="game-select" 
                         baseOption="Select quiz" 
@@ -41,6 +43,8 @@
 </template>
 <script>
 
+import { clearFormObject } from '@/helpers'
+
 import { mapGetters, mapActions } from 'vuex';
 
 import InputField from '@/components/FormsComponents/InputField';
@@ -49,6 +53,8 @@ import TextAreaField from '@/components/FormsComponents/TextAreaField';
 import FormButton from '@/components/FormsComponents/FormButton';
 import FieldOptions from '@/components/FormsComponents/FieldOptions';
 import Notification from '@/components/Notification';
+import AdminSectionHeader from '@/components/AdminSectionHeader';
+
 
 
 export default {
@@ -109,7 +115,7 @@ export default {
             try {
                 await this.onCreateQuestionForGame(dataObject);
                 this.initNotification(true);
-                this.clearForm(this.formData);
+                clearFormObject(this.formData);
             } catch(e) {
                 this.initNotification(false);
                 console.log(e);
@@ -140,12 +146,6 @@ export default {
                 this.notification.type = 'error'
             }
         },
-
-        clearForm(formData) {
-            Object.keys(formData).forEach(function(key,index) {
-                formData[key] = '';
-            });
-        }
     },
 
     components: {
@@ -154,7 +154,8 @@ export default {
         TextAreaField,
         FormButton,
         FieldOptions,
-        Notification
+        Notification,
+        AdminSectionHeader
     }
 }
 </script>

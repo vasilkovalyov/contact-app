@@ -1,7 +1,7 @@
 <template>
     <div class="input-component" 
         :class="[
-            'input-component__'+sizeInput, 
+            sizeInput ? 'input-component__'+sizeInput : '', 
             !hasIcon ? 'input-component__without-icon' : ''
         ]">
         <label class="input-field__label">
@@ -89,110 +89,3 @@ export default {
 }
 
 </script>
-
-<style lang="scss">
-    @import '../../scss/base/variables.scss';
-
-    .input-component {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 18px;
-
-        &__help-link {
-            color: $primary-color;
-            
-            font-size: 14px;
-            margin-bottom: 13px;
-            transition: color 0.3s linear;
-
-            &:empty {
-                display: none;
-            }
-
-            &:hover {
-                color: darken($primary-color, 20%);
-            }
-        }
-
-        &__md {
-            .input-field {
-                input {
-                    padding: 5px 40px;
-                    height: 36px;
-                }
-            }
-
-            &.input-component__without-icon {
-                .input-field {
-                    input {
-                        padding-left: 10px;
-                        padding-right: 10px;
-                    }
-                }
-            }
-        }
-
-        &__without-icon {
-            .input-field {
-                &__input {
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
-            }
-        }
-    }
-
-    .input-field {
-        width: 100%;
-        position: relative;
-
-        &__label {
-            color: $secondary-color;
-            color: $blue-dark;
-            display: block;
-            font-size: 14px;
-            margin-bottom: 13px;
-            font-weight: 600;
-
-            &:empty {
-                display: none;
-            }
-        }
-
-        &__input {
-            border: 2px solid $light;
-            width: 100%;
-            font-size: 14px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 11px 1px rgba(233,236,240,0);
-            font-family: "Roboto";
-            transition: box-shadow .3s ease-in-out;
-            height: 48px;
-            padding: 15px 45px;
-            outline: none;
-
-            &:focus,
-            &:active {
-                box-shadow: 0px 0px 11px 1px #e9ecf0;
-            }
-
-            &::placeholder {
-                color: $secondary-color;
-            }
-        }
-
-        &__icon {
-            color: $secondary-color;
-
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            color: rgb(157, 172, 192);
-            font-size: 14px;
-        }
-    }
-</style>

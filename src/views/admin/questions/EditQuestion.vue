@@ -1,10 +1,12 @@
 <template>
     <div class="edit-questions-page">
-        <section class="section-edit-questions">
+        <section class="section-admin-default">
             <div class="container">
-                <h1>Edit Questions</h1>
-                <div class="quiz-panel">
-                    <form class="form-create-quiz">
+                <AdminSectionHeader>
+                    <template v-slot:title>Edit Questions</template>
+                </AdminSectionHeader>
+                <div class="section-admin-default__body">
+                    <form class="form-admin-question">
                         <!-- <FormSelect 
                             name="game-select" 
                             baseOption="Select quiz" 
@@ -56,6 +58,7 @@ import TextAreaField from '@/components/FormsComponents/TextAreaField';
 import FormButton from '@/components/FormsComponents/FormButton';
 import FieldOptions from '@/components/FormsComponents/FieldOptions';
 import Notification from '@/components/Notification';
+import AdminSectionHeader from '@/components/AdminSectionHeader';
 
 export default {
     name: 'EditQuestion',
@@ -168,7 +171,8 @@ export default {
         TextAreaField,
         FormButton,
         FieldOptions,
-        Notification
+        Notification,
+        AdminSectionHeader
     }
 }
 

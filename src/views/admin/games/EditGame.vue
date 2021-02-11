@@ -1,10 +1,12 @@
 <template>
     <div class="edit-game-page">
-        <section class="section-edit-game">
+        <section class="section-admin-default">
             <div class="container">
-                <h1>Edit Game</h1>
-                <div class="quiz-panel">
-                    <form class="form-create-quiz">
+                <AdminSectionHeader>
+                    <template v-slot:title>Edit Game</template>
+                </AdminSectionHeader>
+                <div class="section-admin-default__body">
+                    <form class="form-admin-game">
                         <InputField 
                             v-model="formData.name"
                             name="quiz-name" 
@@ -53,6 +55,8 @@ import InputField from '@/components/FormsComponents/InputField';
 import TextAreaField from '@/components/FormsComponents/TextAreaField';
 import FormButton from '@/components/FormsComponents/FormButton';
 import Notification from '@/components/Notification';
+import AdminSectionHeader from '@/components/AdminSectionHeader';
+
 
 export default {
     name: 'EditGame',
@@ -120,22 +124,8 @@ export default {
         InputField,
         TextAreaField,
         FormButton,
+        AdminSectionHeader
     }
 }
 
 </script>
-<style lang="scss">
-    @import '../../../scss/main.scss';
-
-    .section-edit-game {
-        padding: 50px 0;
-
-        .form-create-quiz {
-            padding: 50px;
-        }
-
-        h1 {
-            color: $blue-dark-1;
-        }
-    }
-</style>

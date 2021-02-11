@@ -1,48 +1,51 @@
 <template>
-    <section class="section-quiz-game">
+    <section class="section-admin-default">
         <div class="container">
-            <h1>Quiz Games</h1>
-
-            <div class="quiz-panel">
-                <table class="table">
-                    <thead class="table__header">
-                        <tr>
-                            <td>#</td>
-                            <td>Name</td>
-                            <td>Description</td>
-                            <td>Time</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <template v-if="games.length > 0">
-                        <tbody class="table__body">
-                            <tr v-for="(game, i) in games" :key="game.key">
-                                <td>{{++i}}</td>
-                                <td>{{game.name}}</td>
-                                <td>{{game.description}}</td>
-                                <td>{{game.time}}</td>
-                                <td colspan="3">
-                                    <router-link :to="'/admin/view-questions/'+game.key" class="v-btn v-btn__primary">View Questions
-                                        <span class="btn__tip">{{getQuestionsLength(game.questions)}}</span>
-                                    </router-link>
-                                    <router-link :to="'/admin/edit-game/'+game.key" class="v-btn v-btn__secondary">Edit</router-link>
-                                    <FormButton :buttonClass="['v-btn__third']" @clickHandler="onClickRemove(game.key)">Delete</FormButton>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </template>
-                    <template v-else>
-                        <tbody>
+            <AdminSectionHeader>
+                <template v-slot:title>Quiz Games</template>
+            </AdminSectionHeader>
+            <div class="section-admin-default__body">
+                <div class="table-wrapper">
+                    <table class="table">
+                        <thead class="table__header">
                             <tr>
-                                <td colspan="6">
-                                    <span>Games not a found</span>
-                                </td>
+                                <td>#</td>
+                                <td>Name</td>
+                                <td>Description</td>
+                                <td>Time</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                        </tbody>
-                    </template>
-                </table>
+                        </thead>
+                        <template v-if="games.length > 0">
+                            <tbody class="table__body">
+                                <tr v-for="(game, i) in games" :key="game.key">
+                                    <td>{{++i}}</td>
+                                    <td>{{game.name}}</td>
+                                    <td>{{game.description}}</td>
+                                    <td>{{game.time}}</td>
+                                    <td colspan="3">
+                                        <router-link :to="'/admin/view-questions/'+game.key" class="v-btn v-btn__primary">View Questions
+                                            <span class="btn__tip">{{getQuestionsLength(game.questions)}}</span>
+                                        </router-link>
+                                        <router-link :to="'/admin/edit-game/'+game.key" class="v-btn v-btn__secondary">Edit</router-link>
+                                        <FormButton :buttonClass="['v-btn__third']" @clickHandler="onClickRemove(game.key)">Delete</FormButton>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </template>
+                        <template v-else>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6">
+                                        <span>Games not a found</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </template>
+                    </table>
+                </div>
             </div>
         </div>
         <template v-if="isShowNotification">
@@ -63,6 +66,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 import FormButton from '@/components/FormsComponents/FormButton';
 import Notification from '@/components/Notification';
+import AdminSectionHeader from '@/components/AdminSectionHeader';
 
 export default {
     name: 'QuizGames',
@@ -133,7 +137,8 @@ export default {
 
     components: {
         FormButton,
-        Notification
+        Notification,
+        AdminSectionHeader
     }
 }
 </script>
