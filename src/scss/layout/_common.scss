@@ -4,3 +4,9 @@
     margin: 0 auto;
     padding: 0 15px;
 }
+
+.main {
+    @include media('>=tablet') {
+        transition: padding-left 0.3s linear;
+    }
+}

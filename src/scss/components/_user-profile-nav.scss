@@ -38,7 +38,12 @@
         width: 200px;
         font-size: 14px;
         right: 50%;
-        transform: translateX(77%);
+        transform: translateX(45%);
+
+
+        @include media('>=widescreen') {
+            transform: translateX(77%);
+        }
 
         ul {
             list-style-type: none;

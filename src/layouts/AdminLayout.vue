@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper-main">
+    <div class="wrapper-main admin">
         <Header />
         <main class="main">
             <router-view />
@@ -27,6 +27,10 @@ export default {
 
         .main {
             flex: 1;
+        }
+
+        &.admin {
+            padding-left: 63px;
         }
     }
 </style>
