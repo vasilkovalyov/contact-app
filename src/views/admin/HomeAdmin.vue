@@ -1,11 +1,15 @@
 <template>
-    <section class="section-home-admin">
+    <section class="section-admin-default">
         <div class="container">
-            <h1>Home Admin</h1>
+            <AdminSectionHeader>
+                <template v-slot:title>Home Admin</template>
+            </AdminSectionHeader>
         </div>
     </section>
 </template>
 <script>
+
+import AdminSectionHeader from '@/components/AdminSectionHeader';
 
 
 export default {
@@ -14,6 +18,10 @@ export default {
     async mounted() {
         await this.$store.dispatch('onAuthUser');
 	},
+
+    components: {
+        AdminSectionHeader
+    }
 }
 </script>
 
