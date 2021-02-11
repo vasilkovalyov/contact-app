@@ -12,7 +12,7 @@
                 <li v-for="(navItem, i) in navList" :key="i">
                     <router-link :to="navItem.link">
                         <i class="fas" :class="navItem.icon"></i>
-                        <span>{{navItem.name}}</span>
+                        <span>{{navItem.text}}</span>
                     </router-link>
                 </li>
                 <li>
@@ -39,38 +39,13 @@ export default {
                 {
                     link: '/',
                     icon: 'fa-home',
-                    name: 'Home page',
+                    text: 'Home page',
                 },
                 {
                     link: '/admin/admin-profile',
                     icon: 'fa-user-cog',
-                    name: 'Admin profile',
+                    text: 'Admin profile',
                 },
-                {
-                    link: '/admin/users',
-                    icon: 'fa-users',
-                    name: 'Users',
-                },
-                {
-                    link: '/admin/create-quiz-game',
-                    icon: 'fa-gamepad',
-                    name: 'Create quiz game',
-                },
-                {
-                    link: '/admin/create-quiz-questions',
-                    icon: 'fa-gamepad',
-                    name: 'Create quiz questions',
-                },
-                {
-                    link: '/admin/quiz-games',
-                    icon: 'fa-gamepad',
-                    name: 'All quiz games',
-                },
-                {
-                    link: '/admin/quiz-questions',
-                    icon: 'fa-gamepad',
-                    name: 'All quiz questions',
-                }
             ]
         }
     },

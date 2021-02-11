@@ -1,0 +1,121 @@
+.header-nav {
+    &__primary {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        padding: 13px;
+        background-color: $white;
+        box-shadow: -8px 0 10px 0 rgba($black, 0.05%);
+
+        .hamburger {
+            margin-bottom: 47px;
+        }
+    }
+
+    &__secondary {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: $white;
+        box-shadow: -8px 0 10px 0 rgba($black, 0.05%);
+        z-index: 15;
+        width: 200px;
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: transform 0.3s linear;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px;
+        border-bottom: 1px solid $light-3;
+    }
+
+    &__body {
+        padding: 35px 10px;
+    }
+
+    &__logo {
+        width: 100px;
+    }
+}
+
+.header-nav-list {
+    padding: 0;
+    margin: 0;
+
+    &__item {
+        list-style-type: none;
+    }
+
+    &__link {
+        transition: color 0.3s linear;
+
+        &.router-link-exact-active,
+        &:hover {
+            color: $primary-color;
+        }
+    }
+
+    &__text {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    &__primary {
+        .header-nav-list__item {
+            text-align: center;
+
+            &:not(:last-child) {
+                margin-bottom: 20px;
+            }
+        }
+
+        .fas {
+            &.fa-tachometer-alt {
+                font-size: 22px;
+            }
+    
+            &.fa-user-cog {
+                font-size: 20px;
+            }
+    
+            &.fa-users {
+                font-size: 20px;
+            }
+    
+            &.fa-puzzle-piece {
+                font-size: 22px;
+            }
+    
+            &.fa-clipboard-list {
+                font-size: 25px;
+            }
+            
+            &.fa-sign-out-alt {
+                font-size: 22px;
+            }
+    
+        }
+    }
+
+    &__secondary {
+        .header-nav-list__item {
+            padding: 11px 14px;
+
+        }
+
+        .header-nav-list__link {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-nav-list__icon {
+            min-width: 30px;
+        }
+    }
+}
